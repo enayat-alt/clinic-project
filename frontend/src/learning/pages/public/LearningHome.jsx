@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LearningNavbar from "../components/LearningNavbar";
+import LearningNavbar from "../../components/LearningNavbar";
 
 export default function LearningHome() {
    

@@ -1,4 +1,4 @@
-import LearningNavbar from "../components/LearningNavbar";
+import LearningNavbar from "../../components/LearningNavbar";
 
 export default function Dashboard() {
   const user = JSON.parse(
