@@ -4,6 +4,7 @@ import About from "../About/About";
 import DoctorSection from "../doctor/DoctorSection";
 import Appointment from "../Appointment/Appointment";
 import Appointments from "../consultation/consultation";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const services = [
@@ -18,6 +19,32 @@ export default function Home() {
       <Navbar />
 
       <main className="bg-[#fff] text-[#121414]">
+        {/* Learning Promotion Banner */}
+        <section className="bg-yellow-400 text-black">
+          <div className="max-w-7xl mx-auto px-6 py-3">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-center md:text-left">
+                <span className="font-bold text-lg ">
+                  🎓 Odisha polyclinic Learning Platform
+                </span>
+
+                <span className="hidden md:inline">|</span>
+
+                <span className="font-medium animate-bounce ">
+                  Launch Offer: Get up to 50% OFF on FMGE, Clinical Medicine &
+                  Certification Courses
+                </span>
+              </div>
+
+              <Link
+                to="/learning"
+                className="text-white px-5 py-2 rounded-lg font-semibold hover:bg-black transition  animate-pulse "
+              >
+                Explore Courses →
+              </Link>
+            </div>
+          </div>
+        </section>
         {/* Hero Section */}
         <section className="bg-[#1a504c]">
           <div className="max-w-7xl mx-auto px-6 py-24">
@@ -59,9 +86,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-       
+
         <About />
-        <Appointment/>
+
+        <Appointment />
         <DoctorSection />
 
         {/* Statistics */}
