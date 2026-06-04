@@ -1,4 +1,3 @@
-import LearningNavbar from "../../components/LearningNavbar";
 
 export default function Dashboard() {
   const user = JSON.parse(
@@ -7,7 +6,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <LearningNavbar />
 
       <div className="min-h-screen bg-[#e5f9f8] p-10">
         <h1 className="text-4xl font-bold text-[#1a504c]">
