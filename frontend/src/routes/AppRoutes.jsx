@@ -12,15 +12,19 @@ import Appointment from "../pages/Appointment/Appointment";
 
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import LearningHome from "../pages/learning/pages/LearningHome";
-import LearningLogin from "../pages/learning/pages/Login/LearningLogin";
-import Profile from "../pages/learning/pages/Profile";
-import Dashboard from "../pages/learning/pages/Dashboard";
-import MyLearning from "../pages/learning/pages/MyLearning";
-import LearningRegister from "../pages/learning/pages/Register/Register";
-import FindCourse from "../pages/learning/pages/FindCourse";
-import GetCertified from "../pages/learning/pages/GetCertified";
-import Subscribe from "../pages/learning/pages/Subscribe";
+
+
+import LearningHome from "../learning/pages/public/LearningHome";
+import LearningLogin from "../learning/pages/public/LearningLogin";
+import Profile from "../learning/pages/Dashboard/Profile";
+import Dashboard from "../learning/pages/Dashboard/Dashboard";
+import MyLearning from "../learning/pages/Dashboard/MyLearning";
+import LearningRegister from "../learning/pages/public/Register";
+import FindCourse from "../learning/pages/public/FindCourse";
+import GetCertified from "../learning/pages/public/GetCertified";
+import Subscribe from "../learning/pages/public/Subscribe";
+
+
 
 export default function AppRoutes() {
   return (
@@ -45,6 +49,7 @@ export default function AppRoutes() {
       <Route path="/learning/find-course" element={<FindCourse />} />
       <Route path="/learning/certifications" element={<GetCertified />} />
       <Route path="/learning/subscribe" element={<Subscribe/>} />
+
 
       <Route element={<ProtectedRoute />}>
         <Route path="/learning/dashboard" element={<Dashboard />} />
