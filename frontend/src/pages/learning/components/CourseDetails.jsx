@@ -1,0 +1,1 @@
+export default function CourseDetails() { return <div className="p-8 text-2xl">Course Details</div>; }

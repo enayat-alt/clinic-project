@@ -1,0 +1,1 @@
+export default function Users() { return <div className="p-8 text-2xl">Admin Users</div>; }
