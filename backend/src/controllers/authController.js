@@ -5,7 +5,7 @@ const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../utils/generateTokens");
-
+  
 // Register
 exports.register = async (req, res) => {
   try {
