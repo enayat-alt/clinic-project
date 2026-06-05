@@ -1,14 +1,57 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
 
-const patientSchema = new mongoose.Schema({
-  user:        { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  dateOfBirth: { type: Date },
-  gender:      { type: String, enum: ["male", "female", "other"] },
-  bloodGroup:  { type: String },
-  phone:       { type: String },
-  address:     { type: String },
-  medicalHistory: [{ condition: String, diagnosedAt: Date, notes: String }],
-  allergies:   [{ type: String }],
-}, { timestamps: true });
+const Patient = sequelize.define(
+  "Patient",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
 
-module.exports = mongoose.model("Patient", patientSchema);
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+    dateOfBirth: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+
+    gender: {
+      type: DataTypes.ENUM(
+        "male",
+        "female",
+        "other"
+      ),
+      allowNull: true,
+    },
+
+    bloodGroup: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    address: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+
+    allergies: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: [],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = Patient;

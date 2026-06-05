@@ -92,6 +92,7 @@ export default function AppRoutes() {
         <Route path="/tests-services" element={<TestsServices />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/appointment" element={<Appointment />} />
+        
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

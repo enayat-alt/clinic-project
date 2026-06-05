@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useRegisterMutation } from "../../../services/authApi";
 
 export default function LearningRegister() {
   const navigate = useNavigate();
@@ -19,57 +20,65 @@ export default function LearningRegister() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.phone ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-      alert("Please fill all fields");
-      return;
-    }
+const [registerUser, { isLoading }] =
+  useRegisterMutation();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const users =
-      JSON.parse(localStorage.getItem("learningUsers")) || [];
+  if (
+    !formData.name ||
+    !formData.email ||
+    !formData.phone ||
+    !formData.password ||
+    !formData.confirmPassword
+  ) {
+    alert("Please fill all fields");
+    return;
+  }
 
-    const existingUser = users.find(
-      (user) => user.email === formData.email
-    );
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
 
-    if (existingUser) {
-      alert("Email already registered");
-      return;
-    }
-
-    const newUser = {
-      id: Date.now(),
+  try {
+    const response = await registerUser({
       name: formData.name,
       email: formData.email,
-      phone: formData.phone,
       password: formData.password,
-      createdAt: new Date().toISOString(),
-    };
-
-    users.push(newUser);
+      role: "student",
+    }).unwrap();
 
     localStorage.setItem(
-      "learningUsers",
-      JSON.stringify(users)
+      "accessToken",
+      response.accessToken
+    );
+
+    localStorage.setItem(
+      "refreshToken",
+      response.refreshToken
+    );
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify(response.user)
     );
 
     alert("Registration Successful");
 
     navigate("/learning/login");
-  };
+  } catch (error) {
+    console.error(error);
+
+    alert(
+      error?.data?.message ||
+      "Registration Failed"
+    );
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-[#e5f9f8] flex items-center justify-center px-6 py-12">
@@ -152,6 +161,7 @@ export default function LearningRegister() {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              minLength={6}
               placeholder="Create a password"
               className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
             />

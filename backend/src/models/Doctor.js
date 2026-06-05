@@ -1,19 +1,58 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
 
-const doctorSchema = new mongoose.Schema({
-  user:           { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  specialization: { type: String, required: true },
-  qualification:  { type: String, required: true },
-  experience:     { type: Number, default: 0 },
-  bio:            { type: String, default: "" },
-  consultationFee:{ type: Number, default: 0 },
-  availability: [{
-    day:       { type: String },
-    startTime: { type: String },
-    endTime:   { type: String },
-  }],
-  rating:    { type: Number, default: 0 },
-  isVerified:{ type: Boolean, default: false },
-}, { timestamps: true });
+const Doctor = sequelize.define(
+  "Doctor",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
 
-module.exports = mongoose.model("Doctor", doctorSchema);
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+    specialization: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    qualification: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    experience: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
+    bio: {
+      type: DataTypes.TEXT,
+      defaultValue: "",
+    },
+
+    consultationFee: {
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0,
+    },
+
+    rating: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
+
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = Doctor;

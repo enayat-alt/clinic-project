@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 
@@ -8,14 +7,19 @@ export default function LearningNavbar() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const token = localStorage.getItem("accessToken");
 
+  const isLoggedIn = !!token;
+
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  
   const logout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currentUser");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+
     navigate("/learning");
-    window.location.reload();
   };
 
   useEffect(() => {
@@ -42,7 +46,9 @@ export default function LearningNavbar() {
               <h1 className="text-xl font-bold text-[#1a504c]">
                 odisha polyclinic
               </h1>
-              <p className="text-xs text-yellow-500">Medical Education Platform</p>
+              <p className="text-xs text-yellow-500">
+                Medical Education Platform
+              </p>
             </div>
           </Link>
 
@@ -130,7 +136,9 @@ export default function LearningNavbar() {
                       <p className="font-semibold text-sm text-gray-800">
                         {currentUser?.name}
                       </p>
-                      <p className="text-xs text-gray-500">{currentUser?.email}</p>
+                      <p className="text-xs text-gray-500">
+                        {currentUser?.email}
+                      </p>
                     </div>
                     <Link
                       to="/learning/my-learning"
@@ -228,7 +236,9 @@ export default function LearningNavbar() {
                     <p className="font-semibold text-sm text-[#1a504c]">
                       {currentUser?.name}
                     </p>
-                    <p className="text-xs text-gray-500">{currentUser?.email}</p>
+                    <p className="text-xs text-gray-500">
+                      {currentUser?.email}
+                    </p>
                   </div>
                 </div>
                 <Link

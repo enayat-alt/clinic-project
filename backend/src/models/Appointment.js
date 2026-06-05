@@ -1,14 +1,66 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
 
-const appointmentSchema = new mongoose.Schema({
-  patient: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  doctor:  { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  date:    { type: Date, required: true },
-  time:    { type: String, required: true },
-  reason:  { type: String, default: "" },
-  status:  { type: String, enum: ["pending", "confirmed", "cancelled", "completed"], default: "pending" },
-  notes:   { type: String, default: "" },
-  type:    { type: String, enum: ["in-person", "telemedicine"], default: "in-person" },
-}, { timestamps: true });
+const Appointment = sequelize.define(
+  "Appointment",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
 
-module.exports = mongoose.model("Appointment", appointmentSchema);
+    patientId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+    doctorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    reason: {
+      type: DataTypes.TEXT,
+      defaultValue: "",
+    },
+
+    status: {
+      type: DataTypes.ENUM(
+        "pending",
+        "confirmed",
+        "cancelled",
+        "completed"
+      ),
+      defaultValue: "pending",
+    },
+
+    notes: {
+      type: DataTypes.TEXT,
+      defaultValue: "",
+    },
+
+    type: {
+      type: DataTypes.ENUM(
+        "in-person",
+        "telemedicine"
+      ),
+      defaultValue: "in-person",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = Appointment;
