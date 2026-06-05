@@ -32,27 +32,24 @@ export default function LearningLogin() {
         password: formData.password,
       }).unwrap();
 
-      localStorage.setItem(
-        "accessToken",
-        response.accessToken
-      );
+      localStorage.setItem("accessToken", response.accessToken);
 
-      localStorage.setItem(
-        "refreshToken",
-        response.refreshToken
-      );
+      localStorage.setItem("refreshToken", response.refreshToken);
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.user)
-      );
-      
-      navigate("/learning/dashboard");
+      localStorage.setItem("user", JSON.stringify(response.user));
+
+      // navigate("/learning/dashboard");
+      const user = response.user;
+
+      if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (user.role === "student") {
+        navigate("/learning/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
-      setError(
-        error?.data?.message ||
-          "Invalid email or password"
-      );
+      setError(error?.data?.message || "Invalid email or password");
 
       console.error(error);
     }
@@ -61,16 +58,13 @@ export default function LearningLogin() {
   return (
     <div className="min-h-screen bg-[#e5f9f8] flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-[#cdebea] p-8">
-
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-[#1a504c] rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
             L
           </div>
 
-          <h1 className="text-3xl font-bold text-[#1a504c]">
-            Learning Portal
-          </h1>
+          <h1 className="text-3xl font-bold text-[#1a504c]">Learning Portal</h1>
 
           <p className="text-gray-600 mt-2">
             Continue your medical learning journey
@@ -79,7 +73,6 @@ export default function LearningLogin() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-
           <div>
             <label className="block text-sm font-medium mb-2">
               Email Address
@@ -97,9 +90,7 @@ export default function LearningLogin() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium mb-2">Password</label>
 
             <input
               type="password"
@@ -139,16 +130,13 @@ export default function LearningLogin() {
           >
             {isLoading ? "Logging in..." : "Login"}
           </button>
-
         </form>
 
         {/* Divider */}
         <div className="my-6 flex items-center">
           <div className="flex-1 border-t border-gray-300"></div>
 
-          <span className="px-3 text-gray-500 text-sm">
-            OR
-          </span>
+          <span className="px-3 text-gray-500 text-sm">OR</span>
 
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
@@ -178,7 +166,6 @@ export default function LearningLogin() {
             ← Back to Learning Home
           </Link>
         </div>
-
       </div>
     </div>
   );

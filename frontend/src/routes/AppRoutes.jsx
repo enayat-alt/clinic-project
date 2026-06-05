@@ -1,9 +1,11 @@
-
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
+
+import AdminLayout from "../admin/layout/AdminLayout";
+import AdminDashboard from "../admin/pages/Dashboard";
 
 /* =========================
    Clinic Pages
@@ -92,7 +94,6 @@ export default function AppRoutes() {
         <Route path="/tests-services" element={<TestsServices />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/appointment" element={<Appointment />} />
-        
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -131,6 +132,10 @@ export default function AppRoutes() {
 
             <Route path="/learning/profile" element={<Profile />} />
           </Route>
+        </Route>
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
         </Route>
       </Routes>
     </Suspense>
