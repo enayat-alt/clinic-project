@@ -10,52 +10,52 @@ const Appointment = sequelize.define(
       autoIncrement: true,
     },
 
-    patientId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    doctorId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-
-    time: {
+    fullName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    reason: {
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      },
+    },
+
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+    appointmentDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+
+    service: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    symptoms: {
       type: DataTypes.TEXT,
-      defaultValue: "",
+      allowNull: true,
     },
 
     status: {
       type: DataTypes.ENUM(
         "pending",
         "confirmed",
-        "cancelled",
-        "completed"
+        "completed",
+        "cancelled"
       ),
       defaultValue: "pending",
-    },
-
-    notes: {
-      type: DataTypes.TEXT,
-      defaultValue: "",
-    },
-
-    type: {
-      type: DataTypes.ENUM(
-        "in-person",
-        "telemedicine"
-      ),
-      defaultValue: "in-person",
     },
   },
   {
