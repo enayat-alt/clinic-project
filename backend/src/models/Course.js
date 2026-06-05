@@ -1,19 +1,49 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
 
-const courseSchema = new mongoose.Schema({
-  title:       { type: String, required: true },
-  description: { type: String, required: true },
-  category:    { type: String, enum: ["Anatomy", "Physiology", "Pharmacology", "Pathology", "Surgery"], required: true },
-  thumbnail:   { type: String, default: "" },
-  videos: [{
-    title: String,
-    url:   String,
-    duration: Number,
-  }],
-  notes:   [{ title: String, fileUrl: String }],
-  quizzes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Quiz" }],
-  enrolledStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-}, { timestamps: true });
+const Course = sequelize.define(
+  "Course",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
 
-module.exports = mongoose.model("Course", courseSchema);
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+
+    category: {
+      type: DataTypes.ENUM(
+        "Anatomy",
+        "Physiology",
+        "Pharmacology",
+        "Pathology",
+        "Surgery"
+      ),
+      allowNull: false,
+    },
+
+    thumbnail: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = Course;

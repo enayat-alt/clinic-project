@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useLoginMutation } from "../../../services/authApi";
 
 export default function LearningLogin() {
   const navigate = useNavigate();
+
+  const [loginUser, { isLoading }] = useLoginMutation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -20,35 +23,39 @@ export default function LearningLogin() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const users =
-      JSON.parse(localStorage.getItem("learningUsers")) || [];
+    try {
+      const response = await loginUser({
+        email: formData.email,
+        password: formData.password,
+      }).unwrap();
 
-    const user = users.find(
-      (u) =>
-        u.email === formData.email &&
-        u.password === formData.password
-    );
+      localStorage.setItem(
+        "accessToken",
+        response.accessToken
+      );
 
-    if (!user) {
-      setError("Invalid email or password");
-      return;
+      localStorage.setItem(
+        "refreshToken",
+        response.refreshToken
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.user)
+      );
+      
+      navigate("/learning/dashboard");
+    } catch (error) {
+      setError(
+        error?.data?.message ||
+          "Invalid email or password"
+      );
+
+      console.error(error);
     }
-
-    // Save Login State
-    localStorage.setItem("isLoggedIn", "true");
-
-    // Save Current User
-    localStorage.setItem(
-      "currentUser",
-      JSON.stringify(user)
-    );
-
-    alert(`Welcome back ${user.name}!`);
-
-    navigate("/learning/dashboard");
   };
 
   return (
@@ -57,7 +64,6 @@ export default function LearningLogin() {
 
         {/* Logo */}
         <div className="text-center mb-8">
-
           <div className="w-16 h-16 bg-[#1a504c] rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
             L
           </div>
@@ -69,7 +75,6 @@ export default function LearningLogin() {
           <p className="text-gray-600 mt-2">
             Continue your medical learning journey
           </p>
-
         </div>
 
         {/* Form */}
@@ -114,7 +119,6 @@ export default function LearningLogin() {
           )}
 
           <div className="flex justify-between items-center">
-
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" />
               Remember Me
@@ -126,21 +130,20 @@ export default function LearningLogin() {
             >
               Forgot Password?
             </Link>
-
           </div>
 
           <button
             type="submit"
-            className="w-full bg-[#1a504c] text-white py-3 rounded-xl font-semibold hover:bg-black transition"
+            disabled={isLoading}
+            className="w-full bg-[#1a504c] text-white py-3 rounded-xl font-semibold hover:bg-black transition disabled:opacity-50"
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
 
         </form>
 
         {/* Divider */}
         <div className="my-6 flex items-center">
-
           <div className="flex-1 border-t border-gray-300"></div>
 
           <span className="px-3 text-gray-500 text-sm">
@@ -148,7 +151,6 @@ export default function LearningLogin() {
           </span>
 
           <div className="flex-1 border-t border-gray-300"></div>
-
         </div>
 
         {/* Google Login */}
@@ -169,14 +171,12 @@ export default function LearningLogin() {
 
         {/* Back */}
         <div className="text-center mt-6">
-
           <Link
             to="/learning"
             className="text-[#1a504c] hover:underline text-sm"
           >
             ← Back to Learning Home
           </Link>
-
         </div>
 
       </div>

@@ -1,23 +1,97 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
+const { sequelize } = require("../config/db");
 
-const userSchema = new mongoose.Schema({
-  name:     { type: String, required: true, trim: true },
-  email:    { type: String, required: true, unique: true, lowercase: true },
-  password: { type: String, required: true, minlength: 6 },
-  role:     { type: String, enum: ["patient", "doctor", "admin"], default: "patient" },
-  avatar:   { type: String, default: "" },
-  isActive: { type: Boolean, default: true },
-}, { timestamps: true });
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
 
-userSchema.methods.matchPassword = function (enteredPassword) {
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+      set(value) {
+        this.setDataValue("email", value.toLowerCase());
+      },
+    },
+
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [6, 100],
+      },
+    },
+
+    role: {
+      type: DataTypes.ENUM("patient", "student", "admin"),
+      allowNull: false,
+      defaultValue: "patient",
+    },
+
+    avatar: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+    refreshToken: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+  },
+  {
+    timestamps: true,
+
+    hooks: {
+      beforeCreate: async (user) => {
+        if (user.password) {
+          user.password = await bcrypt.hash(user.password, 10);
+        }
+      },
+
+      beforeUpdate: async (user) => {
+        if (user.changed("password")) {
+          user.password = await bcrypt.hash(user.password, 10);
+        }
+      },
+    },
+
+    defaultScope: {
+      attributes: {
+        exclude: ["password"],
+      },
+    },
+
+    scopes: {
+      withPassword: {
+        attributes: {},
+      },
+    },
+  },
+);
+
+User.prototype.matchPassword = async function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = User;
