@@ -8,8 +8,8 @@ export default function LearningLogin() {
   const [loginUser, { isLoading }] = useLoginMutation();
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "admin1@gmail.com",
+    password: "admin1",
   });
 
   const [error, setError] = useState("");

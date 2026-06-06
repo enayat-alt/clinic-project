@@ -2,14 +2,15 @@ import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
-import RoleRoute from "./RoleRoute";
 
 import AdminLayout from "../admin/layout/AdminLayout";
 import AdminDashboard from "../admin/pages/Dashboard";
+import Appointments from "../admin/pages/Appointments";
+import Students from "../admin/pages/Students";
+import Courses from "../admin/pages/Courses";
+import Setting from "../admin/pages/Setting";
 
-/* =========================
-   Clinic Pages
-========================= */
+// Clinic Pages
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const About = lazy(() => import("../pages/About/About"));
@@ -29,9 +30,7 @@ const Login = lazy(() => import("../pages/Login/Login"));
 
 const Register = lazy(() => import("../pages/Register/Register"));
 
-/* =========================
-   Learning Layouts
-========================= */
+//  Learning Layouts
 
 const LearningLayout = lazy(() => import("../learning/layouts/LearningLayout"));
 
@@ -39,9 +38,7 @@ const DashboardLayout = lazy(
   () => import("../learning/layouts/DashboardLayout"),
 );
 
-/* =========================
-   Learning Public Pages
-========================= */
+// Learning Public Pages
 
 const LearningHome = lazy(
   () => import("../learning/pages/public/LearningHome"),
@@ -63,9 +60,7 @@ const GetCertified = lazy(
 
 const Subscribe = lazy(() => import("../learning/pages/public/Subscribe"));
 
-/* =========================
-   Learning Dashboard Pages
-========================= */
+//  Learning Dashboard Pages
 
 const Dashboard = lazy(() => import("../learning/pages/Dashboard/Dashboard"));
 
@@ -83,9 +78,7 @@ export default function AppRoutes() {
       }
     >
       <Routes>
-        {/* =========================
-            Clinic Routes
-        ========================= */}
+        {/*  Clinic Route*/}
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -98,9 +91,7 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* =========================
-            Learning Public Routes
-        ========================= */}
+        {/* Learning Public Routes*/}
 
         <Route path="/learning" element={<LearningLayout />}>
           <Route index element={<LearningHome />} />
@@ -112,17 +103,13 @@ export default function AppRoutes() {
           <Route path="subscribe" element={<Subscribe />} />
         </Route>
 
-        {/* =========================
-            Learning Auth Routes
-        ========================= */}
+        {/* Learning Auth Routes */}
 
         <Route path="/learning/login" element={<LearningLogin />} />
 
         <Route path="/learning/register" element={<LearningRegister />} />
 
-        {/* =========================
-            Learning Protected Routes
-        ========================= */}
+        {/*Learning Protected Routes*/}
 
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
@@ -136,6 +123,10 @@ export default function AppRoutes() {
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="appointments" element={<Appointments />} />
+          <Route path="students" element={<Students />} />
+          <Route path="courses" element={<Courses />} />
+           <Route path="setting" element={<Setting />} />
         </Route>
       </Routes>
     </Suspense>
