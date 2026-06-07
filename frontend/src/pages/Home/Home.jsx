@@ -66,9 +66,15 @@ export default function Home() {
                 </p>
 
                 <div className="flex flex-wrap gap-4">
-                  <button className="bg-[#121414] text-white px-6 py-3 rounded-xl font-medium">
+                  {/* <button className="bg-[#121414] text-white px-6 py-3 rounded-xl font-medium">
                     Book Appointment
-                  </button>
+                  </button> */}
+                  <Link
+                    to="/appointment"
+                    className="bg-[#121414] text-white px-6 py-3 rounded-xl font-medium inline-block"
+                  >
+                    Book Appointment
+                  </Link>
 
                   <button className="border border-[#121414] text-[#121414] px-6 py-3 rounded-xl font-medium">
                     Learn More
