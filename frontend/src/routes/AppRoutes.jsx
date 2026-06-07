@@ -7,8 +7,10 @@ import AdminLayout from "../admin/layout/AdminLayout";
 import AdminDashboard from "../admin/pages/Dashboard";
 import Appointments from "../admin/pages/Appointments";
 import Students from "../admin/pages/Students";
-import Courses from "../admin/pages/Courses";
+import Courses from "../admin/courses/pages/Courses";
 import Setting from "../admin/pages/Setting";
+import CreateCourse from "../admin/courses/pages/CreateCourse";
+import CourseContent from "../admin/courses/pages/CourseContent";
 
 // Clinic Pages
 
@@ -127,6 +129,9 @@ export default function AppRoutes() {
           <Route path="students" element={<Students />} />
           <Route path="courses" element={<Courses />} />
            <Route path="setting" element={<Setting />} />
+            <Route path="courses/create" element={<CreateCourse />} />
+            <Route path="courses/:courseId/content" element={<CourseContent />} />
+           
         </Route>
       </Routes>
     </Suspense>

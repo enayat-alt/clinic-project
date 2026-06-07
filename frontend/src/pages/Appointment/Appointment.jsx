@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useBookAppointmentMutation } from "../../services/appointmentApi";
 
 export default function Appointment() {
-  const [bookAppointment, { isLoading }] =
-    useBookAppointmentMutation();
+  const [bookAppointment, { isLoading }] = useBookAppointmentMutation();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -26,9 +26,7 @@ export default function Appointment() {
     e.preventDefault();
 
     try {
-      const response = await bookAppointment(
-        formData
-      ).unwrap();
+      const response = await bookAppointment(formData).unwrap();
 
       alert(response.message);
 
@@ -44,10 +42,7 @@ export default function Appointment() {
     } catch (error) {
       console.error(error);
 
-      alert(
-        error?.data?.message ||
-          "Failed to book appointment"
-      );
+      alert(error?.data?.message || "Failed to book appointment");
     }
   };
 
@@ -56,13 +51,14 @@ export default function Appointment() {
       {/* Hero Section */}
       <section className="bg-[#1a504c] py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold text-white">
-            Book Appointment
-          </h1>
+          <p className="text-gray-200">
+            <Link to="/">Home</Link> / Contact Us
+          </p>
+
+          <h1 className="text-5xl font-bold text-white">Book Appointment</h1>
 
           <p className="text-gray-200 mt-4 text-lg">
-            Schedule your appointment with our
-            experienced doctors and receive
+            Schedule your appointment with our experienced doctors and receive
             quality healthcare services.
           </p>
         </div>
@@ -77,14 +73,10 @@ export default function Appointment() {
             </h2>
 
             <p className="text-center text-gray-600 mb-8">
-              Fill in your details and our team
-              will contact you shortly.
+              Fill in your details and our team will contact you shortly.
             </p>
 
-            <form
-              onSubmit={handleSubmit}
-              className="grid md:grid-cols-2 gap-6"
-            >
+            <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
               {/* Full Name */}
               <div>
                 <label className="block mb-2 font-medium text-gray-700">
@@ -162,9 +154,7 @@ export default function Appointment() {
                 <input
                   type="date"
                   name="appointmentDate"
-                  value={
-                    formData.appointmentDate
-                  }
+                  value={formData.appointmentDate}
                   onChange={handleChange}
                   required
                   className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
@@ -183,37 +173,16 @@ export default function Appointment() {
                   onChange={handleChange}
                   className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
                 >
-                  <option>
-                    General Consultation
-                  </option>
-                  <option>
-                    Diabetes & Thyroid
-                    Management
-                  </option>
-                  <option>
-                    Blood Pressure Monitoring
-                  </option>
-                  <option>
-                    Skin & Hair Treatment
-                  </option>
-                  <option>
-                    Joint & Nerve Pain Care
-                  </option>
-                  <option>
-                    Headache & Migraine
-                  </option>
-                  <option>
-                    Digestive Issues
-                  </option>
-                  <option>
-                    Mental Health Consultation
-                  </option>
-                  <option>
-                    Women's Health
-                  </option>
-                  <option>
-                    Sexual Health
-                  </option>
+                  <option>General Consultation</option>
+                  <option>Diabetes & Thyroid Management</option>
+                  <option>Blood Pressure Monitoring</option>
+                  <option>Skin & Hair Treatment</option>
+                  <option>Joint & Nerve Pain Care</option>
+                  <option>Headache & Migraine</option>
+                  <option>Digestive Issues</option>
+                  <option>Mental Health Consultation</option>
+                  <option>Women's Health</option>
+                  <option>Sexual Health</option>
                   <option>PRP Therapy</option>
                   <option>Physiotherapy</option>
                   <option>Health Check-up</option>
@@ -242,9 +211,7 @@ export default function Appointment() {
                 disabled={isLoading}
                 className="md:col-span-2 bg-[#1a504c] text-white py-4 rounded-xl font-semibold text-lg hover:bg-[#143d3a] transition duration-300 disabled:opacity-50"
               >
-                {isLoading
-                  ? "Booking Appointment..."
-                  : "Book Appointment"}
+                {isLoading ? "Booking Appointment..." : "Book Appointment"}
               </button>
             </form>
           </div>
@@ -260,33 +227,21 @@ export default function Appointment() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-3xl shadow-md border border-[#cdebea]">
-              <h3 className="text-xl font-bold mb-2">
-                Doctor Consultation
-              </h3>
+              <h3 className="text-xl font-bold mb-2">Doctor Consultation</h3>
 
-              <p className="text-3xl font-bold text-[#1a504c]">
-                ₹300
-              </p>
+              <p className="text-3xl font-bold text-[#1a504c]">₹300</p>
             </div>
 
             <div className="bg-white p-6 rounded-3xl shadow-md border border-[#cdebea]">
-              <h3 className="text-xl font-bold mb-2">
-                Full Body Check-up
-              </h3>
+              <h3 className="text-xl font-bold mb-2">Full Body Check-up</h3>
 
-              <p className="text-3xl font-bold text-[#1a504c]">
-                ₹890
-              </p>
+              <p className="text-3xl font-bold text-[#1a504c]">₹890</p>
             </div>
 
             <div className="bg-white p-6 rounded-3xl shadow-md border border-[#cdebea]">
-              <h3 className="text-xl font-bold mb-2">
-                PRP Therapy
-              </h3>
+              <h3 className="text-xl font-bold mb-2">PRP Therapy</h3>
 
-              <p className="text-3xl font-bold text-[#1a504c]">
-                ₹1,990
-              </p>
+              <p className="text-3xl font-bold text-[#1a504c]">₹1,990</p>
             </div>
           </div>
         </div>
