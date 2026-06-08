@@ -8,7 +8,7 @@ const {
   cancel,
   accept,
   reject,
-} = require("../controllers/appointmentController");
+} = require("../../controllers/clinic/appointmentController");
 
 router.post("/", book);
 

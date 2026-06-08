@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllUsers, deleteUser, getAllDoctors, verifyDoctor, getAnalytics,
-} = require("../controllers/adminController");
-const { protect } = require("../middleware/auth");
-const { authorize } = require("../middleware/roleMiddleware");
+} = require("../../controllers/auth/adminController");
+const { protect } = require("../../middleware/auth");
+const { authorize } = require("../../middleware/roleMiddleware");
 
 router.use(protect, authorize("admin"));
 

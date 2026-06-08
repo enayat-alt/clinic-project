@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../../models/auth/User");
 
 const {
   generateAccessToken,
   generateRefreshToken,
-} = require("../utils/generateTokens");
+} = require("../../utils/generateTokens");
   
 // Register
 exports.register = async (req, res) => {

@@ -20,6 +20,10 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
+     require("../models");
+
+    // CREATE/UPDATE TABLES
+    await sequelize.sync({ alter: true });
     console.log(" PostgreSQL connected successfully");
   } catch (error) {
     console.error(" Database connection error:", error.message);

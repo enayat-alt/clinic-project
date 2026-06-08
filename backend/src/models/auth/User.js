@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
-const { sequelize } = require("../config/db");
+const { sequelize } = require("../../config/db");
 
 const User = sequelize.define(
   "User",
@@ -95,3 +95,4 @@ User.prototype.matchPassword = async function (enteredPassword) {
 };
 
 module.exports = User;
+
