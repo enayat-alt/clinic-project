@@ -1,73 +1,179 @@
+// import { Link } from "react-router-dom";
+
+// export default function FindCourse() {
+//   const courses = [
+//     {
+//       id: 1,
+//       title: "FMGE Complete Preparation",
+//       instructor: "Dr. Shaik Faraz Ahmmed",
+//       price: "₹4,999",
+//       duration: "6 Months",
+//       image:
+//         "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg",
+//     },
+//     {
+//       id: 2,
+//       title: "Clinical Medicine Masterclass",
+//       instructor: "Dr. Shaik Faraz Ahmmed",
+//       price: "₹2,999",
+//       duration: "3 Months",
+//       image:
+//         "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg",
+//     },
+//     {
+//       id: 3,
+//       title: "Physiotherapy Essentials",
+//       instructor: "Expert Faculty",
+//       price: "₹1,999",
+//       duration: "2 Months",
+//       image:
+//         "https://images.pexels.com/photos/4506105/pexels-photo-4506105.jpeg",
+//     },
+//     {
+//       id: 4,
+//       title: "Diabetes & Thyroid Management",
+//       instructor: "Expert Faculty",
+//       price: "₹2,499",
+//       duration: "2 Months",
+//       image:
+//         "https://images.pexels.com/photos/7088530/pexels-photo-7088530.jpeg",
+//     },
+//     {
+//       id: 5,
+//       title: "Diagnostic & Lab Interpretation",
+//       instructor: "Expert Faculty",
+//       price: "₹3,499",
+//       duration: "4 Months",
+//       image:
+//         "https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg",
+//     },
+//     {
+//       id: 6,
+//       title: "Medical Case Discussions",
+//       instructor: "Dr. Shaik Faraz Ahmmed",
+//       price: "₹1,499",
+//       duration: "1 Month",
+//       image:
+//         "https://images.pexels.com/photos/8460049/pexels-photo-8460049.jpeg",
+//     },
+//   ];
+
+//   return (
+//     <div className="min-h-screen bg-[#e5f9f8]">
+//       {/* Hero Section */}
+//       <section className="bg-[#1a504c] py-16">
+//         <div className="max-w-7xl mx-auto px-6 text-center">
+//           <h1 className="text-5xl font-bold text-white">Find Your Course</h1>
+
+//           <p className="text-gray-200 mt-4 max-w-2xl mx-auto">
+//             Explore professional medical courses, FMGE coaching, healthcare
+//             certifications, and practical learning programs.
+//           </p>
+//         </div>
+//       </section>
+
+//       {/* Search */}
+//       <section className="max-w-7xl mx-auto px-6 py-10">
+//         <div className="bg-white p-6 rounded-3xl shadow">
+//           <input
+//             type="text"
+//             placeholder="Search courses..."
+//             className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
+//           />
+//         </div>
+//       </section>
+
+//       {/* Courses */}
+//       <section className="max-w-7xl mx-auto px-6 pb-20">
+//         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+//           {courses.map((course) => (
+//             <div
+//               key={course.id}
+//               //className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition"
+//               className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+//             >
+//               {/* Thumbnail */}
+             
+//               <div className="overflow-hidden">
+//                 <img
+//                   src={course.image}
+//                   alt={course.title}
+//                   className="h-56 w-full object-cover transition-transform duration-500 hover:scale-110"
+//                 />
+//               </div>
+
+//               {/* Content */}
+//               <div className="p-6">
+//                 <h2 className="text-xl font-bold text-[#1a504c]">
+//                   {course.title}
+//                 </h2>
+
+//                 <p className="text-gray-600 mt-2">
+//                   Instructor: {course.instructor}
+//                 </p>
+
+//                 <p className="text-gray-600">Duration: {course.duration}</p>
+
+//                 <p className="text-2xl font-bold text-[#1a504c] mt-4">
+//                   {course.price}
+//                 </p>
+
+//                 <div className="flex gap-3 mt-5">
+//                   <Link
+//                     to={`/learning/course/${course.id}`}
+//                     className="flex-1 text-center border border-[#1a504c] text-[#1a504c] py-2 rounded-xl hover:bg-[#e5f9f8]"
+//                   >
+//                     Details
+//                   </Link>
+
+//                   <button className="flex-1 bg-[#1a504c] text-white py-2 rounded-xl hover:bg-black">
+//                     Enroll Now
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
+
+
+
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function FindCourse() {
-  const courses = [
-    {
-      id: 1,
-      title: "FMGE Complete Preparation",
-      instructor: "Dr. Shaik Faraz Ahmmed",
-      price: "₹4,999",
-      duration: "6 Months",
-      image:
-        "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg",
-    },
-    {
-      id: 2,
-      title: "Clinical Medicine Masterclass",
-      instructor: "Dr. Shaik Faraz Ahmmed",
-      price: "₹2,999",
-      duration: "3 Months",
-      image:
-        "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg",
-    },
-    {
-      id: 3,
-      title: "Physiotherapy Essentials",
-      instructor: "Expert Faculty",
-      price: "₹1,999",
-      duration: "2 Months",
-      image:
-        "https://images.pexels.com/photos/4506105/pexels-photo-4506105.jpeg",
-    },
-    {
-      id: 4,
-      title: "Diabetes & Thyroid Management",
-      instructor: "Expert Faculty",
-      price: "₹2,499",
-      duration: "2 Months",
-      image:
-        "https://images.pexels.com/photos/7088530/pexels-photo-7088530.jpeg",
-    },
-    {
-      id: 5,
-      title: "Diagnostic & Lab Interpretation",
-      instructor: "Expert Faculty",
-      price: "₹3,499",
-      duration: "4 Months",
-      image:
-        "https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg",
-    },
-    {
-      id: 6,
-      title: "Medical Case Discussions",
-      instructor: "Dr. Shaik Faraz Ahmmed",
-      price: "₹1,499",
-      duration: "1 Month",
-      image:
-        "https://images.pexels.com/photos/8460049/pexels-photo-8460049.jpeg",
-    },
-  ];
+  const [courses, setCourses] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const storedCourses =
+      JSON.parse(localStorage.getItem("courses")) || [];
+
+    setCourses(storedCourses);
+  }, []);
+
+  const filteredCourses = courses.filter((course) =>
+    course.title
+      ?.toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-[#e5f9f8]">
       {/* Hero Section */}
       <section className="bg-[#1a504c] py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold text-white">Find Your Course</h1>
+          <h1 className="text-5xl font-bold text-white">
+            Find Your Course
+          </h1>
 
           <p className="text-gray-200 mt-4 max-w-2xl mx-auto">
-            Explore professional medical courses, FMGE coaching, healthcare
-            certifications, and practical learning programs.
+            Explore professional medical courses, FMGE
+            coaching, healthcare certifications, and
+            practical learning programs.
           </p>
         </div>
       </section>
@@ -78,6 +184,10 @@ export default function FindCourse() {
           <input
             type="text"
             placeholder="Search courses..."
+            value={searchTerm}
+            onChange={(e) =>
+              setSearchTerm(e.target.value)
+            }
             className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
           />
         </div>
@@ -85,55 +195,110 @@ export default function FindCourse() {
 
       {/* Courses */}
       <section className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course) => (
-            <div
-              key={course.id}
-              //className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition"
-              className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-            >
-              {/* Thumbnail */}
-             
-              <div className="overflow-hidden">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  className="h-56 w-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-              </div>
+        {filteredCourses.length === 0 ? (
+          <div className="bg-white rounded-3xl p-12 text-center shadow">
+            <h2 className="text-2xl font-bold">
+              No Courses Found
+            </h2>
 
-              {/* Content */}
-              <div className="p-6">
-                <h2 className="text-xl font-bold text-[#1a504c]">
-                  {course.title}
-                </h2>
+            <p className="text-gray-500 mt-3">
+              Create courses from Admin Panel or try a
+              different search.
+            </p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredCourses.map((course) => {
+              const totalLessons =
+                course.chapters?.reduce(
+                  (total, chapter) =>
+                    total +
+                    (chapter.lessons?.length || 0),
+                  0
+                ) || 0;
 
-                <p className="text-gray-600 mt-2">
-                  Instructor: {course.instructor}
-                </p>
+              return (
+                <div
+                  key={course.id}
+                  className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  {/* Thumbnail */}
+                  <div className="overflow-hidden">
+                    <img
+                      src={
+                        course.thumbnail ||
+                        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000"
+                      }
+                      alt={course.title}
+                      className="h-56 w-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
 
-                <p className="text-gray-600">Duration: {course.duration}</p>
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-xs font-semibold">
+                        {course.category ||
+                          "Medical Course"}
+                      </span>
 
-                <p className="text-2xl font-bold text-[#1a504c] mt-4">
-                  {course.price}
-                </p>
+                      <span className="text-xs text-gray-500">
+                        {course.status ||
+                          "Published"}
+                      </span>
+                    </div>
 
-                <div className="flex gap-3 mt-5">
-                  <Link
-                    to={`/learning/course/${course.id}`}
-                    className="flex-1 text-center border border-[#1a504c] text-[#1a504c] py-2 rounded-xl hover:bg-[#e5f9f8]"
-                  >
-                    Details
-                  </Link>
+                    <h2 className="text-xl font-bold text-[#1a504c]">
+                      {course.title}
+                    </h2>
 
-                  <button className="flex-1 bg-[#1a504c] text-white py-2 rounded-xl hover:bg-black">
-                    Enroll Now
-                  </button>
+                    <p className="text-gray-600 mt-2">
+                      Instructor:{" "}
+                      {course.instructor ||
+                        "Odisha Polyclinic"}
+                    </p>
+
+                    <p className="text-gray-600">
+                      Duration:{" "}
+                      {course.duration ||
+                        "Self Paced"}
+                    </p>
+
+                    <div className="flex justify-between mt-3 text-sm text-gray-500">
+                      <span>
+                        📚{" "}
+                        {course.chapters?.length ||
+                          0}{" "}
+                        Chapters
+                      </span>
+
+                      <span>
+                        🎥 {totalLessons} Lessons
+                      </span>
+                    </div>
+
+                    <p className="text-2xl font-bold text-[#1a504c] mt-4">
+                      ₹{course.price || 0}
+                    </p>
+
+                    <div className="flex gap-3 mt-5">
+                      <Link
+                        to={`/learning/course/${course.id}`}
+                        className="flex-1 text-center border border-[#1a504c] text-[#1a504c] py-2 rounded-xl hover:bg-[#e5f9f8]"
+                      >
+                        Details
+                      </Link>
+
+                      <button className="flex-1 bg-[#1a504c] text-white py-2 rounded-xl hover:bg-black">
+                        Enroll Now
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </section>
     </div>
   );

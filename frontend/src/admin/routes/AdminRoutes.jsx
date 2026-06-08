@@ -8,6 +8,8 @@ import Courses from "../courses/pages/Courses";
 import CreateCourse from "../courses/pages/CreateCourse";
 import Setting from "../pages/Setting";
 import CourseContent from "../courses/pages/CourseContent";
+import AddLesson from "../courses/pages/AddLesson";
+import AddChapter from "../courses/pages/AddChapter";
 
 export default function AdminRoutes() {
   return (
@@ -22,7 +24,8 @@ export default function AdminRoutes() {
 
       <Route path="courses/create" element={<CreateCourse />} />
       <Route path="courses/:courseId/content" element={<CourseContent />} />
-      
+      <Route path="add-lesson/:courseId/:chapterId" element={<AddLesson />} />
+      <Route path="add-chapter/:courseId" element={<AddChapter />} />
     </Route>
   );
 }
