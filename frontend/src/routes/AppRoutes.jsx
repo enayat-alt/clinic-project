@@ -11,6 +11,8 @@ import Courses from "../admin/courses/pages/Courses";
 import Setting from "../admin/pages/Setting";
 import CreateCourse from "../admin/courses/pages/CreateCourse";
 import CourseContent from "../admin/courses/pages/CourseContent";
+import AddLesson from "../admin/courses/pages/AddLesson";
+import AddChapter from "../admin/courses/pages/AddChapter";
 
 // Clinic Pages
 
@@ -61,6 +63,9 @@ const GetCertified = lazy(
 );
 
 const Subscribe = lazy(() => import("../learning/pages/public/Subscribe"));
+const CourseDetails = lazy(
+  () => import("../learning/pages/public/CourseDetails"),
+);
 
 //  Learning Dashboard Pages
 
@@ -103,6 +108,10 @@ export default function AppRoutes() {
           <Route path="certifications" element={<GetCertified />} />
 
           <Route path="subscribe" element={<Subscribe />} />
+          <Route
+            path="/learning/course/:courseId"
+            element={<CourseDetails />}
+          />
         </Route>
 
         {/* Learning Auth Routes */}
@@ -128,10 +137,14 @@ export default function AppRoutes() {
           <Route path="appointments" element={<Appointments />} />
           <Route path="students" element={<Students />} />
           <Route path="courses" element={<Courses />} />
-           <Route path="setting" element={<Setting />} />
-            <Route path="courses/create" element={<CreateCourse />} />
-            <Route path="courses/:courseId/content" element={<CourseContent />} />
-           
+          <Route path="setting" element={<Setting />} />
+          <Route path="courses/create" element={<CreateCourse />} />
+          <Route path="courses/:courseId/content" element={<CourseContent />} />
+          <Route
+            path="add-lesson/:courseId/:chapterId"
+            element={<AddLesson />}
+          />
+          <Route path="add-chapter/:courseId" element={<AddChapter />} />
         </Route>
       </Routes>
     </Suspense>
