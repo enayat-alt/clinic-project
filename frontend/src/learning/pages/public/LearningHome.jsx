@@ -1,16 +1,30 @@
 
+
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useGetCoursesQuery } from "../../../admin/courses/services/courseApi";
 
 export default function LearningHome() {
-  const [courses, setCourses] = useState([]);
+  const {
+    data: courses = [],
+    isLoading,
+    error,
+  } = useGetCoursesQuery();
 
-  useEffect(() => {
-    const storedCourses =
-      JSON.parse(localStorage.getItem("courses")) || [];
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading Courses...
+      </div>
+    );
+  }
 
-    setCourses(storedCourses);
-  }, []);
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-500">
+        Failed to load courses
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">
@@ -120,7 +134,7 @@ export default function LearningHome() {
               </h3>
 
               <p className="text-gray-500 mt-2">
-                Create courses from the Admin Panel.
+                No courses found in database.
               </p>
             </div>
           ) : (
@@ -143,8 +157,7 @@ export default function LearningHome() {
 
                   <div className="p-6">
                     <span className="inline-block bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-sm font-medium">
-                      {course.category ||
-                        "Medical Course"}
+                      {course.category || "Medical Course"}
                     </span>
 
                     <h3 className="text-2xl font-bold mt-4 text-gray-800">
@@ -152,25 +165,22 @@ export default function LearningHome() {
                     </h3>
 
                     <p className="text-gray-600 mt-3 line-clamp-3">
-                      {course.description ||
-                        "Comprehensive learning materials, videos, PDFs, quizzes and certification."}
+                      {course.description}
                     </p>
 
                     <div className="mt-4 flex justify-between text-sm text-gray-500">
                       <span>
-                        Chapters:{" "}
-                        {course.chapters?.length || 0}
+                        Chapters: {course.Chapters?.length || 0}
                       </span>
 
                       <span>
                         Lessons:{" "}
-                        {course.chapters?.reduce(
+                        {course.Chapters?.reduce(
                           (total, chapter) =>
                             total +
-                            (chapter.lessons?.length ||
-                              0),
+                            (chapter.Lessons?.length || 0),
                           0
-                        )}
+                        ) || 0}
                       </span>
                     </div>
 
