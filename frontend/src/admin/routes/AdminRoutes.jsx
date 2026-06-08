@@ -10,6 +10,7 @@ import Setting from "../pages/Setting";
 import CourseContent from "../courses/pages/CourseContent";
 import AddLesson from "../courses/pages/AddLesson";
 import AddChapter from "../courses/pages/AddChapter";
+import EditCourse from "../courses/pages/EditCourse";
 
 export default function AdminRoutes() {
   return (
@@ -26,6 +27,7 @@ export default function AdminRoutes() {
       <Route path="courses/:courseId/content" element={<CourseContent />} />
       <Route path="add-lesson/:courseId/:chapterId" element={<AddLesson />} />
       <Route path="add-chapter/:courseId" element={<AddChapter />} />
+      <Route path="courses/:id/edit" element={<EditCourse/>} />
     </Route>
   );
 }

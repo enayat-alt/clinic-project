@@ -1,12 +1,18 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCreateCourseMutation } from "../services/courseApi";
 
 export default function CreateCourse() {
   const navigate = useNavigate();
 
+  const [createCourse, { isLoading }] =
+    useCreateCourseMutation();
+
   const [formData, setFormData] = useState({
     title: "",
     instructor: "",
+    category: "",
     price: "",
     description: "",
     thumbnail: "",
@@ -19,29 +25,30 @@ export default function CreateCourse() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const courses =
-      JSON.parse(localStorage.getItem("courses")) || [];
+    try {
+      await createCourse({
+        title: formData.title,
+        instructor: formData.instructor,
+        category: formData.category,
+        price: Number(formData.price),
+        description: formData.description,
+        thumbnail: formData.thumbnail,
+      }).unwrap();
 
-    const newCourse = {
-      id: Date.now(),
-      ...formData,
-      chapters: [],
-      createdAt: new Date().toISOString(),
-    };
+      alert("Course Created Successfully");
 
-    courses.push(newCourse);
+      navigate("/admin/courses");
+    } catch (error) {
+      console.log(error);
 
-    localStorage.setItem(
-      "courses",
-      JSON.stringify(courses)
-    );
-
-    alert("Course Created Successfully");
-
-    navigate("/admin/courses");
+      alert(
+        error?.data?.message ||
+          "Failed to create course"
+      );
+    }
   };
 
   return (
@@ -61,6 +68,7 @@ export default function CreateCourse() {
           onSubmit={handleSubmit}
           className="space-y-6"
         >
+          {/* Course Title */}
           <div>
             <label className="block mb-2 font-medium">
               Course Title
@@ -76,6 +84,7 @@ export default function CreateCourse() {
             />
           </div>
 
+          {/* Instructor */}
           <div>
             <label className="block mb-2 font-medium">
               Instructor
@@ -91,6 +100,58 @@ export default function CreateCourse() {
             />
           </div>
 
+          {/* Category */}
+          <div>
+            <label className="block mb-2 font-medium">
+              Category
+            </label>
+
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-xl px-4 py-3"
+            >
+              <option value="">
+                Select Category
+              </option>
+
+              <option value="FMGE">
+                FMGE
+              </option>
+
+              <option value="Anatomy">
+                Anatomy
+              </option>
+
+              <option value="Physiology">
+                Physiology
+              </option>
+
+              <option value="Pharmacology">
+                Pharmacology
+              </option>
+
+              <option value="Pathology">
+                Pathology
+              </option>
+
+              <option value="Medicine">
+                Medicine
+              </option>
+
+              <option value="Surgery">
+                Surgery
+              </option>
+
+              <option value="Physiotherapy">
+                Physiotherapy
+              </option>
+            </select>
+          </div>
+
+          {/* Price */}
           <div>
             <label className="block mb-2 font-medium">
               Price
@@ -106,6 +167,7 @@ export default function CreateCourse() {
             />
           </div>
 
+          {/* Thumbnail */}
           <div>
             <label className="block mb-2 font-medium">
               Thumbnail URL
@@ -121,6 +183,7 @@ export default function CreateCourse() {
             />
           </div>
 
+          {/* Description */}
           <div>
             <label className="block mb-2 font-medium">
               Description
@@ -136,11 +199,15 @@ export default function CreateCourse() {
             />
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
-            className="bg-[#1a504c] text-white px-6 py-3 rounded-xl"
+            disabled={isLoading}
+            className="bg-[#1a504c] text-white px-6 py-3 rounded-xl hover:bg-black transition disabled:opacity-50"
           >
-            Create Course
+            {isLoading
+              ? "Creating..."
+              : "Create Course"}
           </button>
         </form>
       </div>

@@ -1,27 +1,46 @@
 
+
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useGetCoursesQuery} from "../../../admin/courses/services/courseApi";
 
 export default function FindCourse() {
-  const [courses, setCourses] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] =
+    useState("");
 
-  useEffect(() => {
-    const storedCourses =
-      JSON.parse(localStorage.getItem("courses")) || [];
+  const {
+    data: courses = [],
+    isLoading,
+    error,
+  } = useGetCoursesQuery();
 
-    setCourses(storedCourses);
-  }, []);
-
-  const filteredCourses = courses.filter((course) =>
-    course.title
-      ?.toLowerCase()
-      .includes(searchTerm.toLowerCase())
+  const filteredCourses = courses.filter(
+    (course) =>
+      course.title
+        ?.toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        )
   );
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        Loading Courses...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-red-500">
+        Failed to load courses
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#e5f9f8]">
-      {/* Hero Section */}
       <section className="bg-[#1a504c] py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold text-white">
@@ -29,14 +48,14 @@ export default function FindCourse() {
           </h1>
 
           <p className="text-gray-200 mt-4 max-w-2xl mx-auto">
-            Explore professional medical courses, FMGE
-            coaching, healthcare certifications, and
+            Explore professional medical
+            courses, FMGE coaching,
+            healthcare certifications, and
             practical learning programs.
           </p>
         </div>
       </section>
 
-      {/* Search */}
       <section className="max-w-7xl mx-auto px-6 py-10">
         <div className="bg-white p-6 rounded-3xl shadow">
           <input
@@ -44,14 +63,15 @@ export default function FindCourse() {
             placeholder="Search courses..."
             value={searchTerm}
             onChange={(e) =>
-              setSearchTerm(e.target.value)
+              setSearchTerm(
+                e.target.value
+              )
             }
             className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
           />
         </div>
       </section>
 
-      {/* Courses */}
       <section className="max-w-7xl mx-auto px-6 pb-20">
         {filteredCourses.length === 0 ? (
           <div className="bg-white rounded-3xl p-12 text-center shadow">
@@ -60,27 +80,17 @@ export default function FindCourse() {
             </h2>
 
             <p className="text-gray-500 mt-3">
-              Create courses from Admin Panel or try a
-              different search.
+              Try a different search.
             </p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map((course) => {
-              const totalLessons =
-                course.chapters?.reduce(
-                  (total, chapter) =>
-                    total +
-                    (chapter.lessons?.length || 0),
-                  0
-                ) || 0;
-
-              return (
+            {filteredCourses.map(
+              (course) => (
                 <div
                   key={course.id}
                   className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  {/* Thumbnail */}
                   <div className="overflow-hidden">
                     <img
                       src={
@@ -92,7 +102,6 @@ export default function FindCourse() {
                     />
                   </div>
 
-                  {/* Content */}
                   <div className="p-6">
                     <div className="flex justify-between items-center mb-3">
                       <span className="bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-xs font-semibold">
@@ -112,8 +121,7 @@ export default function FindCourse() {
 
                     <p className="text-gray-600 mt-2">
                       Instructor:{" "}
-                      {course.instructor ||
-                        "Odisha Polyclinic"}
+                      {course.instructor}
                     </p>
 
                     <p className="text-gray-600">
@@ -121,19 +129,6 @@ export default function FindCourse() {
                       {course.duration ||
                         "Self Paced"}
                     </p>
-
-                    <div className="flex justify-between mt-3 text-sm text-gray-500">
-                      <span>
-                        📚{" "}
-                        {course.chapters?.length ||
-                          0}{" "}
-                        Chapters
-                      </span>
-
-                      <span>
-                        🎥 {totalLessons} Lessons
-                      </span>
-                    </div>
 
                     <p className="text-2xl font-bold text-[#1a504c] mt-4">
                       ₹{course.price || 0}
@@ -146,15 +141,11 @@ export default function FindCourse() {
                       >
                         Details
                       </Link>
-
-                      {/* <button className="flex-1 bg-[#1a504c] text-white py-2 rounded-xl hover:bg-black">
-                        Enroll Now
-                      </button> */}
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              )
+            )}
           </div>
         )}
       </section>

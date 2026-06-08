@@ -1,52 +1,43 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useCreateChapterMutation } from "../services/chapterApi";
 
 export default function AddChapter() {
   const { courseId } = useParams();
-
   const navigate = useNavigate();
 
   const [chapterTitle, setChapterTitle] =
     useState("");
 
-  const handleSubmit = () => {
+  const [createChapter, { isLoading }] =
+    useCreateChapterMutation();
+
+  const handleSubmit = async () => {
     if (!chapterTitle.trim()) {
       alert("Please enter chapter title");
       return;
     }
 
-    const courses =
-      JSON.parse(localStorage.getItem("courses")) ||
-      [];
+    try {
+      await createChapter({
+        title: chapterTitle,
+        courseId: Number(courseId),
+        order: 1,
+      }).unwrap();
 
-    const updatedCourses = courses.map(
-      (course) => {
-        if (
-          course.id === Number(courseId)
-        ) {
-          return {
-            ...course,
-            chapters: [
-              ...(course.chapters || []),
-              {
-                id: Date.now(),
-                title: chapterTitle,
-                lessons: [],
-              },
-            ],
-          };
-        }
+      alert("Chapter Created Successfully");
 
-        return course;
-      }
-    );
+      navigate(
+        `/admin/courses/${courseId}/content`
+      );
+    } catch (error) {
+      console.log(error);
 
-    localStorage.setItem(
-      "courses",
-      JSON.stringify(updatedCourses)
-    );
-
-    navigate(`/admin/courses/${courseId}/content`);
+      alert(
+        error?.data?.message ||
+          "Failed to create chapter"
+      );
+    }
   };
 
   return (
@@ -83,9 +74,12 @@ export default function AddChapter() {
           <div className="flex gap-3">
             <button
               onClick={handleSubmit}
+              disabled={isLoading}
               className="bg-[#1a504c] text-white px-6 py-3 rounded-xl"
             >
-              Save Chapter
+              {isLoading
+                ? "Saving..."
+                : "Save Chapter"}
             </button>
 
             <button

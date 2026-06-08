@@ -13,6 +13,7 @@ import CreateCourse from "../admin/courses/pages/CreateCourse";
 import CourseContent from "../admin/courses/pages/CourseContent";
 import AddLesson from "../admin/courses/pages/AddLesson";
 import AddChapter from "../admin/courses/pages/AddChapter";
+import EditCourse from "../admin/courses/pages/EditCourse";
 
 // Clinic Pages
 
@@ -150,6 +151,7 @@ export default function AppRoutes() {
             element={<AddLesson />}
           />
           <Route path="add-chapter/:courseId" element={<AddChapter />} />
+            <Route path="courses/:id/edit" element={<EditCourse/>} />
         </Route>
       </Routes>
     </Suspense>

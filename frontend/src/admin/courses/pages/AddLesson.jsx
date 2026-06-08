@@ -1,5 +1,7 @@
+
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useCreateLessonMutation } from "../services/lessonApi";
 
 export default function AddLesson() {
   const { courseId, chapterId } =
@@ -16,60 +18,38 @@ export default function AddLesson() {
   const [lessonUrl, setLessonUrl] =
     useState("");
 
-  const handleSubmit = () => {
+  const [createLesson, { isLoading }] =
+    useCreateLessonMutation();
+
+  const handleSubmit = async () => {
     if (!lessonTitle.trim()) {
       alert("Please enter lesson title");
       return;
     }
 
-    const courses =
-      JSON.parse(localStorage.getItem("courses")) ||
-      [];
+    try {
+      await createLesson({
+        title: lessonTitle,
+        type: lessonType,
+        fileUrl: lessonUrl,
+        chapterId: Number(chapterId),
+        duration: "",
+        order: 1,
+      }).unwrap();
 
-    const updatedCourses = courses.map(
-      (course) => {
-        if (
-          course.id === Number(courseId)
-        ) {
-          return {
-            ...course,
-            chapters: course.chapters.map(
-              (chapter) => {
-                if (
-                  chapter.id ===
-                  Number(chapterId)
-                ) {
-                  return {
-                    ...chapter,
-                    lessons: [
-                      ...(chapter.lessons ||
-                        []),
-                      {
-                        id: Date.now(),
-                        title: lessonTitle,
-                        type: lessonType,
-                        url: lessonUrl,
-                      },
-                    ],
-                  };
-                }
+      alert("Lesson Created Successfully");
 
-                return chapter;
-              }
-            ),
-          };
-        }
+      navigate(
+        `/admin/courses/${courseId}/content`
+      );
+    } catch (error) {
+      console.log(error);
 
-        return course;
-      }
-    );
-
-    localStorage.setItem(
-      "courses",
-      JSON.stringify(updatedCourses)
-    );
-
-    navigate(`/admin/courses/${courseId}/content`);
+      alert(
+        error?.data?.message ||
+          "Failed to create lesson"
+      );
+    }
   };
 
   return (
@@ -147,9 +127,12 @@ export default function AddLesson() {
           <div className="flex gap-3">
             <button
               onClick={handleSubmit}
+              disabled={isLoading}
               className="bg-[#1a504c] text-white px-6 py-3 rounded-xl"
             >
-              Save Lesson
+              {isLoading
+                ? "Saving..."
+                : "Save Lesson"}
             </button>
 
             <button
