@@ -1,5 +1,5 @@
-const Doctor = require("../models/Doctor");
-const User = require("../models/User");
+const Doctor = require("../../models/clinic/Doctor");
+const User = require("../../models/auth/User");
 
 exports.getAll = async (req, res) => {
   try {
