@@ -64,8 +64,12 @@ const GetCertified = lazy(
 
 const Subscribe = lazy(() => import("../learning/pages/public/Subscribe"));
 const CourseDetails = lazy(
-  () => import("../learning/pages/public/CourseDetails"),
+  () => import("../learning/components/CourseDetails"),
 );
+const EnrollCourse = lazy(
+  () => import("../learning/pages/public/EnrollCourse"),
+);
+
 
 //  Learning Dashboard Pages
 
@@ -109,9 +113,10 @@ export default function AppRoutes() {
 
           <Route path="subscribe" element={<Subscribe />} />
           <Route
-            path="/learning/course/:courseId"
+            path="course/:courseId"
             element={<CourseDetails />}
           />
+          <Route path="enroll/:courseId" element={<EnrollCourse />} />
         </Route>
 
         {/* Learning Auth Routes */}
