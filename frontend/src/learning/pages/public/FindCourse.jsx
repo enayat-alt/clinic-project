@@ -13,6 +13,8 @@ export default function FindCourse() {
     isLoading,
     error,
   } = useGetCoursesQuery();
+  //console.log(course.id)
+  console.log(courses);
 
   const filteredCourses = courses.filter(
     (course) =>

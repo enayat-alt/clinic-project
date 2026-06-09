@@ -71,7 +71,6 @@ const EnrollCourse = lazy(
   () => import("../learning/pages/public/EnrollCourse"),
 );
 
-
 //  Learning Dashboard Pages
 
 const Dashboard = lazy(() => import("../learning/pages/Dashboard/Dashboard"));
@@ -113,10 +112,7 @@ export default function AppRoutes() {
           <Route path="certifications" element={<GetCertified />} />
 
           <Route path="subscribe" element={<Subscribe />} />
-          <Route
-            path="course/:courseId"
-            element={<CourseDetails />}
-          />
+          <Route path="course/:courseId" element={<CourseDetails />} />
           <Route path="enroll/:courseId" element={<EnrollCourse />} />
         </Route>
 
@@ -151,7 +147,7 @@ export default function AppRoutes() {
             element={<AddLesson />}
           />
           <Route path="add-chapter/:courseId" element={<AddChapter />} />
-            <Route path="courses/:id/edit" element={<EditCourse/>} />
+          <Route path="courses/:id/edit" element={<EditCourse />} />
         </Route>
       </Routes>
     </Suspense>

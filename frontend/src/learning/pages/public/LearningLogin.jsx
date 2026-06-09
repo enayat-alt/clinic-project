@@ -1,9 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate ,useLocation} from "react-router-dom";
 import { useState } from "react";
 import { useLoginMutation } from "../../../services/authApi";
 
 export default function LearningLogin() {
   const navigate = useNavigate();
+  //const navigate = useNavigate();
+const location = useLocation();
+
+const redirect =
+  new URLSearchParams(location.search).get("redirect");
 
   const [loginUser, { isLoading }] = useLoginMutation();
 
@@ -39,15 +44,31 @@ export default function LearningLogin() {
       localStorage.setItem("user", JSON.stringify(response.user));
 
       // navigate("/learning/dashboard");
+      // const user = response.user;
+
+      // if (user.role === "admin") {
+      //   navigate("/admin/dashboard");
+      // } else if (user.role === "student") {
+      //   navigate("/learning/dashboard");
+      // } else {
+      //   navigate("/");
+      // }
       const user = response.user;
 
-      if (user.role === "admin") {
-        navigate("/admin/dashboard");
-      } else if (user.role === "student") {
-        navigate("/learning/dashboard");
-      } else {
-        navigate("/");
-      }
+// If user came from another page
+if (redirect) {
+  navigate(redirect);
+  return;
+}
+
+// Normal login flow
+if (user.role === "admin") {
+  navigate("/admin/dashboard");
+} else if (user.role === "student") {
+  navigate("/learning/dashboard");
+} else {
+  navigate("/");
+}
     } catch (error) {
       setError(error?.data?.message || "Invalid email or password");
 
@@ -170,3 +191,4 @@ export default function LearningLogin() {
     </div>
   );
 }
+
