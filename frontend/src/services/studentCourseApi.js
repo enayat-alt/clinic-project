@@ -10,10 +10,7 @@ export const studentCourseApi = createApi({
       const token = localStorage.getItem("accessToken");
 
       if (token) {
-        headers.set(
-          "Authorization",
-          `Bearer ${token}`
-        );
+        headers.set("Authorization", `Bearer ${token}`);
       }
 
       return headers;
@@ -27,9 +24,14 @@ export const studentCourseApi = createApi({
         method: "POST",
       }),
     }),
+
+    getMyCourses: builder.query({
+      query: () => ({
+        url: "/student-courses/my-courses",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const {
-  useEnrollInCourseMutation,
-} = studentCourseApi;
+export const { useEnrollInCourseMutation , useGetMyCoursesQuery,} = studentCourseApi;

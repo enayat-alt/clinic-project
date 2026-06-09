@@ -49,5 +49,31 @@ exports.enrollInCourse = async (req, res) => {
     return res.status(500).json({
       message: "Server error",
     });
+    
+  }
+};
+
+exports.getMyCourses = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const courses = await StudentCourse.findAll({
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: Course,
+        },
+      ],
+    });
+
+    return res.status(200).json(courses);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Server error",
+    });
   }
 };
