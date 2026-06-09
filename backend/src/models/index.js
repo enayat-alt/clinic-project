@@ -4,7 +4,6 @@ const Lesson = require("./learning/Lesson");
 const User = require("./auth/User");
 const StudentCourse = require("./learning/StudentCourse");
 
-
 Course.hasMany(Chapter, {
   foreignKey: "courseId",
   onDelete: "CASCADE",
@@ -37,12 +36,26 @@ Course.belongsToMany(User, {
   as: "students",
 });
 
+StudentCourse.belongsTo(User, {
+  foreignKey: "userId",
+});
+
+User.hasMany(StudentCourse, {
+  foreignKey: "userId",
+});
+
+StudentCourse.belongsTo(Course, {
+  foreignKey: "courseId",
+});
+
+Course.hasMany(StudentCourse, {
+  foreignKey: "courseId",
+});
+
 module.exports = {
   Course,
   Chapter,
   Lesson,
   User,
   StudentCourse,
-
-
 };
