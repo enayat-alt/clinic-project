@@ -1,62 +1,48 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { useGetCourseByIdQuery } from "../../../admin/courses/services/courseApi";
+
 export default function EnrollCourse() {
   const { courseId } = useParams();
   const navigate = useNavigate();
 
-  const [course, setCourse] = useState(null);
   const [coupon, setCoupon] = useState("");
 
+  const {
+    data: course,
+    isLoading,
+    error,
+  } = useGetCourseByIdQuery(courseId);
+
   useEffect(() => {
-    const courses =
-      JSON.parse(localStorage.getItem("courses")) || [];
+    const token = localStorage.getItem("accessToken");
 
-    const selectedCourse = courses.find(
-      (course) => course.id === Number(courseId)
-    );
-
-    setCourse(selectedCourse);
-  }, [courseId]);
+    if (!token) {
+      navigate(
+        `/login?redirect=/learning/enroll/${courseId}`
+      );
+    }
+  }, [courseId, navigate]);
 
   const handleEnroll = () => {
-    const enrolledCourses =
-      JSON.parse(
-        localStorage.getItem("enrolledCourses")
-      ) || [];
-
-    const alreadyEnrolled =
-      enrolledCourses.find(
-        (item) => item.id === course.id
-      );
-
-    if (alreadyEnrolled) {
-      alert("You are already enrolled");
-
-      navigate("/learning/my-learning");
-      return;
-    }
-
-    enrolledCourses.push({
-      ...course,
-      enrolledAt: new Date().toISOString(),
-      paymentStatus: "paid",
-    });
-
-    localStorage.setItem(
-      "enrolledCourses",
-      JSON.stringify(enrolledCourses)
+    alert(
+      "Razorpay payment integration will be added next."
     );
-
-    alert("Enrollment Successful");
-
-    navigate("/learning/my-learning");
   };
 
-  if (!course) {
+  if (isLoading) {
     return (
-      <div className="p-10 text-center">
-        <h2 className="text-2xl font-bold">
+      <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
+        Loading Course...
+      </div>
+    );
+  }
+
+  if (error || !course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h2 className="text-2xl font-bold text-red-500">
           Course Not Found
         </h2>
       </div>
@@ -64,36 +50,63 @@ export default function EnrollCourse() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10">
-      <div className="max-w-6xl mx-auto px-6">
-        <h1 className="text-4xl font-bold mb-8">
+    <div className="min-h-screen bg-gray-50 py-6 md:py-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">
           Enroll Course
         </h1>
 
         <div className="grid lg:grid-cols-2 gap-8">
+
           {/* Course Card */}
 
           <div className="bg-white rounded-3xl overflow-hidden shadow-lg">
+
             <img
               src={
                 course.thumbnail ||
                 "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200"
               }
               alt={course.title}
-              className="w-full h-72 object-cover"
+              className="w-full h-56 md:h-72 object-cover"
             />
 
-            <div className="p-6">
-              <h2 className="text-3xl font-bold">
+            <div className="p-5 md:p-6">
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-xs md:text-sm font-semibold">
+                  {course.category}
+                </span>
+
+                <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs md:text-sm">
+                  {course.status}
+                </span>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-bold">
                 {course.title}
               </h2>
 
-              <p className="text-gray-600 mt-4">
+              <p className="text-gray-600 mt-4 leading-7">
                 {course.description}
               </p>
 
+              <div className="mt-6 space-y-2">
+
+                <p>
+                  <strong>Instructor:</strong>{" "}
+                  {course.instructor}
+                </p>
+
+                <p>
+                  <strong>Category:</strong>{" "}
+                  {course.category}
+                </p>
+              </div>
+
               <div className="mt-6">
-                <span className="text-3xl font-bold text-[#1a504c]">
+                <span className="text-3xl md:text-4xl font-bold text-[#1a504c]">
                   ₹{course.price || 0}
                 </span>
               </div>
@@ -102,7 +115,8 @@ export default function EnrollCourse() {
 
           {/* Payment Section */}
 
-          <div className="bg-white rounded-3xl shadow-lg p-8">
+          <div className="bg-white rounded-3xl shadow-lg p-5 md:p-8">
+
             <h2 className="text-2xl font-bold mb-6">
               Order Summary
             </h2>
@@ -115,7 +129,8 @@ export default function EnrollCourse() {
               </span>
             </div>
 
-            <div className="border-t pt-4">
+            <div className="border-t pt-5">
+
               <label className="block mb-2 font-medium">
                 Coupon Code
               </label>
@@ -127,12 +142,13 @@ export default function EnrollCourse() {
                   setCoupon(e.target.value)
                 }
                 placeholder="Enter Coupon Code"
-                className="w-full border rounded-xl px-4 py-3"
+                className="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
               />
             </div>
 
             <div className="border-t mt-6 pt-6">
-              <div className="flex justify-between text-2xl font-bold">
+
+              <div className="flex justify-between text-xl md:text-2xl font-bold">
                 <span>Total</span>
 
                 <span>
@@ -143,16 +159,17 @@ export default function EnrollCourse() {
 
             <button
               onClick={handleEnroll}
-              className="w-full mt-8 bg-[#1a504c] text-white py-4 rounded-xl font-semibold hover:bg-black transition"
+              className="w-full mt-8 bg-[#1a504c] text-white py-4 rounded-xl font-semibold text-lg hover:bg-black transition"
             >
               Proceed To Payment
             </button>
 
             <p className="text-center text-gray-500 mt-4 text-sm">
-              Payment gateway will be integrated later
-              using Razorpay.
+              Secure payment will be processed using Razorpay.
             </p>
+
           </div>
+
         </div>
       </div>
     </div>

@@ -1,106 +1,144 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useGetCourseByIdQuery } from "../../admin/courses/services/courseApi";
 
 export default function CourseDetails() {
   const { courseId } = useParams();
   const navigate = useNavigate();
 
-  const [course, setCourse] = useState(null);
+  const {
+    data: course,
+    isLoading,
+    error,
+  } = useGetCourseByIdQuery(courseId);
 
-  useEffect(() => {
-    const courses = JSON.parse(localStorage.getItem("courses")) || [];
+  const handleEnroll = () => {
+    const token = localStorage.getItem("accessToken");
 
-    const selectedCourse = courses.find(
-      (course) => course.id === Number(courseId),
-    );
+    if (!token) {
+      navigate(
+       // `/learning/login?redirect=/learning/course/${courseId}`
+       `/learning/login?redirect=/learning/enroll/${courseId}`
+       
+      );
+      return;
+    }
+      
+    navigate(`/learning/enroll/${courseId}`);
+  };
 
-    setCourse(selectedCourse);
-  }, [courseId]);
-
-  if (!course) {
+  if (isLoading) {
     return (
-      <div className="max-w-6xl mx-auto p-10 text-center">
-        <h2 className="text-3xl font-bold">Course Not Found</h2>
+      <div className="min-h-screen flex items-center justify-center text-lg font-semibold">
+        Loading...
       </div>
     );
   }
 
+  if (error || !course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-500 text-lg">
+        Course not found
+      </div>
+    );
+  }
+
+  const totalChapters =
+    course?.Chapters?.length || 0;
+
   const totalLessons =
-    course.chapters?.reduce(
-      (total, chapter) => total + (chapter.lessons?.length || 0),
-      0,
+    course?.Chapters?.reduce(
+      (total, chapter) =>
+        total +
+        (chapter.Lessons?.length || 0),
+      0
     ) || 0;
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Hero Card */}
-        <div className="bg-white rounded-3xl overflow-hidden shadow-lg">
-          <div className="grid lg:grid-cols-2">
-            {/* Thumbnail */}
-            <div>
-              <img
-                src={
-                  course.thumbnail ||
-                  "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200"
-                }
-                alt={course.title}
-                className="w-full h-full min-h-[350px] object-cover"
-              />
-            </div>
+    <div className="bg-gray-50 min-h-screen py-6 md:py-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
 
-            {/* Details */}
-            <div className="p-8">
-              <span className="inline-block bg-[#e5f9f8] text-[#1a504c] px-4 py-2 rounded-full text-sm font-medium">
-                {course.category || "Medical Course"}
+        {/* Course Header */}
+        <div className="bg-white rounded-3xl overflow-hidden shadow-lg">
+
+          <img
+            src={
+              course.thumbnail ||
+              "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000"
+            }
+            alt={course.title}
+            className="w-full h-56 md:h-80 lg:h-[420px] object-cover"
+          />
+
+          <div className="p-5 md:p-8">
+
+            <div className="flex flex-wrap gap-2 mb-4">
+              <span className="bg-[#e5f9f8] text-[#1a504c] px-4 py-1 rounded-full text-xs md:text-sm font-semibold">
+                {course.category}
               </span>
 
-              <h1 className="text-4xl font-bold mt-4 text-gray-800">
-                {course.title}
-              </h1>
+              <span className="bg-yellow-100 text-yellow-700 px-4 py-1 rounded-full text-xs md:text-sm">
+                {course.status}
+              </span>
+            </div>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                {course.description || "No course description available."}
-              </p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a504c] leading-tight">
+              {course.title}
+            </h1>
 
-              <div className="mt-6">
-                <span className="text-4xl font-bold text-[#1a504c]">
-                  ₹{course.price || 0}
-                </span>
+            <p className="text-gray-600 mt-5 text-base md:text-lg leading-7 md:leading-8">
+              {course.description}
+            </p>
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-8">
+
+              <div className="bg-gray-100 rounded-2xl p-5">
+                <h3 className="text-gray-500 font-medium">
+                  Instructor
+                </h3>
+
+                <p className="text-lg md:text-xl font-bold mt-2">
+                  {course.instructor}
+                </p>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mt-8">
-                <div className="bg-gray-50 p-4 rounded-xl text-center">
-                  <h3 className="text-2xl font-bold text-[#1a504c]">
-                    {course.chapters?.length || 0}
-                  </h3>
-                  <p className="text-sm text-gray-500">Chapters</p>
-                </div>
+              <div className="bg-gray-100 rounded-2xl p-5">
+                <h3 className="text-gray-500 font-medium">
+                  Chapters
+                </h3>
 
-                <div className="bg-gray-50 p-4 rounded-xl text-center">
-                  <h3 className="text-2xl font-bold text-[#1a504c]">
-                    {totalLessons}
-                  </h3>
-                  <p className="text-sm text-gray-500">Lessons</p>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-xl text-center">
-                  <h3 className="text-2xl font-bold text-[#1a504c]">
-                    Lifetime
-                  </h3>
-                  <p className="text-sm text-gray-500">Access</p>
-                </div>
+                <p className="text-lg md:text-xl font-bold mt-2">
+                  {totalChapters}
+                </p>
               </div>
 
-              {/* <button className="mt-8 w-full bg-[#1a504c] text-white py-4 rounded-xl font-semibold hover:bg-black transition">
-                Enroll Now
-              </button> */}
+              <div className="bg-gray-100 rounded-2xl p-5">
+                <h3 className="text-gray-500 font-medium">
+                  Lessons
+                </h3>
+
+                <p className="text-lg md:text-xl font-bold mt-2">
+                  {totalLessons}
+                </p>
+              </div>
+            </div>
+
+            {/* Price + Enroll */}
+            <div className="mt-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+              <div>
+                <p className="text-gray-500">
+                  Course Price
+                </p>
+
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a504c]">
+                  ₹{course.price}
+                </h2>
+              </div>
+
               <button
-                onClick={() => {
-                  console.log("clicked");
-                  navigate(`/learning/enroll/${course.id}`);
-                }}
-                className="mt-8 w-full bg-[#1a504c] text-white py-4 rounded-xl font-semibold"
+                onClick={handleEnroll}
+                className="w-full lg:w-auto bg-[#1a504c] text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-black transition"
               >
                 Enroll Now
               </button>
@@ -108,58 +146,80 @@ export default function CourseDetails() {
           </div>
         </div>
 
-        {/* Course Content */}
-        <div className="mt-10">
-          <h2 className="text-3xl font-bold mb-6">Course Content</h2>
+        {/* Curriculum */}
+        <div className="bg-white rounded-3xl shadow-lg mt-8 md:mt-10 p-5 md:p-8">
 
-          {course.chapters?.length > 0 ? (
-            course.chapters.map((chapter, index) => (
-              <details
-                key={chapter.id}
-                className="bg-white border rounded-2xl p-5 mb-4 shadow-sm"
-              >
-                <summary className="cursor-pointer font-semibold text-lg flex justify-between">
-                  <span>
-                    Chapter {index + 1}: {chapter.title}
-                  </span>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6">
 
-                  <span className="text-sm text-gray-500">
-                    {chapter.lessons?.length || 0} Lessons
-                  </span>
-                </summary>
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Course Curriculum
+            </h2>
 
-                <div className="mt-4 space-y-3">
-                  {chapter.lessons?.length > 0 ? (
-                    chapter.lessons.map((lesson) => (
-                      <div
-                        key={lesson.id}
-                        className="flex justify-between items-center border rounded-xl p-4"
-                      >
-                        <div>
-                          <h4 className="font-medium">{lesson.title}</h4>
+            <span className="text-gray-500">
+              {totalChapters} Chapters • {totalLessons} Lessons
+            </span>
+          </div>
 
-                          <p className="text-sm text-gray-500">
-                            {lesson.type?.toUpperCase()}
-                          </p>
+          {course?.Chapters?.length > 0 ? (
+            <div className="space-y-5">
+
+              {course.Chapters.map((chapter) => (
+                <div
+                  key={chapter.id}
+                  className="border rounded-2xl p-4 md:p-5"
+                >
+
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+
+                    <h3 className="font-semibold text-lg md:text-xl">
+                      📚 {chapter.title}
+                    </h3>
+
+                    <span className="text-sm text-gray-500">
+                      {chapter.Lessons?.length || 0} Lessons
+                    </span>
+                  </div>
+
+                  <div className="mt-4 space-y-3">
+
+                    {chapter.Lessons?.length > 0 ? (
+                      chapter.Lessons.map((lesson) => (
+                        <div
+                          key={lesson.id}
+                          className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b pb-3"
+                        >
+
+                          <div className="flex items-center gap-2">
+                            <span>🔒</span>
+
+                            <span className="font-medium text-sm md:text-base">
+                              {lesson.title}
+                            </span>
+                          </div>
+
+                          <span className="text-xs md:text-sm text-gray-500">
+                            {lesson.type}
+                          </span>
                         </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500 text-sm">
+                        No lessons available
+                      </p>
+                    )}
 
-                        <span className="bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-sm">
-                          {lesson.type}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-500">No lessons available</p>
-                  )}
+                  </div>
                 </div>
-              </details>
-            ))
+              ))}
+
+            </div>
           ) : (
-            <div className="bg-white rounded-2xl p-8 text-center">
-              No chapters available.
+            <div className="text-center py-10 text-gray-500">
+              No chapters available
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

@@ -1,164 +1,190 @@
-// import { useNavigate, useParams } from "react-router-dom";
-// import { useEffect, useState } from "react";
+// import { Link, useNavigate, useLocation } from "react-router-dom";
+// import { useState } from "react";
+// import { useLoginMutation } from "../../../services/authApi";
 
-// export default function CourseDetails() {
-//   const { courseId } = useParams();
+// export default function LearningLogin() {
 //   const navigate = useNavigate();
 
-//   const [course, setCourse] = useState(null);
+//   const [loginUser, { isLoading }] = useLoginMutation();
 
-//   useEffect(() => {
-//     const courses = JSON.parse(localStorage.getItem("courses")) || [];
+//   const [formData, setFormData] = useState({
+//     email: "admin1@gmail.com",
+//     password: "admin1",
+//   });
+//   const location = useLocation();
 
-//     const selectedCourse = courses.find(
-//       (course) => course.id === Number(courseId),
-//     );
+//   const redirect = new URLSearchParams(location.search).get("redirect");
+//   console.log(redirect)
 
-//     setCourse(selectedCourse);
-//   }, [courseId]);
+//   const [error, setError] = useState("");
 
-//   if (!course) {
-//     return (
-//       <div className="max-w-6xl mx-auto p-10 text-center">
-//         <h2 className="text-3xl font-bold">Course Not Found</h2>
-//       </div>
-//     );
-//   }
+//   const handleChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       [e.target.name]: e.target.value,
+//     });
 
-//   const totalLessons =
-//     course.chapters?.reduce(
-//       (total, chapter) => total + (chapter.lessons?.length || 0),
-//       0,
-//     ) || 0;
+//     setError("");
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const response = await loginUser({
+//         email: formData.email,
+//         password: formData.password,
+//       }).unwrap();
+
+//       localStorage.setItem("accessToken", response.accessToken);
+
+//       localStorage.setItem("refreshToken", response.refreshToken);
+
+//       localStorage.setItem("user", JSON.stringify(response.user));
+
+//       // navigate("/learning/dashboard");
+//       //   const user = response.user;
+
+//       //   if (user.role === "admin") {
+//       //     navigate("/admin/dashboard");
+//       //   } else if (user.role === "student") {
+//       //     navigate("/learning/dashboard");
+//       //   } else {
+//       //     navigate("/");
+//       //   }
+//       const user = response.user;
+
+//       // Redirect to requested page first
+//       if (redirect) {
+//         navigate(redirect);
+//         return;
+//       }
+
+//       // Default role-based redirects
+//       if (user.role === "admin") {
+//         navigate("/admin/dashboard");
+//       } else if (user.role === "student") {
+//         navigate("/learning/dashboard");
+//       } else {
+//         navigate("/");
+//       }
+//     } catch (error) {
+//       setError(error?.data?.message || "Invalid email or password");
+
+//       console.error(error);
+//     }
+//   };
 
 //   return (
-//     <div className="bg-gray-50 min-h-screen py-10">
-//       <div className="max-w-6xl mx-auto px-6">
-//         {/* Hero Card */}
-//         <div className="bg-white rounded-3xl overflow-hidden shadow-lg">
-//           <div className="grid lg:grid-cols-2">
-//             {/* Thumbnail */}
-//             <div>
-//               <img
-//                 src={
-//                   course.thumbnail ||
-//                   "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200"
-//                 }
-//                 alt={course.title}
-//                 className="w-full h-full min-h-[350px] object-cover"
-//               />
-//             </div>
-
-//             {/* Details */}
-//             <div className="p-8">
-//               <span className="inline-block bg-[#e5f9f8] text-[#1a504c] px-4 py-2 rounded-full text-sm font-medium">
-//                 {course.category || "Medical Course"}
-//               </span>
-
-//               <h1 className="text-4xl font-bold mt-4 text-gray-800">
-//                 {course.title}
-//               </h1>
-
-//               <p className="mt-4 text-gray-600 leading-7">
-//                 {course.description || "No course description available."}
-//               </p>
-
-//               <div className="mt-6">
-//                 <span className="text-4xl font-bold text-[#1a504c]">
-//                   ₹{course.price || 0}
-//                 </span>
-//               </div>
-
-//               <div className="grid grid-cols-3 gap-4 mt-8">
-//                 <div className="bg-gray-50 p-4 rounded-xl text-center">
-//                   <h3 className="text-2xl font-bold text-[#1a504c]">
-//                     {course.chapters?.length || 0}
-//                   </h3>
-//                   <p className="text-sm text-gray-500">Chapters</p>
-//                 </div>
-
-//                 <div className="bg-gray-50 p-4 rounded-xl text-center">
-//                   <h3 className="text-2xl font-bold text-[#1a504c]">
-//                     {totalLessons}
-//                   </h3>
-//                   <p className="text-sm text-gray-500">Lessons</p>
-//                 </div>
-
-//                 <div className="bg-gray-50 p-4 rounded-xl text-center">
-//                   <h3 className="text-2xl font-bold text-[#1a504c]">
-//                     Lifetime
-//                   </h3>
-//                   <p className="text-sm text-gray-500">Access</p>
-//                 </div>
-//               </div>
-
-//               {/* <button className="mt-8 w-full bg-[#1a504c] text-white py-4 rounded-xl font-semibold hover:bg-black transition">
-//                 Enroll Now
-//               </button> */}
-//               <button
-//                 onClick={() => {
-//                   console.log("clicked");
-//                   navigate(`/learning/enroll/${course.id}`);
-//                 }}
-//                 className="mt-8 w-full bg-[#1a504c] text-white py-4 rounded-xl font-semibold"
-//               >
-//                 Enroll Now
-//               </button>
-//             </div>
+//     <div className="min-h-screen bg-[#e5f9f8] flex items-center justify-center px-6 py-12">
+//       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-[#cdebea] p-8">
+//         {/* Logo */}
+//         <div className="text-center mb-8">
+//           <div className="w-16 h-16 bg-[#1a504c] rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+//             L
 //           </div>
+
+//           <h1 className="text-3xl font-bold text-[#1a504c]">Learning Portal</h1>
+
+//           <p className="text-gray-600 mt-2">
+//             Continue your medical learning journey
+//           </p>
 //         </div>
 
-//         {/* Course Content */}
-//         <div className="mt-10">
-//           <h2 className="text-3xl font-bold mb-6">Course Content</h2>
+//         {/* Form */}
+//         <form onSubmit={handleSubmit} className="space-y-5">
+//           <div>
+//             <label className="block text-sm font-medium mb-2">
+//               Email Address
+//             </label>
 
-//           {course.chapters?.length > 0 ? (
-//             course.chapters.map((chapter, index) => (
-//               <details
-//                 key={chapter.id}
-//                 className="bg-white border rounded-2xl p-5 mb-4 shadow-sm"
-//               >
-//                 <summary className="cursor-pointer font-semibold text-lg flex justify-between">
-//                   <span>
-//                     Chapter {index + 1}: {chapter.title}
-//                   </span>
+//             <input
+//               type="email"
+//               name="email"
+//               value={formData.email}
+//               onChange={handleChange}
+//               placeholder="Enter your email"
+//               className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
+//               required
+//             />
+//           </div>
 
-//                   <span className="text-sm text-gray-500">
-//                     {chapter.lessons?.length || 0} Lessons
-//                   </span>
-//                 </summary>
+//           <div>
+//             <label className="block text-sm font-medium mb-2">Password</label>
 
-//                 <div className="mt-4 space-y-3">
-//                   {chapter.lessons?.length > 0 ? (
-//                     chapter.lessons.map((lesson) => (
-//                       <div
-//                         key={lesson.id}
-//                         className="flex justify-between items-center border rounded-xl p-4"
-//                       >
-//                         <div>
-//                           <h4 className="font-medium">{lesson.title}</h4>
+//             <input
+//               type="password"
+//               name="password"
+//               value={formData.password}
+//               onChange={handleChange}
+//               placeholder="Enter your password"
+//               className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
+//               required
+//             />
+//           </div>
 
-//                           <p className="text-sm text-gray-500">
-//                             {lesson.type?.toUpperCase()}
-//                           </p>
-//                         </div>
-
-//                         <span className="bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-sm">
-//                           {lesson.type}
-//                         </span>
-//                       </div>
-//                     ))
-//                   ) : (
-//                     <p className="text-gray-500">No lessons available</p>
-//                   )}
-//                 </div>
-//               </details>
-//             ))
-//           ) : (
-//             <div className="bg-white rounded-2xl p-8 text-center">
-//               No chapters available.
+//           {error && (
+//             <div className="bg-red-100 text-red-600 p-3 rounded-xl text-sm">
+//               {error}
 //             </div>
 //           )}
+
+//           <div className="flex justify-between items-center">
+//             <label className="flex items-center gap-2 text-sm">
+//               <input type="checkbox" />
+//               Remember Me
+//             </label>
+
+//             <Link
+//               to="/learning/forgot-password"
+//               className="text-[#1a504c] text-sm hover:underline"
+//             >
+//               Forgot Password?
+//             </Link>
+//           </div>
+
+//           <button
+//             type="submit"
+//             disabled={isLoading}
+//             className="w-full bg-[#1a504c] text-white py-3 rounded-xl font-semibold hover:bg-black transition disabled:opacity-50"
+//           >
+//             {isLoading ? "Logging in..." : "Login"}
+//           </button>
+//         </form>
+
+//         {/* Divider */}
+//         <div className="my-6 flex items-center">
+//           <div className="flex-1 border-t border-gray-300"></div>
+
+//           <span className="px-3 text-gray-500 text-sm">OR</span>
+
+//           <div className="flex-1 border-t border-gray-300"></div>
+//         </div>
+
+//         {/* Google Login */}
+//         <button className="w-full border border-[#cdebea] py-3 rounded-xl hover:bg-[#e5f9f8] transition">
+//           Continue with Google
+//         </button>
+
+//         {/* Register Link */}
+//         <p className="text-center mt-6 text-gray-600">
+//           Don't have an account?{" "}
+//           <Link
+//             to="/learning/register"
+//             className="text-[#1a504c] font-semibold hover:underline"
+//           >
+//             Create Account
+//           </Link>
+//         </p>
+
+//         {/* Back */}
+//         <div className="text-center mt-6">
+//           <Link
+//             to="/learning"
+//             className="text-[#1a504c] hover:underline text-sm"
+//           >
+//             ← Back to Learning Home
+//           </Link>
 //         </div>
 //       </div>
 //     </div>
