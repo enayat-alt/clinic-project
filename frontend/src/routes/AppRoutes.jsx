@@ -14,6 +14,7 @@ import CourseContent from "../admin/courses/pages/CourseContent";
 import AddLesson from "../admin/courses/pages/AddLesson";
 import AddChapter from "../admin/courses/pages/AddChapter";
 import EditCourse from "../admin/courses/pages/EditCourse";
+import EnrollPage from "../learning/pages/public/EnrollPage";
 
 // Clinic Pages
 
@@ -114,6 +115,7 @@ export default function AppRoutes() {
           <Route path="subscribe" element={<Subscribe />} />
           <Route path="course/:courseId" element={<CourseDetails />} />
           <Route path="enroll/:courseId" element={<EnrollCourse />} />
+          <Route path="payment/:courseId" element={<EnrollPage />} />
         </Route>
 
         {/* Learning Auth Routes */}
