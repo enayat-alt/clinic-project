@@ -23,6 +23,7 @@ app.use("/api/admin", require("./routes/auth/adminRoutes"));
 app.use("/api/chapters", require("./routes/learning/chapterRoutes"));
 
 app.use("/api/lessons", require("./routes/learning/lessonRoutes"));
+app.use("/api/student-courses", require("./routes/learning/studentCourseRoutes"));
 
 app.get("/", (req, res) => {
   res.json({ message: "MediCare API running" });
