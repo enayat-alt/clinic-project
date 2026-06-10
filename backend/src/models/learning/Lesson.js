@@ -14,12 +14,14 @@ const Lesson = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
 
     type: {
-      type: DataTypes.ENUM(
-        "video",
-        "pdf"
-      ),
+      type: DataTypes.ENUM("video", "pdf"),
       defaultValue: "video",
     },
 
@@ -40,7 +42,7 @@ const Lesson = sequelize.define(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = Lesson;

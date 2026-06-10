@@ -1,1 +1,9 @@
-export default function Quiz() { return <div className="p-8 text-2xl">Quiz</div>; }
+import React from 'react'
+
+const Quiz = () => {
+  return (
+    <div>Quiz</div>
+  )
+}
+
+export default Quiz

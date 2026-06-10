@@ -6,6 +6,8 @@ exports.createChapter = async (req, res) => {
       title: req.body.title,
       courseId: req.body.courseId,
       order: req.body.order || 1,
+      description:req.body.description
+        
     });
 
     res.status(201).json(chapter);
