@@ -19,6 +19,10 @@ const Chapter = sequelize.define(
       type: DataTypes.INTEGER,
       defaultValue: 1,
     },
+       description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
   {
     timestamps: true,

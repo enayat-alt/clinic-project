@@ -12,6 +12,7 @@ exports.createLesson = async (
       duration: req.body.duration,
       chapterId: req.body.chapterId,
       order: req.body.order || 1,
+      description: req.body.description
     });
 
     res.status(201).json(lesson);

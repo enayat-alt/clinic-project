@@ -1,28 +1,37 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useGetCourseByIdQuery } from "../../admin/courses/services/courseApi";
 
 export default function CourseDetails() {
   const { courseId } = useParams();
   const navigate = useNavigate();
 
-  const {
-    data: course,
-    isLoading,
-    error,
-  } = useGetCourseByIdQuery(courseId);
+  const [openChapter, setOpenChapter] = useState(null);
+  const [openLessons, setOpenLessons] = useState({});
+
+  const toggleLesson = (chapterId, lessonId) => {
+  setOpenLessons((prev) => ({
+    ...prev,
+    [chapterId]:
+      prev[chapterId] === lessonId
+        ? null
+        : lessonId,
+  }));
+};
+
+  const { data: course, isLoading, error } = useGetCourseByIdQuery(courseId);
 
   const handleEnroll = () => {
     const token = localStorage.getItem("accessToken");
 
     if (!token) {
       navigate(
-       // `/learning/login?redirect=/learning/course/${courseId}`
-       `/learning/login?redirect=/learning/enroll/${courseId}`
-       
+        // `/learning/login?redirect=/learning/course/${courseId}`
+        `/learning/login?redirect=/learning/enroll/${courseId}`,
       );
       return;
     }
-      
+
     navigate(`/learning/enroll/${courseId}`);
   };
 
@@ -42,24 +51,19 @@ export default function CourseDetails() {
     );
   }
 
-  const totalChapters =
-    course?.Chapters?.length || 0;
+  const totalChapters = course?.Chapters?.length || 0;
 
   const totalLessons =
     course?.Chapters?.reduce(
-      (total, chapter) =>
-        total +
-        (chapter.Lessons?.length || 0),
-      0
+      (total, chapter) => total + (chapter.Lessons?.length || 0),
+      0,
     ) || 0;
 
   return (
     <div className="bg-gray-50 min-h-screen py-6 md:py-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-
         {/* Course Header */}
         <div className="bg-white rounded-3xl overflow-hidden shadow-lg">
-
           <img
             src={
               course.thumbnail ||
@@ -70,7 +74,6 @@ export default function CourseDetails() {
           />
 
           <div className="p-5 md:p-8">
-
             <div className="flex flex-wrap gap-2 mb-4">
               <span className="bg-[#e5f9f8] text-[#1a504c] px-4 py-1 rounded-full text-xs md:text-sm font-semibold">
                 {course.category}
@@ -91,11 +94,8 @@ export default function CourseDetails() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-8">
-
               <div className="bg-gray-100 rounded-2xl p-5">
-                <h3 className="text-gray-500 font-medium">
-                  Instructor
-                </h3>
+                <h3 className="text-gray-500 font-medium">Instructor</h3>
 
                 <p className="text-lg md:text-xl font-bold mt-2">
                   {course.instructor}
@@ -103,9 +103,7 @@ export default function CourseDetails() {
               </div>
 
               <div className="bg-gray-100 rounded-2xl p-5">
-                <h3 className="text-gray-500 font-medium">
-                  Chapters
-                </h3>
+                <h3 className="text-gray-500 font-medium">Chapters</h3>
 
                 <p className="text-lg md:text-xl font-bold mt-2">
                   {totalChapters}
@@ -113,9 +111,7 @@ export default function CourseDetails() {
               </div>
 
               <div className="bg-gray-100 rounded-2xl p-5">
-                <h3 className="text-gray-500 font-medium">
-                  Lessons
-                </h3>
+                <h3 className="text-gray-500 font-medium">Lessons</h3>
 
                 <p className="text-lg md:text-xl font-bold mt-2">
                   {totalLessons}
@@ -125,11 +121,8 @@ export default function CourseDetails() {
 
             {/* Price + Enroll */}
             <div className="mt-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-
               <div>
-                <p className="text-gray-500">
-                  Course Price
-                </p>
+                <p className="text-gray-500">Course Price</p>
 
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a504c]">
                   ₹{course.price}
@@ -147,10 +140,9 @@ export default function CourseDetails() {
         </div>
 
         {/* Curriculum */}
+        {/* Curriculum */}
         <div className="bg-white rounded-3xl shadow-lg mt-8 md:mt-10 p-5 md:p-8">
-
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6">
-
             <h2 className="text-2xl md:text-3xl font-bold">
               Course Curriculum
             </h2>
@@ -162,56 +154,101 @@ export default function CourseDetails() {
 
           {course?.Chapters?.length > 0 ? (
             <div className="space-y-5">
-
               {course.Chapters.map((chapter) => (
                 <div
                   key={chapter.id}
-                  className="border rounded-2xl p-4 md:p-5"
+                  className="border rounded-2xl overflow-hidden"
                 >
+                  {/* Chapter Header */}
+                  <button
+                    onClick={() =>
+                      setOpenChapter(
+                        openChapter === chapter.id ? null : chapter.id,
+                      )
+                    }
+                    className="w-full p-5 flex justify-between items-center text-left hover:bg-gray-50 transition"
+                  >
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg md:text-xl">
+                        📚 {chapter.title}
+                      </h3>
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-
-                    <h3 className="font-semibold text-lg md:text-xl">
-                      📚 {chapter.title}
-                    </h3>
-
-                    <span className="text-sm text-gray-500">
-                      {chapter.Lessons?.length || 0} Lessons
-                    </span>
-                  </div>
-
-                  <div className="mt-4 space-y-3">
-
-                    {chapter.Lessons?.length > 0 ? (
-                      chapter.Lessons.map((lesson) => (
-                        <div
-                          key={lesson.id}
-                          className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b pb-3"
-                        >
-
-                          <div className="flex items-center gap-2">
-                            <span>🔒</span>
-
-                            <span className="font-medium text-sm md:text-base">
-                              {lesson.title}
-                            </span>
-                          </div>
-
-                          <span className="text-xs md:text-sm text-gray-500">
-                            {lesson.type}
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-gray-500 text-sm">
-                        No lessons available
+                      <p className="text-sm text-gray-400 mt-2">
+                        {chapter.Lessons?.length || 0} Lessons
                       </p>
-                    )}
+                    </div>
 
-                  </div>
+                    <span className="text-2xl text-[#1a504c]">
+                      {openChapter === chapter.id ? "−" : "+"}
+                    </span>
+                  </button>
+
+                  {/* Chapter Content */}
+                  {openChapter === chapter.id && (
+                    <div className="px-5 pb-5 border-t">
+                      <p className="text-gray-600 mt-4 mb-5 text-sm md:text-base leading-6">
+                        {chapter.description ||
+                          "No chapter description available."}
+                      </p>
+
+                      {chapter.Lessons?.length > 0 ? (
+                        <div className="space-y-3">
+                          {chapter.Lessons.map((lesson) => (
+                            <div
+                              key={lesson.id}
+                              className="border rounded-xl overflow-hidden"
+                            >
+                              {/* Lesson Header */}
+                              <button
+                                onClick={() =>
+                                  toggleLesson(chapter.id, lesson.id)
+                                }
+                                className="w-full px-4 py-4 flex justify-between items-center text-left hover:bg-gray-50"
+                              >
+                                <div className="flex items-center gap-2">
+                                  <span>🔒</span>
+
+                                  <span className="font-medium text-sm md:text-base">
+                                    {lesson.title}
+                                  </span>
+                                </div>
+
+                                <span className="text-xl text-[#1a504c]">
+                                  {openLessons[chapter.id] === lesson.id
+                                    ? "−"
+                                    : "+"}
+                                </span>
+                              </button>
+
+                              {/* Lesson Content */}
+                              {openLessons[chapter.id] === lesson.id && (
+                                <div className="px-4 pb-4 border-t">
+                                  <p className="text-sm text-gray-600 mt-3 leading-6">
+                                    {lesson.description ||
+                                      "No lesson description available."}
+                                  </p>
+
+                                  <div className="mt-3 flex flex-wrap gap-4 text-xs text-gray-500">
+                                    <span>Type: {lesson.type}</span>
+
+                                    {lesson.duration && (
+                                      <span>Duration: {lesson.duration}</span>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-gray-500 text-sm mt-3">
+                          No lessons available
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
-
             </div>
           ) : (
             <div className="text-center py-10 text-gray-500">
@@ -219,7 +256,6 @@ export default function CourseDetails() {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );
