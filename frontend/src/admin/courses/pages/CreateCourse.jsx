@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateCourseMutation } from "../services/courseApi";
@@ -25,9 +24,7 @@ export default function CreateCourse() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (status) => {
     try {
       await createCourse({
         title: formData.title,
@@ -36,9 +33,14 @@ export default function CreateCourse() {
         price: Number(formData.price),
         description: formData.description,
         thumbnail: formData.thumbnail,
+        status,
       }).unwrap();
 
-      alert("Course Created Successfully");
+      alert(
+        status === "Draft"
+          ? "Course saved as draft"
+          : "Course published successfully"
+      );
 
       navigate("/admin/courses");
     } catch (error) {
@@ -64,10 +66,7 @@ export default function CreateCourse() {
       </div>
 
       <div className="bg-white p-6 rounded-2xl shadow-sm border">
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6"
-        >
+        <form className="space-y-6">
           {/* Course Title */}
           <div>
             <label className="block mb-2 font-medium">
@@ -190,25 +189,44 @@ export default function CreateCourse() {
             </label>
 
             <textarea
-              rows="5"
+              rows="6"
               name="description"
               value={formData.description}
               onChange={handleChange}
               required
               className="w-full border rounded-xl px-4 py-3"
+              placeholder="Enter detailed course description..."
             />
           </div>
 
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="bg-[#1a504c] text-white px-6 py-3 rounded-xl hover:bg-black transition disabled:opacity-50"
-          >
-            {isLoading
-              ? "Creating..."
-              : "Create Course"}
-          </button>
+          {/* Buttons */}
+          <div className="flex gap-4">
+            <button
+              type="button"
+              disabled={isLoading}
+              onClick={() =>
+                handleSubmit("Draft")
+              }
+              className="bg-gray-500 text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition disabled:opacity-50"
+            >
+              {isLoading
+                ? "Saving..."
+                : "Save as Draft"}
+            </button>
+
+            <button
+              type="button"
+              disabled={isLoading}
+              onClick={() =>
+                handleSubmit("Published")
+              }
+              className="bg-[#1a504c] text-white px-6 py-3 rounded-xl hover:bg-black transition disabled:opacity-50"
+            >
+              {isLoading
+                ? "Publishing..."
+                : "Publish Course"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
