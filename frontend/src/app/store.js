@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authApi } from "../services/authApi";
 import { appointmentApi } from "../services/appointmentApi";
-import {studentCourseApi} from "../services/studentCourseApi"
+import { studentCourseApi } from "../services/studentCourseApi";
 
 //admin
 import { courseApi } from "../admin/courses/services/courseApi";
 import { chapterApi } from "../admin/courses/services/chapterApi";
 import { lessonApi } from "../admin/courses/services/lessonApi";
-
+import { dashboardStatsApi } from "../admin/courses/services/dashboardStatsApi";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +17,7 @@ export const store = configureStore({
     [chapterApi.reducerPath]: chapterApi.reducer,
     [lessonApi.reducerPath]: lessonApi.reducer,
     [studentCourseApi.reducerPath]: studentCourseApi.reducer,
+    [dashboardStatsApi.reducerPath]: dashboardStatsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -27,5 +28,6 @@ export const store = configureStore({
       chapterApi.middleware,
       lessonApi.middleware,
       studentCourseApi.middleware,
+      dashboardStatsApi.middleware
     ),
 });

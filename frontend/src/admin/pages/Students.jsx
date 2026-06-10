@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useGetStudentsQuery } from "../courses/services/dashboardStatsApi";
 
 export default function AdminStudents() {
-  const [students] = useState([
-    {
-      id: 1,
-      name: "Rahul Kumar",
-      email: "rahul@gmail.com",
-      role: "student",
-      status: "active",
-      joinedAt: "2026-06-01",
-    },
-    {
-      id: 2,
-      name: "Amit Singh",
-      email: "amit@gmail.com",
-      role: "student",
-      status: "active",
-      joinedAt: "2026-06-03",
-    },
-  ]);
+  const {
+    data: students = [],
+    isLoading,
+    error,
+  } = useGetStudentsQuery();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-[70vh]">
+        <div className="text-lg font-semibold text-[#1a504c]">
+          Loading students...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-[70vh]">
+        <div className="text-lg font-semibold text-red-500">
+          Failed to load students
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -84,12 +91,14 @@ export default function AdminStudents() {
                   </td>
 
                   <td className="p-4">
-                    {student.joinedAt}
+                    {new Date(
+                      student.createdAt
+                    ).toLocaleDateString()}
                   </td>
 
                   <td className="p-4">
                     <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-                      {student.status}
+                      Active
                     </span>
                   </td>
 

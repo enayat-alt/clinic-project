@@ -1,17 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAllUsers, deleteUser, getAllDoctors, verifyDoctor, getAnalytics,
+  getAllUsers,
+  deleteUser,
+  getAllDoctors,
+  verifyDoctor,
+  getAnalytics,
+  getDashboardStats,
+  getStudents
 } = require("../../controllers/auth/adminController");
 const { protect } = require("../../middleware/auth");
 const { authorize } = require("../../middleware/roleMiddleware");
 
 router.use(protect, authorize("admin"));
 
-router.get("/users",              getAllUsers);
-router.delete("/users/:id",       deleteUser);
-router.get("/doctors",            getAllDoctors);
+router.get("/users", getAllUsers);
+router.delete("/users/:id", deleteUser);
+router.get("/doctors", getAllDoctors);
 router.patch("/doctors/:id/verify", verifyDoctor);
-router.get("/analytics",          getAnalytics);
+router.get("/analytics", getAnalytics);
+router.get("/dashboard-stats", protect, getDashboardStats);
+router.get("/students", protect, getStudents);
 
 module.exports = router;
