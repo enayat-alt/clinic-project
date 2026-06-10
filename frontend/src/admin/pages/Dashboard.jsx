@@ -1,5 +1,7 @@
 
+
 import { useGetAppointmentsQuery } from "../../services/appointmentApi";
+import { useGetDashboardStatsQuery } from "../courses/services/dashboardStatsApi";
 
 export default function Dashboard() {
   const {
@@ -8,16 +10,24 @@ export default function Dashboard() {
     error,
   } = useGetAppointmentsQuery();
 
+  const {
+    data: dashboardStats,
+    isLoading: statsLoading,
+    error: statsError,
+  } = useGetDashboardStatsQuery();
+
   const appointments = data?.appointments || [];
 
   const totalAppointments = appointments.length;
 
   const pendingAppointments = appointments.filter(
-    (appointment) => appointment.status === "pending"
+    (appointment) =>
+      appointment.status === "pending"
   ).length;
 
   const confirmedAppointments = appointments.filter(
-    (appointment) => appointment.status === "confirmed"
+    (appointment) =>
+      appointment.status === "confirmed"
   ).length;
 
   const stats = [
@@ -35,19 +45,22 @@ export default function Dashboard() {
     },
     {
       title: "Total Students",
-      value: 0,
+      value:
+        dashboardStats?.totalStudents || 0,
     },
     {
       title: "Total Courses",
-      value: 0,
+      value:
+        dashboardStats?.totalCourses || 0,
     },
     {
-      title: "Total Users",
-      value: 0,
+      title: "Total Enrollments",
+      value:
+        dashboardStats?.totalEnrollments || 0,
     },
   ];
 
-  if (isLoading) {
+  if (isLoading || statsLoading) {
     return (
       <div className="flex items-center justify-center h-[70vh]">
         <div className="text-lg font-semibold text-[#1a504c]">
@@ -57,7 +70,7 @@ export default function Dashboard() {
     );
   }
 
-  if (error) {
+  if (error || statsError) {
     return (
       <div className="flex items-center justify-center h-[70vh]">
         <div className="text-lg font-semibold text-red-500">
@@ -156,7 +169,9 @@ export default function Dashboard() {
                       </td>
 
                       <td className="py-3 px-4">
-                        {appointment.appointmentDate}
+                        {
+                          appointment.appointmentDate
+                        }
                       </td>
 
                       <td className="py-3 px-4">
