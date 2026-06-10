@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import {
   useGetCoursesQuery,
@@ -8,18 +7,13 @@ import {
 export default function AdminCourses() {
   const navigate = useNavigate();
 
-  const {
-    data: courses = [],
-    isLoading,
-    error,
-  } = useGetCoursesQuery();
+  const { data: courses = [], isLoading, error } = useGetCoursesQuery();
 
-  const [deleteCourse] =
-    useDeleteCourseMutation();
+  const [deleteCourse] = useDeleteCourseMutation();
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this course?"
+      "Are you sure you want to delete this course?",
     );
 
     if (!confirmDelete) return;
@@ -31,19 +25,12 @@ export default function AdminCourses() {
     } catch (error) {
       console.log(error);
 
-      alert(
-        error?.data?.message ||
-          "Failed to delete course"
-      );
+      alert(error?.data?.message || "Failed to delete course");
     }
   };
 
   if (isLoading) {
-    return (
-      <div className="text-center py-10">
-        Loading courses...
-      </div>
-    );
+    return <div className="text-center py-10">Loading courses...</div>;
   }
 
   if (error) {
@@ -57,25 +44,18 @@ export default function AdminCourses() {
   const totalCourses = courses.length;
 
   const publishedCourses = courses.filter(
-    (course) =>
-      course.status?.toLowerCase() ===
-      "published"
+    (course) => course.status?.toLowerCase() === "published",
   ).length;
 
-  const draftCourses =
-    totalCourses - publishedCourses;
+  const draftCourses = totalCourses - publishedCourses;
 
   return (
     <div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">
-            Courses
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-800">Courses</h1>
 
-          <p className="text-gray-500 mt-1">
-            Manage all learning courses
-          </p>
+          <p className="text-gray-500 mt-1">Manage all learning courses</p>
         </div>
 
         <Link
@@ -88,9 +68,7 @@ export default function AdminCourses() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white rounded-2xl border p-6 shadow-sm">
-          <h3 className="text-gray-500 text-sm">
-            Total Courses
-          </h3>
+          <h3 className="text-gray-500 text-sm">Total Courses</h3>
 
           <p className="text-3xl font-bold text-[#1a504c] mt-2">
             {totalCourses}
@@ -98,9 +76,7 @@ export default function AdminCourses() {
         </div>
 
         <div className="bg-white rounded-2xl border p-6 shadow-sm">
-          <h3 className="text-gray-500 text-sm">
-            Published Courses
-          </h3>
+          <h3 className="text-gray-500 text-sm">Published Courses</h3>
 
           <p className="text-3xl font-bold text-green-600 mt-2">
             {publishedCourses}
@@ -108,9 +84,7 @@ export default function AdminCourses() {
         </div>
 
         <div className="bg-white rounded-2xl border p-6 shadow-sm">
-          <h3 className="text-gray-500 text-sm">
-            Draft Courses
-          </h3>
+          <h3 className="text-gray-500 text-sm">Draft Courses</h3>
 
           <p className="text-3xl font-bold text-yellow-500 mt-2">
             {draftCourses}
@@ -120,9 +94,7 @@ export default function AdminCourses() {
 
       {courses.length === 0 ? (
         <div className="bg-white rounded-2xl border p-10 text-center">
-          <h3 className="text-2xl font-semibold">
-            No Courses Found
-          </h3>
+          <h3 className="text-2xl font-semibold">No Courses Found</h3>
 
           <p className="text-gray-500 mt-2">
             Create your first course to get started.
@@ -141,38 +113,23 @@ export default function AdminCourses() {
             <table className="w-full min-w-[900px]">
               <thead className="bg-[#1a504c] text-white">
                 <tr>
-                  <th className="p-4 text-left">
-                    Course
-                  </th>
+                  <th className="p-4 text-left">Course</th>
 
-                  <th className="p-4 text-left">
-                    Instructor
-                  </th>
+                  <th className="p-4 text-left">Instructor</th>
 
-                  <th className="p-4 text-left">
-                    Category
-                  </th>
+                  <th className="p-4 text-left">Category</th>
 
-                  <th className="p-4 text-left">
-                    Price
-                  </th>
+                  <th className="p-4 text-left">Price</th>
 
-                  <th className="p-4 text-left">
-                    Status
-                  </th>
+                  <th className="p-4 text-left">Status</th>
 
-                  <th className="p-4 text-left">
-                    Actions
-                  </th>
+                  <th className="p-4 text-left">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
                 {courses.map((course) => (
-                  <tr
-                    key={course.id}
-                    className="border-b hover:bg-gray-50"
-                  >
+                  <tr key={course.id} className="border-b hover:bg-gray-50">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         {course.thumbnail && (
@@ -184,38 +141,26 @@ export default function AdminCourses() {
                         )}
 
                         <div>
-                          <div className="font-semibold">
-                            {course.title}
-                          </div>
+                          <div className="font-semibold">{course.title}</div>
 
                           <div className="text-sm text-gray-500">
-                            {course.description?.slice(
-                              0,
-                              50
-                            )}
+                            {course.description?.slice(0, 50)}
                             ...
                           </div>
                         </div>
                       </div>
                     </td>
 
-                    <td className="p-4">
-                      {course.instructor}
-                    </td>
+                    <td className="p-4">{course.instructor}</td>
 
-                    <td className="p-4">
-                      {course.category}
-                    </td>
+                    <td className="p-4">{course.category}</td>
 
-                    <td className="p-4">
-                      ₹{course.price}
-                    </td>
+                    <td className="p-4">₹{course.price}</td>
 
                     <td className="p-4">
                       <span
                         className={`px-3 py-1 rounded-full text-sm ${
-                          course.status?.toLowerCase() ===
-                          "published"
+                          course.status?.toLowerCase() === "published"
                             ? "bg-green-100 text-green-700"
                             : "bg-yellow-100 text-yellow-700"
                         }`}
@@ -224,35 +169,29 @@ export default function AdminCourses() {
                       </span>
                     </td>
 
-                    <td className="p-4">
-                      <div className="flex flex-wrap gap-2">
+                    <td className="p-4 min-w-[220px]">
+                      <div className="flex flex-col sm:flex-row gap-2">
                         <button
                           onClick={() =>
-                            navigate(
-                              `/admin/courses/${course.id}/content`
-                            )
+                            navigate(`/admin/courses/${course.id}/content`)
                           }
-                          className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm"
+                          className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap"
                         >
                           Manage
                         </button>
 
                         <button
                           onClick={() =>
-                            navigate(
-                              `/admin/courses/${course.id}/edit`
-                            )
+                            navigate(`/admin/courses/${course.id}/edit`)
                           }
-                          className="bg-yellow-500 text-white px-3 py-1 rounded-lg text-sm"
+                          className="bg-yellow-500 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap"
                         >
                           Edit
                         </button>
 
                         <button
-                          onClick={() =>
-                            handleDelete(course.id)
-                          }
-                          className="bg-red-500 text-white px-3 py-1 rounded-lg text-sm"
+                          onClick={() => handleDelete(course.id)}
+                          className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap"
                         >
                           Delete
                         </button>
