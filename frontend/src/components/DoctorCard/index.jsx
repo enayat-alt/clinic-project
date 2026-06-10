@@ -1,1 +1,0 @@
-export default function DoctorCard() { return <div className="p-4">DoctorCard</div>; }
