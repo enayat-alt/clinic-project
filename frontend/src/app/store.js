@@ -4,10 +4,10 @@ import { appointmentApi } from "../services/appointmentApi";
 import { studentCourseApi } from "../services/studentCourseApi";
 
 //admin
-import { courseApi } from "../admin/courses/services/courseApi";
-import { chapterApi } from "../admin/courses/services/chapterApi";
-import { lessonApi } from "../admin/courses/services/lessonApi";
-import { dashboardStatsApi } from "../admin/courses/services/dashboardStatsApi";
+import { courseApi } from "../features/admin/courses/services/courseApi";
+import { chapterApi } from "../features/admin/courses/services/chapterApi";
+import { lessonApi } from "../features/admin/courses/services/lessonApi";
+import { dashboardStatsApi } from "../features/admin/courses/services/dashboardStatsApi";
 
 export const store = configureStore({
   reducer: {

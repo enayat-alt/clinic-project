@@ -2,7 +2,7 @@
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useGetCoursesQuery} from "../../../admin/courses/services/courseApi";
+import { useGetCoursesQuery} from "../../../features/admin/courses/services/courseApi";
 
 export default function FindCourse() {
   const [searchTerm, setSearchTerm] =

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useGetCourseByIdQuery } from "../../admin/courses/services/courseApi";
+import { useGetCourseByIdQuery } from "../../features/admin/courses/services/courseApi";
 
 export default function CourseDetails() {
   const { courseId } = useParams();
