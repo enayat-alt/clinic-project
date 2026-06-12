@@ -1,6 +1,6 @@
 
 
-import { useGetAppointmentsQuery } from "../../services/appointmentApi";
+import { useGetAppointmentsQuery } from "../../../services/appointmentApi";
 import { useGetDashboardStatsQuery } from "../courses/services/dashboardStatsApi";
 
 export default function Dashboard() {

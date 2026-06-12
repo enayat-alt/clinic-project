@@ -2,7 +2,7 @@ import {
   useGetAppointmentsQuery,
   useAcceptAppointmentMutation,
   useRejectAppointmentMutation,
-} from "../../services/appointmentApi";
+} from "../../../services/appointmentApi";
 
 export default function AdminAppointments() {
   const { data, isLoading, refetch } =

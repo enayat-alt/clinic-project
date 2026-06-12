@@ -1,7 +1,7 @@
 
 
 import { Link } from "react-router-dom";
-import { useGetCoursesQuery } from "../../../admin/courses/services/courseApi";
+import { useGetCoursesQuery } from "../../../features/admin/courses/services/courseApi";
 
 export default function LearningHome() {
   const {

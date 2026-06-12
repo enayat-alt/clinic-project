@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useGetCourseByIdQuery } from "../../../admin/courses/services/courseApi";
+import { useGetCourseByIdQuery } from "../../../features/admin/courses/services/courseApi";
 
 export default function EnrollCourse() {
   const { courseId } = useParams();

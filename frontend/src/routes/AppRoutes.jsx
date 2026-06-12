@@ -3,17 +3,17 @@ import { Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 
-import AdminLayout from "../admin/layout/AdminLayout";
-import AdminDashboard from "../admin/pages/Dashboard";
-import Appointments from "../admin/pages/Appointments";
-import Students from "../admin/pages/Students";
-import Courses from "../admin/courses/pages/Courses";
-import Setting from "../admin/pages/Setting";
-import CreateCourse from "../admin/courses/pages/CreateCourse";
-import CourseContent from "../admin/courses/pages/CourseContent";
-import AddLesson from "../admin/courses/pages/AddLesson";
-import AddChapter from "../admin/courses/pages/AddChapter";
-import EditCourse from "../admin/courses/pages/EditCourse";
+import AdminLayout from "../features/admin/layout/AdminLayout";
+import AdminDashboard from "../features/admin/pages/Dashboard";
+import Appointments from "../features/admin/pages/Appointments";
+import Students from "../features/admin/pages/Students";
+import Courses from "../features/admin/courses/pages/Courses";
+import Setting from "../features/admin/pages/Setting";
+import CreateCourse from "../features/admin/courses/pages/CreateCourse";
+import CourseContent from "../features/admin/courses/pages/CourseContent";
+import AddLesson from "../features/admin/courses/pages/AddLesson";
+import AddChapter from "../features/admin/courses/pages/AddChapter";
+import EditCourse from "../features/admin/courses/pages/EditCourse";
 import EnrollPage from "../learning/pages/public/EnrollPage";
 
 // Clinic Pages
