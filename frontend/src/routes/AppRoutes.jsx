@@ -14,71 +14,72 @@ import CourseContent from "../features/admin/courses/pages/CourseContent";
 import AddLesson from "../features/admin/courses/pages/AddLesson";
 import AddChapter from "../features/admin/courses/pages/AddChapter";
 import EditCourse from "../features/admin/courses/pages/EditCourse";
-import EnrollPage from "../learning/pages/public/EnrollPage";
+//import EnrollPage from "../learning/pages/public/EnrollPage";
 
 // Clinic Pages
 
-const Home = lazy(() => import("../pages/Home/Home"));
-const About = lazy(() => import("../pages/About/About"));
-const Departments = lazy(() => import("../pages/Departments/Departments"));
-
-const Consultation = lazy(() => import("../pages/Consultation/Consultation"));
+const Home = lazy(() => import("../features/clinic/pages/Home/Home"));
+const About = lazy(() => import("../features/clinic/pages/About/About"));
+const Departments = lazy(() => import("../features/clinic/pages/Departments/Departments"));
 
 const TestsServices = lazy(
-  () => import("../pages/TestsServices/TestsServices"),
+  () => import("../features/clinic/pages/TestsServices/TestsServices"),
 );
 
-const Contact = lazy(() => import("../pages/Contact/Contact"));
+const Contact = lazy(() => import("../features/clinic/pages/Contact/Contact"));
 
-const Appointment = lazy(() => import("../pages/Appointment/Appointment"));
+const Appointment = lazy(() => import("../features/clinic/pages/Appointment/Appointment"));
 
-const Login = lazy(() => import("../pages/Login/Login"));
+const Login = lazy(() => import("../features/clinic/pages/Login/Login"));
 
-const Register = lazy(() => import("../pages/Register/Register"));
+const Register = lazy(() => import("../features/clinic/pages/Register/Register"));
 
 //  Learning Layouts
 
-const LearningLayout = lazy(() => import("../learning/layouts/LearningLayout"));
+const LearningLayout = lazy(() => import("../features/learning/layouts/LearningLayout"));
 
 const DashboardLayout = lazy(
-  () => import("../learning/layouts/DashboardLayout"),
+  () => import("../features/learning/layouts/DashboardLayout"),
 );
 
 // Learning Public Pages
 
 const LearningHome = lazy(
-  () => import("../learning/pages/public/LearningHome"),
+  () => import("../features/learning/pages/public/LearningHome"),
 );
 
 const LearningLogin = lazy(
-  () => import("../learning/pages/public/LearningLogin"),
+  () => import("../features/learning//pages/public/LearningLogin"),
 );
 
 const LearningRegister = lazy(
-  () => import("../learning/pages/public/Register"),
+  () => import("../features/learning/pages/public/Register"),
 );
 
-const FindCourse = lazy(() => import("../learning/pages/public/FindCourse"));
+const FindCourse = lazy(() => import("../features/learning/pages/public/FindCourse"));
 
 const GetCertified = lazy(
-  () => import("../learning/pages/public/GetCertified"),
+  () => import("../features/learning/pages/public/GetCertified"),
 );
 
-const Subscribe = lazy(() => import("../learning/pages/public/Subscribe"));
+const Subscribe = lazy(() => import("../features/learning/pages/public/Subscribe"));
 const CourseDetails = lazy(
-  () => import("../learning/components/CourseDetails"),
+  () => import("../features/learning/components/CourseDetails"),
 );
 const EnrollCourse = lazy(
-  () => import("../learning/pages/public/EnrollCourse"),
+  () => import("../features/learning/pages/public/EnrollCourse"),
+);
+const EnrollPage = lazy(
+  () => import("../features/learning/pages/public/EnrollPage"),
 );
 
 //  Learning Dashboard Pages
 
-const Dashboard = lazy(() => import("../learning/pages/Dashboard/Dashboard"));
+const Dashboard = lazy(() => import("../features/learning/pages/Dashboard/Dashboard"));
 
-const MyLearning = lazy(() => import("../learning/pages/Dashboard/MyLearning"));
+const MyLearning = lazy(() => import("../features/learning/pages/Dashboard/MyLearning"));
 
-const Profile = lazy(() => import("../learning/pages/Dashboard/Profile"));
+const Profile = lazy(() => import("../features/learning/pages/Dashboard/Profile"));
 
 export default function AppRoutes() {
   return (
@@ -95,7 +96,6 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/departments" element={<Departments />} />
-        <Route path="/consultation" element={<Consultation />} />
         <Route path="/tests-services" element={<TestsServices />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/appointment" element={<Appointment />} />
