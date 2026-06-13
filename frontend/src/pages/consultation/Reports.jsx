@@ -1,1 +1,0 @@
-export default function Reports() { return <div className="p-8 text-2xl">Patient Reports</div>; }

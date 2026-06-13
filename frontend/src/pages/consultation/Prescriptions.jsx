@@ -1,1 +1,0 @@
-export default function Prescriptions() { return <div className="p-8 text-2xl">Patient Prescriptions</div>; }
