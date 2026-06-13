@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import About from "../About/About";
 import DoctorSection from "../doctor/DoctorSection";
 import Appointment from "../Appointment/Appointment";
-import Appointments from "../consultation/consultation";
+//import Appointments from "../consultation/consultation";
 import { Link } from "react-router-dom";
 
 export default function Home() {
