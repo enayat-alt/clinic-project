@@ -1,158 +1,4 @@
 
-// import { useState } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { useCreateLessonMutation } from "../services/lessonApi";
-
-// export default function AddLesson() {
-//   const { courseId, chapterId } =
-//     useParams();
-
-//   const navigate = useNavigate();
-
-//   const [lessonTitle, setLessonTitle] =
-//     useState("");
-
-//   const [lessonType, setLessonType] =
-//     useState("video");
-
-//   const [lessonUrl, setLessonUrl] =
-//     useState("");
-
-//   const [createLesson, { isLoading }] =
-//     useCreateLessonMutation();
-
-//   const handleSubmit = async () => {
-//     if (!lessonTitle.trim()) {
-//       alert("Please enter lesson title");
-//       return;
-//     }
-
-//     try {
-//       await createLesson({
-//         title: lessonTitle,
-//         type: lessonType,
-//         fileUrl: lessonUrl,
-//         chapterId: Number(chapterId),
-//         duration: "",
-//         order: 1,
-//       }).unwrap();
-
-//       alert("Lesson Created Successfully");
-
-//       navigate(
-//         `/admin/courses/${courseId}/content`
-//       );
-//     } catch (error) {
-//       console.log(error);
-
-//       alert(
-//         error?.data?.message ||
-//           "Failed to create lesson"
-//       );
-//     }
-//   };
-
-//   return (
-//     <div className="max-w-3xl mx-auto">
-//       <div className="bg-white border rounded-2xl p-8 shadow-sm">
-//         <h1 className="text-3xl font-bold mb-2">
-//           Add Lesson
-//         </h1>
-
-//         <p className="text-gray-500 mb-6">
-//           Add a new lesson to this chapter.
-//         </p>
-
-//         <div className="space-y-5">
-//           <div>
-//             <label className="block mb-2 font-medium">
-//               Lesson Title
-//             </label>
-
-//             <input
-//               type="text"
-//               value={lessonTitle}
-//               onChange={(e) =>
-//                 setLessonTitle(
-//                   e.target.value
-//                 )
-//               }
-//               placeholder="Enter lesson title"
-//               className="w-full border rounded-xl px-4 py-3"
-//             />
-//           </div>
-
-//           <div>
-//             <label className="block mb-2 font-medium">
-//               Lesson Type
-//             </label>
-
-//             <select
-//               value={lessonType}
-//               onChange={(e) =>
-//                 setLessonType(
-//                   e.target.value
-//                 )
-//               }
-//               className="w-full border rounded-xl px-4 py-3"
-//             >
-//               <option value="video">
-//                 Video
-//               </option>
-
-//               <option value="pdf">
-//                 PDF
-//               </option>
-//             </select>
-//           </div>
-
-//           <div>
-//             <label className="block mb-2 font-medium">
-//               Video / PDF URL
-//             </label>
-
-//             <input
-//               type="text"
-//               value={lessonUrl}
-//               onChange={(e) =>
-//                 setLessonUrl(
-//                   e.target.value
-//                 )
-//               }
-//               placeholder="Enter URL"
-//               className="w-full border rounded-xl px-4 py-3"
-//             />
-//           </div>
-
-//           <div className="flex gap-3">
-//             <button
-//               onClick={handleSubmit}
-//               disabled={isLoading}
-//               className="bg-[#1a504c] text-white px-6 py-3 rounded-xl"
-//             >
-//               {isLoading
-//                 ? "Saving..."
-//                 : "Save Lesson"}
-//             </button>
-
-//             <button
-//               onClick={() =>
-//                 navigate(
-//                   `/admin/courses/${courseId}/content`
-//                 )
-//               }
-//               className="bg-gray-300 px-6 py-3 rounded-xl"
-//             >
-//               Cancel
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCreateLessonMutation } from "../services/lessonApi";
@@ -196,7 +42,7 @@ export default function AddLesson() {
         order: 1,
       }).unwrap();
 
-      alert("Lesson Created Successfully");
+      alert("Lesson created successfully");
 
       navigate(
         `/admin/courses/${courseId}/content`
@@ -213,19 +59,37 @@ export default function AddLesson() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="bg-white border rounded-2xl p-8 shadow-sm">
-        <h1 className="text-3xl font-bold mb-2">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
           Add Lesson
         </h1>
 
-        <p className="text-gray-500 mb-6">
-          Add a new lesson to this chapter.
+        <p className="text-slate-500 dark:text-slate-400 mt-1">
+          Add a new lesson to this chapter
         </p>
+      </div>
 
-        <div className="space-y-5">
+      {/* Card */}
+      <div
+        className="
+          bg-white dark:bg-slate-800
+          rounded-2xl
+          border border-slate-100 dark:border-slate-700
+          shadow-sm
+          p-6
+        "
+      >
+        <div className="space-y-6">
           {/* Lesson Title */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Lesson Title
             </label>
 
@@ -238,17 +102,35 @@ export default function AddLesson() {
                 )
               }
               placeholder="Enter lesson title"
-              className="w-full border rounded-xl px-4 py-3"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
             />
           </div>
 
           {/* Lesson Description */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Lesson Description
             </label>
 
             <textarea
+              rows={5}
               value={lessonDescription}
               onChange={(e) =>
                 setLessonDescription(
@@ -256,14 +138,31 @@ export default function AddLesson() {
                 )
               }
               placeholder="Enter lesson description"
-              rows={4}
-              className="w-full border rounded-xl px-4 py-3 resize-none"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+                resize-none
+              "
             />
           </div>
 
           {/* Lesson Type */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Lesson Type
             </label>
 
@@ -274,7 +173,17 @@ export default function AddLesson() {
                   e.target.value
                 )
               }
-              className="w-full border rounded-xl px-4 py-3"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
             >
               <option value="video">
                 Video
@@ -288,8 +197,16 @@ export default function AddLesson() {
 
           {/* URL */}
           <div>
-            <label className="block mb-2 font-medium">
-              Video / PDF URL
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
+              {lessonType === "video"
+                ? "Video URL"
+                : "PDF URL"}
             </label>
 
             <input
@@ -300,16 +217,44 @@ export default function AddLesson() {
                   e.target.value
                 )
               }
-              placeholder="Enter URL"
-              className="w-full border rounded-xl px-4 py-3"
+              placeholder={
+                lessonType === "video"
+                  ? "https://youtube.com/..."
+                  : "https://example.com/file.pdf"
+              }
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
             />
           </div>
 
-          <div className="flex gap-3">
+          {/* Buttons */}
+          <div className="flex flex-wrap gap-3 pt-2">
             <button
+              type="button"
               onClick={handleSubmit}
               disabled={isLoading}
-              className="bg-[#1a504c] text-white px-6 py-3 rounded-xl"
+              className="
+                inline-flex items-center
+                bg-indigo-600
+                hover:bg-indigo-700
+                text-white
+                px-5 py-2.5
+                rounded-xl
+                text-sm
+                font-medium
+                transition
+                disabled:opacity-50
+              "
             >
               {isLoading
                 ? "Saving..."
@@ -317,12 +262,26 @@ export default function AddLesson() {
             </button>
 
             <button
+              type="button"
               onClick={() =>
                 navigate(
                   `/admin/courses/${courseId}/content`
                 )
               }
-              className="bg-gray-300 px-6 py-3 rounded-xl"
+              className="
+                inline-flex items-center
+                bg-slate-200
+                hover:bg-slate-300
+                dark:bg-slate-700
+                dark:hover:bg-slate-600
+                text-slate-700
+                dark:text-slate-200
+                px-5 py-2.5
+                rounded-xl
+                text-sm
+                font-medium
+                transition
+              "
             >
               Cancel
             </button>

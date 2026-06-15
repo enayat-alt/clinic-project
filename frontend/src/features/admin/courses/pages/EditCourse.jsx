@@ -197,7 +197,6 @@ export default function EditCourse() {
               value={formData.description}
               onChange={handleChange}
               className="w-full border rounded-xl px-4 py-3"
-              required
             />
           </div>
 

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateCourseMutation } from "../services/courseApi";
@@ -55,21 +56,37 @@ export default function CreateCourse() {
 
   return (
     <div>
+      {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
           Create Course
         </h1>
 
-        <p className="text-gray-500 mt-1">
-          Add a new course
+        <p className="text-slate-500 dark:text-slate-400 mt-1">
+          Add a new course to your learning platform
         </p>
       </div>
 
-      <div className="bg-white p-6 rounded-2xl shadow-sm border">
+      {/* Form Card */}
+      <div
+        className="
+          bg-white dark:bg-slate-800
+          rounded-2xl
+          border border-slate-100 dark:border-slate-700
+          shadow-sm
+          p-6
+        "
+      >
         <form className="space-y-6">
           {/* Course Title */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Course Title
             </label>
 
@@ -79,13 +96,31 @@ export default function CreateCourse() {
               value={formData.title}
               onChange={handleChange}
               required
-              className="w-full border rounded-xl px-4 py-3"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
+              placeholder="Enter course title"
             />
           </div>
 
           {/* Instructor */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Instructor
             </label>
 
@@ -95,13 +130,31 @@ export default function CreateCourse() {
               value={formData.instructor}
               onChange={handleChange}
               required
-              className="w-full border rounded-xl px-4 py-3"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
+              placeholder="Enter instructor name"
             />
           </div>
 
           {/* Category */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Category
             </label>
 
@@ -110,7 +163,17 @@ export default function CreateCourse() {
               value={formData.category}
               onChange={handleChange}
               required
-              className="w-full border rounded-xl px-4 py-3"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
             >
               <option value="">
                 Select Category
@@ -152,8 +215,14 @@ export default function CreateCourse() {
 
           {/* Price */}
           <div>
-            <label className="block mb-2 font-medium">
-              Price
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
+              Price (₹)
             </label>
 
             <input
@@ -162,13 +231,31 @@ export default function CreateCourse() {
               value={formData.price}
               onChange={handleChange}
               required
-              className="w-full border rounded-xl px-4 py-3"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
+              placeholder="Enter price"
             />
           </div>
 
           {/* Thumbnail */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Thumbnail URL
             </label>
 
@@ -177,14 +264,49 @@ export default function CreateCourse() {
               name="thumbnail"
               value={formData.thumbnail}
               onChange={handleChange}
-              placeholder="https://..."
-              className="w-full border rounded-xl px-4 py-3"
+              placeholder="https://example.com/image.jpg"
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
             />
           </div>
 
+          {/* Thumbnail Preview */}
+          {formData.thumbnail && (
+            <div>
+              <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
+                Thumbnail Preview
+              </p>
+
+              <img
+                src={formData.thumbnail}
+                alt="Thumbnail Preview"
+                className="w-48 h-28 rounded-xl object-cover border border-slate-200 dark:border-slate-700"
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+              />
+            </div>
+          )}
+
           {/* Description */}
           <div>
-            <label className="block mb-2 font-medium">
+            <label
+              className="
+                block mb-2
+                text-sm font-medium
+                text-slate-700 dark:text-slate-300
+              "
+            >
               Description
             </label>
 
@@ -194,20 +316,42 @@ export default function CreateCourse() {
               value={formData.description}
               onChange={handleChange}
               required
-              className="w-full border rounded-xl px-4 py-3"
               placeholder="Enter detailed course description..."
+              className="
+                w-full
+                px-4 py-3
+                rounded-xl
+                border border-slate-200 dark:border-slate-600
+                bg-white dark:bg-slate-900
+                text-slate-900 dark:text-white
+                placeholder:text-slate-400
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+              "
             />
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 pt-2">
             <button
               type="button"
               disabled={isLoading}
               onClick={() =>
                 handleSubmit("Draft")
               }
-              className="bg-gray-500 text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition disabled:opacity-50"
+              className="
+                inline-flex items-center
+                bg-slate-500
+                hover:bg-slate-600
+                text-white
+                px-5 py-2.5
+                rounded-xl
+                text-sm
+                font-medium
+                transition
+                disabled:opacity-50
+              "
             >
               {isLoading
                 ? "Saving..."
@@ -220,7 +364,18 @@ export default function CreateCourse() {
               onClick={() =>
                 handleSubmit("Published")
               }
-              className="bg-[#1a504c] text-white px-6 py-3 rounded-xl hover:bg-black transition disabled:opacity-50"
+              className="
+                inline-flex items-center
+                bg-indigo-600
+                hover:bg-indigo-700
+                text-white
+                px-5 py-2.5
+                rounded-xl
+                text-sm
+                font-medium
+                transition
+                disabled:opacity-50
+              "
             >
               {isLoading
                 ? "Publishing..."
