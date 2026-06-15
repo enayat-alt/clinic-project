@@ -3,6 +3,9 @@ import AppRoutes from "./routes/AppRoutes";
 
 export default function App() {
   return (
-   return null;
+    <div>
+       return null;
+    </div>
+  
   );
 }

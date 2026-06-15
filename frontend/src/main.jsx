@@ -23,11 +23,13 @@ import { Suspense } from "react";
 
 import { store } from "./app/store";
 import { router } from "./routes/AppRoutes";
+import { ThemeProvider } from "./context/ThemeContext";
 
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <ThemeProvider>
     <Provider store={store}>
       <Suspense
         fallback={
@@ -39,5 +41,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RouterProvider router={router} />
       </Suspense>
     </Provider>
+    </ThemeProvider>
   </React.StrictMode>
 );
