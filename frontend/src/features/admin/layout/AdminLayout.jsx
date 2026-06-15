@@ -111,7 +111,7 @@ export default function AdminLayout() {
               <Menu size={22} />
             </button>
             <h1 className="font-semibold text-slate-800 dark:text-white text-sm md:text-lg">
-              EduSphere Admin
+              odishapolyclinic learning admin
             </h1>
           </div>
 
