@@ -59,6 +59,44 @@ export default function CourseDetails() {
   return (
     <div className="bg-gray-50 min-h-screen py-6 md:py-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
+        {/* Back Button */}
+        <button
+          onClick={() => navigate(-1)}
+          className="
+    inline-flex
+    items-center
+    gap-2
+    mb-6
+    px-4
+    py-2
+    rounded-xl
+    bg-white
+    border border-gray-200
+    text-gray-700
+    text-sm
+    font-medium
+    shadow-sm
+    hover:bg-gray-50
+    hover:shadow-md
+    transition-all
+  "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Back
+        </button>
         {/* Course Header */}
         <div className="bg-white rounded-3xl overflow-hidden shadow-lg">
           <img
