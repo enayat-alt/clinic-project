@@ -3,6 +3,8 @@ const Chapter = require("./learning/Chapter");
 const Lesson = require("./learning/Lesson");
 const User = require("./auth/User");
 const StudentCourse = require("./learning/StudentCourse");
+const Doctor = require("./clinic/Doctor");
+const Patient = require("./clinic/Patient")
 
 Course.hasMany(Chapter, {
   foreignKey: "courseId",
@@ -52,16 +54,32 @@ Course.hasMany(StudentCourse, {
   foreignKey: "courseId",
 });
 
+Doctor.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
+
+User.hasOne(Doctor, {
+  foreignKey: "userId",
+  as: "doctor",
+});
+
+Patient.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
+
+User.hasOne(Patient, {
+  foreignKey: "userId",
+  as: "patient",
+});
+
 module.exports = {
   Course,
   Chapter,
   Lesson,
   User,
   StudentCourse,
+  Doctor,
+  Patient
 };
-
-
-
-
-
-
