@@ -1,14 +1,8 @@
-
-
 import { Link } from "react-router-dom";
 import { useGetCoursesQuery } from "../../../admin/courses/services/courseApi";
 
 export default function LearningHome() {
-  const {
-    data: courses = [],
-    isLoading,
-    error,
-  } = useGetCoursesQuery();
+  const { data: courses = [], isLoading, error } = useGetCoursesQuery();
 
   if (isLoading) {
     return (
@@ -44,10 +38,9 @@ export default function LearningHome() {
               </h1>
 
               <p className="text-gray-200 mt-6 text-lg leading-8">
-                Master FMGE preparation, clinical medicine,
-                diagnostics, physiotherapy, and healthcare
-                skills through structured courses and expert
-                mentorship.
+                Master FMGE preparation, clinical medicine, diagnostics,
+                physiotherapy, and healthcare skills through structured courses
+                and expert mentorship.
               </p>
 
               <div className="flex gap-4 mt-8">
@@ -83,9 +76,7 @@ export default function LearningHome() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="bg-white p-6 rounded-2xl text-center">
-              <h3 className="text-4xl font-bold text-[#1a504c]">
-                500+
-              </h3>
+              <h3 className="text-4xl font-bold text-[#1a504c]">500+</h3>
               <p>Students</p>
             </div>
 
@@ -97,16 +88,12 @@ export default function LearningHome() {
             </div>
 
             <div className="bg-white p-6 rounded-2xl text-center">
-              <h3 className="text-4xl font-bold text-[#1a504c]">
-                1000+
-              </h3>
+              <h3 className="text-4xl font-bold text-[#1a504c]">1000+</h3>
               <p>Clinical Cases</p>
             </div>
 
             <div className="bg-white p-6 rounded-2xl text-center">
-              <h3 className="text-4xl font-bold text-[#1a504c]">
-                12+
-              </h3>
+              <h3 className="text-4xl font-bold text-[#1a504c]">12+</h3>
               <p>Years Experience</p>
             </div>
           </div>
@@ -122,16 +109,13 @@ export default function LearningHome() {
             </h2>
 
             <p className="text-gray-600 mt-4">
-              Learn from expert doctors and healthcare
-              professionals.
+              Learn from expert doctors and healthcare professionals.
             </p>
           </div>
 
           {courses.length === 0 ? (
             <div className="bg-white rounded-3xl p-10 text-center shadow">
-              <h3 className="text-2xl font-semibold">
-                No Courses Available
-              </h3>
+              <h3 className="text-2xl font-semibold">No Courses Available</h3>
 
               <p className="text-gray-500 mt-2">
                 No courses found in database.
@@ -142,8 +126,21 @@ export default function LearningHome() {
               {courses.map((course) => (
                 <div
                   key={course.id}
-                  className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                  className="
+              bg-white
+              rounded-3xl
+              overflow-hidden
+              shadow-lg
+              hover:shadow-2xl
+              transition-all
+              duration-300
+              hover:-translate-y-2
+              flex
+              flex-col
+              h-full
+            "
                 >
+                  {/* Course Image */}
                   <div className="overflow-hidden">
                     <img
                       src={
@@ -151,55 +148,117 @@ export default function LearningHome() {
                         "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000"
                       }
                       alt={course.title}
-                      className="h-56 w-full object-cover transition duration-500 hover:scale-110"
+                      className="
+                  h-56
+                  w-full
+                  object-cover
+                  transition
+                  duration-500
+                  hover:scale-110
+                "
                     />
                   </div>
 
-                  <div className="p-6">
-                    <span className="inline-block bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-sm font-medium">
+                  {/* Card Content */}
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Category */}
+                    <span
+                      className="
+                  inline-block
+                  w-fit
+                  bg-[#e5f9f8]
+                  text-[#1a504c]
+                  px-3
+                  py-1
+                  rounded-full
+                  text-sm
+                  font-medium
+                "
+                    >
                       {course.category || "Medical Course"}
                     </span>
 
-                    <h3 className="text-2xl font-bold mt-4 text-gray-800">
+                    {/* Title */}
+                    <h3
+                      className="
+                  text-2xl
+                  font-bold
+                  mt-4
+                  text-gray-800
+                  line-clamp-2
+                  min-h-[64px]
+                "
+                    >
                       {course.title}
                     </h3>
 
-                    <p className="text-gray-600 mt-3 line-clamp-3">
+                    {/* Description */}
+                    <p
+                      className="
+                  text-gray-600
+                  mt-3
+                  line-clamp-3
+                  min-h-[72px]
+                "
+                    >
                       {course.description}
                     </p>
 
-                    <div className="mt-4 flex justify-between text-sm text-gray-500">
-                      <span>
-                        Chapters: {course.Chapters?.length || 0}
-                      </span>
+                    {/* Bottom Section */}
+                    <div className="mt-auto">
+                      {/* Stats */}
+                      <div
+                        className="
+                    mt-4
+                    flex
+                    justify-between
+                    text-sm
+                    text-gray-500
+                  "
+                      >
+                        <span>Chapters: {course.Chapters?.length || 0}</span>
 
-                      <span>
-                        Lessons:{" "}
-                        {course.Chapters?.reduce(
-                          (total, chapter) =>
-                            total +
-                            (chapter.Lessons?.length || 0),
-                          0
-                        ) || 0}
-                      </span>
+                        <span>
+                          Lessons:{" "}
+                          {course.Chapters?.reduce(
+                            (total, chapter) =>
+                              total + (chapter.Lessons?.length || 0),
+                            0,
+                          ) || 0}
+                        </span>
+                      </div>
+
+                      {/* Price */}
+                      <div className="flex items-center justify-between mt-6">
+                        <span className="text-3xl font-bold text-[#1a504c]">
+                          ₹{course.price || 0}
+                        </span>
+
+                        <span className="text-sm text-gray-500">
+                          Lifetime Access
+                        </span>
+                      </div>
+
+                      {/* Button */}
+                      <Link
+                        to={`/learning/course/${course.id}`}
+                        className="
+                    block
+                    text-center
+                    mt-6
+                    w-full
+                    bg-[#1a504c]
+                    text-white
+                    py-3
+                    rounded-xl
+                    font-semibold
+                    hover:bg-black
+                    transition
+                  "
+                      >
+                        View Course
+                      </Link>
                     </div>
-
-                    <div className="flex items-center justify-between mt-6">
-                      <span className="text-3xl font-bold text-[#1a504c]">
-                        ₹{course.price || 0}
-                      </span>
-
-                      <span className="text-sm text-gray-500">
-                        Lifetime Access
-                      </span>
-                    </div>
-
-                    <Link
-                      to={`/learning/course/${course.id}`}
-                      className="block text-center mt-6 w-full bg-[#1a504c] text-white py-3 rounded-xl font-semibold hover:bg-black transition"
-                    >
-                      View Course
-                    </Link>
                   </div>
                 </div>
               ))}
@@ -216,21 +275,64 @@ export default function LearningHome() {
           </h2>
 
           <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-2xl">
-              Expert Faculty
+            <div className="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition">
+              <h3 className="font-semibold text-lg text-[#1a504c]">
+                Expert Faculty
+              </h3>
+
+              <p className="text-gray-500 mt-2 text-sm">
+                Learn directly from experienced doctors and healthcare experts.
+              </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl">
-              Recorded Classes
+            <div className="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition">
+              <h3 className="font-semibold text-lg text-[#1a504c]">
+                Recorded Classes
+              </h3>
+
+              <p className="text-gray-500 mt-2 text-sm">
+                Study anytime with lifetime access to course videos.
+              </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl">
-              Mock Tests
+            <div className="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition">
+              <h3 className="font-semibold text-lg text-[#1a504c]">
+                Mock Tests
+              </h3>
+
+              <p className="text-gray-500 mt-2 text-sm">
+                Practice with assessments designed to strengthen your knowledge.
+              </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl">
-              Certificates
+            <div className="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition">
+              <h3 className="font-semibold text-lg text-[#1a504c]">
+                Certificates
+              </h3>
+
+              <p className="text-gray-500 mt-2 text-sm">
+                Earn certificates to showcase your achievements and expertise.
+              </p>
             </div>
+          </div>
+        </div>
+      </section>
+     
+      {/* Why Learn */}
+      <section className="bg-[#e5f9f8] py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-12">
+            Why Learn With Us?
+          </h2>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-2xl">Expert Faculty</div>
+
+            <div className="bg-white p-6 rounded-2xl">Recorded Classes</div>
+
+            <div className="bg-white p-6 rounded-2xl">Mock Tests</div>
+
+            <div className="bg-white p-6 rounded-2xl">Certificates</div>
           </div>
         </div>
       </section>
@@ -238,17 +340,15 @@ export default function LearningHome() {
       {/* CTA */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-5xl font-bold">
-            Start Learning Today
-          </h2>
+          <h2 className="text-5xl font-bold">Start Learning Today</h2>
 
           <p className="text-gray-600 mt-4">
-            Join our growing community of healthcare
-            professionals and medical students.
+            Join our growing community of healthcare professionals and medical
+            students.
           </p>
 
           <Link
-            to="/learning"
+            to="/learning/find-course"
             className="inline-block mt-8 bg-[#1a504c] text-white px-8 py-4 rounded-xl"
           >
             Browse Courses

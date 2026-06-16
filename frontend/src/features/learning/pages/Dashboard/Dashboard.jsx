@@ -1,49 +1,38 @@
-
 import { Link } from "react-router-dom";
 import { useGetMyCoursesQuery } from "../../../../services/studentCourseApi";
+import { BookOpen, CheckCircle2, Award, PlayCircle } from "lucide-react";
 
 export default function Dashboard() {
-  const user = JSON.parse(
-    localStorage.getItem("currentUser")
-  );
+  const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  const {
-    data: courses = [],
-    isLoading,
-    error,
-  } = useGetMyCoursesQuery();
+  const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
 
   return (
-    <div className="min-h-screen bg-[#f7f9fa]">
+    <div className="min-h-screen bg-slate-50">
       {/* Welcome Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-6 py-10">
-          <h1 className="text-4xl font-bold text-[#1c1d1f]">
+      <div className="bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <h1 className="text-2xl font-bold text-slate-800">
             Welcome back, {user?.name} 👋
           </h1>
-
-          <p className="text-gray-600 mt-2">
+          <p className="text-slate-400 mt-1 text-sm">
             Ready to continue your learning journey?
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-6 py-8 space-y-6">
         {/* Loading */}
         {isLoading && (
-          <div className="bg-white rounded-2xl p-8 shadow">
-            <p className="text-center text-lg">
-              Loading courses...
-            </p>
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
+            <p className="text-center text-sm text-slate-400">Loading courses...</p>
           </div>
         )}
 
         {/* Error */}
         {error && (
-          <div className="bg-white rounded-2xl p-8 shadow">
-            <p className="text-center text-red-500">
-              Failed to load courses.
-            </p>
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
+            <p className="text-center text-sm text-rose-500">Failed to load courses.</p>
           </div>
         )}
 
@@ -51,135 +40,115 @@ export default function Dashboard() {
           <>
             {/* Continue Learning */}
             {courses.length > 0 && (
-              <div className="bg-[#1c1d1f] rounded-3xl overflow-hidden text-white mb-10 shadow-lg">
-                <div className="md:flex">
-                  <img
-                    src={courses[0].Course.thumbnail}
-                    alt={courses[0].Course.title}
-                    className="md:w-96 w-full h-64 object-cover"
-                  />
+              <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                <h2 className="text-base font-semibold text-slate-800 mb-3">Continue learning</h2>
 
-                  <div className="p-8 flex-1">
-                    <p className="text-sm text-gray-300">
-                      Continue Learning
-                    </p>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-slate-50 rounded-xl p-4">
+                  <div className="w-full sm:w-32 h-20 rounded-lg bg-[#1a504c]/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    {courses[0].Course.thumbnail ? (
+                      <img
+                        src={courses[0].Course.thumbnail}
+                        alt={courses[0].Course.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <BookOpen size={24} className="text-[#1a504c]" />
+                    )}
+                  </div>
 
-                    <h2 className="text-3xl font-bold mt-2">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-semibold text-slate-800 truncate">
                       {courses[0].Course.title}
-                    </h2>
-
-                    <p className="mt-4 text-gray-300 line-clamp-3">
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">
                       {courses[0].Course.description}
                     </p>
 
-                    <button className="mt-6 bg-[#a435f0] px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
-                      Continue Course
-                    </button>
+                    <div className="w-full bg-slate-200 rounded-full h-1.5 mt-3">
+                      <div className="bg-[#1a504c] h-1.5 rounded-full" style={{ width: "0%" }} />
+                    </div>
+                    <p className="mt-1 text-xs text-slate-400">0% completed</p>
                   </div>
+
+                  <button className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-purple-700 transition whitespace-nowrap">
+                    <PlayCircle size={15} />
+                    Continue
+                  </button>
                 </div>
               </div>
             )}
 
             {/* Stats */}
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
-              <div className="bg-white p-6 rounded-2xl shadow">
-                <p className="text-gray-500">
-                  Enrolled Courses
-                </p>
-
-                <h3 className="text-4xl font-bold mt-2 text-[#1c1d1f]">
-                  {courses.length}
-                </h3>
-              </div>
-
-              <div className="bg-white p-6 rounded-2xl shadow">
-                <p className="text-gray-500">
-                  Completed
-                </p>
-
-                <h3 className="text-4xl font-bold mt-2 text-[#1c1d1f]">
-                  0
-                </h3>
-              </div>
-
-              <div className="bg-white p-6 rounded-2xl shadow">
-                <p className="text-gray-500">
-                  Certificates
-                </p>
-
-                <h3 className="text-4xl font-bold mt-2 text-[#1c1d1f]">
-                  0
-                </h3>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <StatCard icon={BookOpen} label="Enrolled courses" value={courses.length} />
+              <StatCard icon={CheckCircle2} label="Completed" value={0} />
+              <StatCard icon={Award} label="Certificates" value={0} />
             </div>
 
             {/* My Learning */}
             <div>
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-[#1c1d1f]">
-                  My Learning
-                </h2>
-
-                <p className="text-gray-500">
-                  {courses.length} Courses
-                </p>
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-base font-semibold text-slate-800">My learning</h2>
+                <p className="text-xs text-slate-400">{courses.length} courses</p>
               </div>
 
               {courses.length === 0 ? (
-                <div className="bg-white rounded-2xl shadow p-10 text-center">
-                  <p className="text-gray-500 text-lg">
-                    You haven't enrolled in any courses yet.
-                  </p>
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-10 text-center">
+                  <BookOpen size={28} className="text-slate-300 mx-auto mb-2" />
+                  <p className="text-slate-400 text-sm">You haven't enrolled in any courses yet.</p>
                 </div>
               ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {courses.map((enrollment) => (
                     <div
                       key={enrollment.id}
-                      className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition"
+                      className="bg-white/80 backdrop-blur rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
                     >
-                      <img
-                        src={enrollment.Course.thumbnail}
-                        alt={enrollment.Course.title}
-                        className="w-full h-48 object-cover"
-                      />
+                      <div className="w-full h-28 bg-[#1a504c]/10 flex items-center justify-center overflow-hidden">
+                        {enrollment.Course.thumbnail ? (
+                          <img
+                            src={enrollment.Course.thumbnail}
+                            alt={enrollment.Course.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <BookOpen size={28} className="text-[#1a504c]" />
+                        )}
+                      </div>
 
-                      <div className="p-6">
-                        <h3 className="font-bold text-lg text-[#1c1d1f] line-clamp-2">
+                      <div className="p-4 flex flex-col flex-1">
+                        <h3 className="text-sm font-semibold text-slate-800 line-clamp-2 min-h-[2.5rem]">
                           {enrollment.Course.title}
                         </h3>
 
-                        <p className="text-sm text-gray-500 mt-2">
+                        <p className="text-xs text-slate-400 mt-1">
                           {enrollment.Course.instructor}
                         </p>
+                        {enrollment.Course.level && (
+                          <p className="text-xs text-slate-400 mt-0.5">
+                            {enrollment.Course.level}
+                          </p>
+                        )}
 
-                        <p className="text-sm text-gray-500 mt-1">
-                          {enrollment.Course.level}
-                        </p>
-
-                        {/* Progress */}
-                        <div className="mt-6">
-                          <div className="flex justify-between text-sm mb-2">
+                        <div className="mt-3">
+                          <div className="flex justify-between text-xs text-slate-400 mb-1">
                             <span>Progress</span>
-
                             <span>0%</span>
                           </div>
-
-                          <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div className="w-full bg-slate-100 rounded-full h-1.5">
                             <div
-                              className="bg-[#a435f0] h-2 rounded-full"
-                              style={{
-                                width: "0%",
-                              }}
+                              className="bg-[#1a504c] h-1.5 rounded-full"
+                              style={{ width: "0%" }}
                             />
                           </div>
                         </div>
 
                         <Link
                           to={`/courses/${enrollment.Course.id}`}
-                          className="block text-center mt-6 bg-[#a435f0] text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+                          className="mt-4 w-full flex items-center justify-center gap-1.5 text-sm font-medium text-[#1a504c] border border-[#1a504c]/30 py-2 rounded-lg hover:bg-[#1a504c]/5 transition"
                         >
-                          Continue Learning
+                          <PlayCircle size={14} />
+                          Continue
                         </Link>
                       </div>
                     </div>
@@ -190,6 +159,18 @@ export default function Dashboard() {
           </>
         )}
       </div>
+    </div>
+  );
+}
+
+function StatCard({ icon: Icon, label, value }) {
+  return (
+    <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-4">
+      <div className="w-9 h-9 rounded-lg bg-[#1a504c]/10 flex items-center justify-center mb-2">
+        <Icon size={16} className="text-[#1a504c]" />
+      </div>
+      <p className="text-2xl font-bold text-slate-800">{value}</p>
+      <p className="text-xs text-slate-400 mt-0.5">{label}</p>
     </div>
   );
 }
