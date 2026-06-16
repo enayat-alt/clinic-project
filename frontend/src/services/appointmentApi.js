@@ -1,11 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithReauth } from "./baseQueryWithReauth";
 
 export const appointmentApi = createApi({
   reducerPath: "appointmentApi",
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
-  }),
+  // baseQuery: fetchBaseQuery({
+  //   baseUrl: "http://localhost:5000/api",
+  // }),
+
+   baseQuery: baseQueryWithReauth,
 
   endpoints: (builder) => ({
     bookAppointment: builder.mutation({
