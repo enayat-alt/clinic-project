@@ -10,14 +10,11 @@ export default function CourseDetails() {
   const [openLessons, setOpenLessons] = useState({});
 
   const toggleLesson = (chapterId, lessonId) => {
-  setOpenLessons((prev) => ({
-    ...prev,
-    [chapterId]:
-      prev[chapterId] === lessonId
-        ? null
-        : lessonId,
-  }));
-};
+    setOpenLessons((prev) => ({
+      ...prev,
+      [chapterId]: prev[chapterId] === lessonId ? null : lessonId,
+    }));
+  };
 
   const { data: course, isLoading, error } = useGetCourseByIdQuery(courseId);
 
@@ -129,9 +126,29 @@ export default function CourseDetails() {
                 </h2>
               </div>
 
-              <button
+              {/* <button
                 onClick={handleEnroll}
                 className="w-full lg:w-auto bg-[#1a504c] text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-black transition"
+              >
+                Enroll Now
+              </button> */}
+              <button
+                onClick={handleEnroll}
+                className="
+    w-full lg:w-auto
+    px-6 py-3
+    rounded-lg
+    bg-[#1a504c]
+    text-white
+    text-sm font-medium
+    shadow-sm
+    hover:bg-[#143d3a]
+    hover:shadow-md
+    transition-all duration-200
+    focus:outline-none
+    focus:ring-2
+    focus:ring-[#1a504c]/30
+  "
               >
                 Enroll Now
               </button>

@@ -1,14 +1,14 @@
-
-
 import { useState } from "react";
 import {
   useGetAppointmentsQuery,
   useAcceptAppointmentMutation,
   useRejectAppointmentMutation,
 } from "../../../services/appointmentApi";
+import AppointmentFilters from "../components/AppointmentFilters";
 
 export default function AdminAppointments() {
   const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("");
 
   const { data, isLoading, refetch } =
     useGetAppointmentsQuery();
@@ -47,19 +47,26 @@ export default function AdminAppointments() {
 
   const appointments = data?.appointments || [];
 
-  // Search
   const filteredAppointments =
-    appointments.filter(
-      (item) =>
+    appointments.filter((item) => {
+      const matchesSearch =
         item.fullName
           ?.toLowerCase()
           .includes(search.toLowerCase()) ||
         item.email
           ?.toLowerCase()
-          .includes(search.toLowerCase())
-    );
+          .includes(search.toLowerCase());
 
-  // Stats
+      const matchesStatus =
+        !status ||
+        item.status === status;
+
+      return (
+        matchesSearch &&
+        matchesStatus
+      );
+    });
+
   const pendingCount = appointments.filter(
     (a) => a.status === "pending"
   ).length;
@@ -87,7 +94,7 @@ export default function AdminAppointments() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm p-6">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm p-6">
           <p className="text-sm text-slate-500 dark:text-slate-400">
             Pending
           </p>
@@ -118,30 +125,13 @@ export default function AdminAppointments() {
         </div>
       </div>
 
-      {/* Search */}
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search by patient name or email..."
-          value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
-          className="
-            w-full md:w-96
-            px-4 py-3
-            rounded-xl
-            border border-slate-200
-            dark:border-slate-600
-            bg-white dark:bg-slate-800
-            text-slate-700 dark:text-white
-            placeholder:text-slate-400
-            focus:outline-none
-            focus:ring-2
-            focus:ring-indigo-500
-          "
-        />
-      </div>
+      {/* Filters */}
+      <AppointmentFilters
+        search={search}
+        setSearch={setSearch}
+        status={status}
+        setStatus={setStatus}
+      />
 
       {/* Table */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
@@ -214,11 +204,9 @@ export default function AdminAppointments() {
                   <td className="p-4">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        item.status ===
-                        "confirmed"
+                        item.status === "confirmed"
                           ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-                          : item.status ===
-                            "cancelled"
+                          : item.status === "cancelled"
                           ? "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400"
                           : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                       }`}
@@ -228,14 +216,11 @@ export default function AdminAppointments() {
                   </td>
 
                   <td className="p-4">
-                    {item.status ===
-                    "pending" ? (
+                    {item.status === "pending" ? (
                       <div className="flex gap-2">
                         <button
                           onClick={() =>
-                            handleAccept(
-                              item.id
-                            )
+                            handleAccept(item.id)
                           }
                           className="
                             px-4 py-1.5
@@ -255,9 +240,7 @@ export default function AdminAppointments() {
 
                         <button
                           onClick={() =>
-                            handleReject(
-                              item.id
-                            )
+                            handleReject(item.id)
                           }
                           className="
                             px-4 py-1.5
@@ -284,8 +267,7 @@ export default function AdminAppointments() {
                 </tr>
               ))}
 
-              {filteredAppointments.length ===
-                0 && (
+              {filteredAppointments.length === 0 && (
                 <tr>
                   <td
                     colSpan="6"

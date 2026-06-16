@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 
@@ -13,7 +14,6 @@ export default function LearningNavbar() {
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
@@ -87,20 +87,20 @@ export default function LearningNavbar() {
           </div>
 
           {/* Desktop Right Section */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             {!isLoggedIn ? (
               <>
                 <Link
                   to="/learning/login"
-                  className="border border-[#1a504c] text-[#1a504c] px-5 py-2 rounded-xl hover:bg-[#e5f9f8] transition"
+                  className="text-slate-600 font-medium px-5 py-2.5 rounded-xl hover:bg-slate-100 transition-colors"
                 >
-                  Login
+                  Log in
                 </Link>
                 <Link
                   to="/learning/register"
-                  className="bg-[#1a504c] text-white px-5 py-2 rounded-xl hover:bg-black transition"
+                  className="bg-[#1a504c] text-white font-medium px-5 py-2.5 rounded-xl shadow-sm hover:bg-[#143e3b] hover:shadow-md transition-all"
                 >
-                  Register
+                  Get started
                 </Link>
               </>
             ) : (
@@ -214,16 +214,16 @@ export default function LearningNavbar() {
                 <Link
                   to="/learning/login"
                   onClick={() => setIsOpen(false)}
-                  className="border border-[#1a504c] text-[#1a504c] text-center py-2 rounded-xl"
+                  className="text-slate-600 font-medium text-center py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
                 >
-                  Login
+                  Log in
                 </Link>
                 <Link
                   to="/learning/register"
                   onClick={() => setIsOpen(false)}
-                  className="bg-[#1a504c] text-white text-center py-2 rounded-xl"
+                  className="bg-[#1a504c] text-white font-medium text-center py-2.5 rounded-xl shadow-sm hover:bg-[#143e3b] transition-all"
                 >
-                  Register
+                  Get started
                 </Link>
               </>
             ) : (
@@ -269,3 +269,4 @@ export default function LearningNavbar() {
     </nav>
   );
 }
+

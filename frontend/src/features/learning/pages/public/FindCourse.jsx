@@ -1,29 +1,48 @@
 
-
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useGetCoursesQuery} from "../../../admin/courses/services/courseApi";
+import { useGetCoursesQuery } from "../../../admin/courses/services/courseApi";
+import CourseFilters from "../../components/CourseFilters";
+import CourseCard from "../../components/CourseCard";
 
 export default function FindCourse() {
-  const [searchTerm, setSearchTerm] =
-    useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
 
   const {
     data: courses = [],
     isLoading,
     error,
   } = useGetCoursesQuery();
-  //console.log(course.id)
-  console.log(courses);
 
-  const filteredCourses = courses.filter(
-    (course) =>
-      course.title
-        ?.toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        )
-  );
+  // Get categories dynamically from DB courses
+  const categories = [
+    ...new Set(
+      courses
+        .map((course) => course.category)
+        .filter(Boolean)
+    ),
+  ];
+
+  const filteredCourses = courses.filter((course) => {
+    const matchesSearch = course.title
+      ?.toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      !category || course.category === category;
+
+    const matchesPrice =
+      !price ||
+      (price === "free" && Number(course.price) === 0) ||
+      (price === "paid" && Number(course.price) > 0);
+
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesPrice
+    );
+  });
 
   if (isLoading) {
     return (
@@ -43,6 +62,7 @@ export default function FindCourse() {
 
   return (
     <div className="min-h-screen bg-[#e5f9f8]">
+      {/* Hero */}
       <section className="bg-[#1a504c] py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold text-white">
@@ -50,30 +70,27 @@ export default function FindCourse() {
           </h1>
 
           <p className="text-gray-200 mt-4 max-w-2xl mx-auto">
-            Explore professional medical
-            courses, FMGE coaching,
-            healthcare certifications, and
-            practical learning programs.
+            Explore professional medical courses,
+            FMGE coaching, healthcare certifications,
+            and practical learning programs.
           </p>
         </div>
       </section>
 
+      {/* Filters */}
       <section className="max-w-7xl mx-auto px-6 py-10">
-        <div className="bg-white p-6 rounded-3xl shadow">
-          <input
-            type="text"
-            placeholder="Search courses..."
-            value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(
-                e.target.value
-              )
-            }
-            className="w-full border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
-          />
-        </div>
+        <CourseFilters
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          category={category}
+          setCategory={setCategory}
+          price={price}
+          setPrice={setPrice}
+          categories={categories}
+        />
       </section>
 
+      {/* Courses */}
       <section className="max-w-7xl mx-auto px-6 pb-20">
         {filteredCourses.length === 0 ? (
           <div className="bg-white rounded-3xl p-12 text-center shadow">
@@ -82,73 +99,31 @@ export default function FindCourse() {
             </h2>
 
             <p className="text-gray-500 mt-3">
-              Try a different search.
+              Try changing your search or filters.
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map(
-              (course) => (
-                <div
+          <>
+            <div className="mb-6">
+              <p className="text-gray-600">
+                Showing{" "}
+                <span className="font-semibold text-[#1a504c]">
+                  {filteredCourses.length}
+                </span>{" "}
+                course
+                {filteredCourses.length > 1 ? "s" : ""}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredCourses.map((course) => (
+                <CourseCard
                   key={course.id}
-                  className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                >
-                  <div className="overflow-hidden">
-                    <img
-                      src={
-                        course.thumbnail ||
-                        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000"
-                      }
-                      alt={course.title}
-                      className="h-56 w-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="bg-[#e5f9f8] text-[#1a504c] px-3 py-1 rounded-full text-xs font-semibold">
-                        {course.category ||
-                          "Medical Course"}
-                      </span>
-
-                      <span className="text-xs text-gray-500">
-                        {course.status ||
-                          "Published"}
-                      </span>
-                    </div>
-
-                    <h2 className="text-xl font-bold text-[#1a504c]">
-                      {course.title}
-                    </h2>
-
-                    <p className="text-gray-600 mt-2">
-                      Instructor:{" "}
-                      {course.instructor}
-                    </p>
-
-                    <p className="text-gray-600">
-                      Duration:{" "}
-                      {course.duration ||
-                        "Self Paced"}
-                    </p>
-
-                    <p className="text-2xl font-bold text-[#1a504c] mt-4">
-                      ₹{course.price || 0}
-                    </p>
-
-                    <div className="flex gap-3 mt-5">
-                      <Link
-                        to={`/learning/course/${course.id}`}
-                        className="flex-1 text-center border border-[#1a504c] text-[#1a504c] py-2 rounded-xl hover:bg-[#e5f9f8]"
-                      >
-                        Details
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
+                  course={course}
+                />
+              ))}
+            </div>
+          </>
         )}
       </section>
     </div>
