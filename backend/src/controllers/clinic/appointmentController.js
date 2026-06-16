@@ -1,15 +1,55 @@
 const Appointment = require("../../models/clinic/Appointment");
 
 // Get All Appointments (Admin)
+// exports.getAll = async (req, res) => {
+//   try {
+//     const appointments = await Appointment.findAll({
+//       order: [["createdAt", "DESC"]],
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       appointments,
+//     });
+//   } catch (error) {
+//     console.error(error);
+
+//     res.status(500).json({
+//       success: false,
+//       message: "Server Error",
+//     });
+//   }
+// };
+// Get All Appointments (Admin)
 exports.getAll = async (req, res) => {
   try {
-    const appointments = await Appointment.findAll({
-      order: [["createdAt", "DESC"]],
-    });
+    const page =
+      parseInt(req.query.page) || 1;
+
+    const limit =
+      parseInt(req.query.limit) || 10;
+
+    const offset =
+      (page - 1) * limit;
+
+    const { count, rows } =
+      await Appointment.findAndCountAll({
+        limit,
+        offset,
+        order: [["createdAt", "DESC"]],
+      });
 
     res.status(200).json({
       success: true,
-      appointments,
+      appointments: rows,
+      pagination: {
+        page,
+        limit,
+        total: count,
+        totalPages: Math.ceil(
+          count / limit
+        ),
+      },
     });
   } catch (error) {
     console.error(error);
@@ -20,7 +60,6 @@ exports.getAll = async (req, res) => {
     });
   }
 };
-
 // Book Appointment (Public)
 exports.book = async (req, res) => {
   try {

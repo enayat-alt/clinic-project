@@ -4,20 +4,39 @@ const {
   Lesson,
 } = require("../../models");
 
+
 exports.getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.findAll({
-      order: [["createdAt", "DESC"]],
-    });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 9;
 
-    res.status(200).json(courses);
+    const offset = (page - 1) * limit;
+
+    const { count, rows } =
+      await Course.findAndCountAll({
+        limit,
+        offset,
+        order: [["createdAt", "DESC"]],
+      });
+
+    res.status(200).json({
+      courses: rows,
+
+      pagination: {
+        page,
+        limit,
+        total: count,
+        totalPages: Math.ceil(
+          count / limit
+        ),
+      },
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
 };
-
 exports.getCourseById = async (req, res) => {
   try {
     const course = await Course.findByPk(

@@ -3,17 +3,21 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const courseApi = createApi({
   reducerPath: "courseApi",
-    baseQuery: fetchBaseQuery({
+  baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api",
   }),
   tagTypes: ["Courses"],
 
   endpoints: (builder) => ({
+    // getCourses: builder.query({
+    //   query: () => ({
+    //     url: "/courses",
+    //   }),
+    //   providesTags: ["Courses"],
+    // }),
     getCourses: builder.query({
-      query: () => ({
-        url: "/courses",
-      }),
-      providesTags: ["Courses"],
+      query: ({ page = 1, limit = 6 }) =>
+        `/courses?page=${page}&limit=${limit}`,
     }),
 
     getCourseById: builder.query({
@@ -57,3 +61,5 @@ export const {
   useUpdateCourseMutation,
   useDeleteCourseMutation,
 } = courseApi;
+
+

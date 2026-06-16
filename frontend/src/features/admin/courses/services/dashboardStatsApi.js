@@ -10,10 +10,7 @@ export const dashboardStatsApi = createApi({
       const token = localStorage.getItem("accessToken");
 
       if (token) {
-        headers.set(
-          "Authorization",
-          `Bearer ${token}`
-        );
+        headers.set("Authorization", `Bearer ${token}`);
       }
 
       return headers;
@@ -25,13 +22,11 @@ export const dashboardStatsApi = createApi({
       query: () => "/admin/dashboard-stats",
     }),
     getStudents: builder.query({
-      query: () => "/admin/students",
+      query: ({ page = 1, limit = 10 } = {}) =>
+        `/admin/students?page=${page}&limit=${limit}`,
     }),
   }),
-  
 });
 
-export const {
-  useGetDashboardStatsQuery,
-  useGetStudentsQuery,
-} = dashboardStatsApi;
+export const { useGetDashboardStatsQuery, useGetStudentsQuery } =
+  dashboardStatsApi;

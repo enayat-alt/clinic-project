@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   useGetCoursesQuery,
   useDeleteCourseMutation,
@@ -9,8 +8,18 @@ import {
 export default function AdminCourses() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data: courses = [], isLoading, error } = useGetCoursesQuery();
+  const page = Number(searchParams.get("page")) || 1;
+
+  
+  const { data, isLoading, error } = useGetCoursesQuery({
+    page,
+    limit: 6,
+  });
+
+  const courses = data?.courses || [];
+  const pagination = data?.pagination;
 
   const [deleteCourse] = useDeleteCourseMutation();
 
@@ -29,27 +38,6 @@ export default function AdminCourses() {
       alert(error?.data?.message || "Failed to delete course");
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-[70vh]">
-        <div className="text-lg font-semibold text-slate-500 dark:text-slate-400">
-          Loading courses...
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-[70vh]">
-        <div className="text-lg font-semibold text-rose-500">
-          Failed to load courses
-        </div>
-      </div>
-    );
-  }
-
   const filteredCourses = courses.filter(
     (course) =>
       course.title?.toLowerCase().includes(search.toLowerCase()) ||
@@ -273,8 +261,8 @@ export default function AdminCourses() {
 
                     {/* <td className="p-4">
                       <div className="flex flex-wrap gap-2"> */}
-                      <td className="p-4 min-w-[260px]">
-  <div className="flex items-center gap-2 whitespace-nowrap">
+                    <td className="p-4 min-w-[260px]">
+                      <div className="flex items-center gap-2 whitespace-nowrap">
                         <button
                           onClick={() =>
                             navigate(`/admin/courses/${course.id}/content`)
@@ -338,6 +326,76 @@ export default function AdminCourses() {
                 ))}
               </tbody>
             </table>
+            <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
+              <button
+                disabled={page === 1}
+                onClick={() =>
+                  setSearchParams({
+                    page: page - 1,
+                  })
+                }
+                className="
+      px-3 py-2
+      text-sm
+      rounded-lg
+      border
+      bg-white
+      disabled:opacity-40
+      disabled:cursor-not-allowed
+      hover:border-indigo-600
+      hover:text-indigo-600
+      transition
+    "
+              >
+                ← Prev
+              </button>
+
+              {Array.from(
+                {
+                  length: pagination?.totalPages || 0,
+                },
+                (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() =>
+                      setSearchParams({
+                        page: i + 1,
+                      })
+                    }
+                    className={`w-9 h-9 rounded-lg text-sm transition ${
+                      page === i + 1
+                        ? "bg-indigo-600 text-white"
+                        : "bg-white border hover:border-indigo-600 hover:text-indigo-600"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ),
+              )}
+
+              <button
+                disabled={page === pagination?.totalPages}
+                onClick={() =>
+                  setSearchParams({
+                    page: page + 1,
+                  })
+                }
+                className="
+      px-3 py-2
+      text-sm
+      rounded-lg
+      border
+      bg-white
+      disabled:opacity-40
+      disabled:cursor-not-allowed
+      hover:border-indigo-600
+      hover:text-indigo-600
+      transition
+    "
+              >
+                Next →
+              </button>
+            </div>
           </div>
         </div>
       )}

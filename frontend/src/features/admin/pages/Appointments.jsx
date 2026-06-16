@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import {
   useGetAppointmentsQuery,
   useAcceptAppointmentMutation,
@@ -10,14 +12,18 @@ export default function AdminAppointments() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
 
-  const { data, isLoading, refetch } =
-    useGetAppointmentsQuery();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [acceptAppointment] =
-    useAcceptAppointmentMutation();
+  const page = Number(searchParams.get("page")) || 1;
 
-  const [rejectAppointment] =
-    useRejectAppointmentMutation();
+  const { data, isLoading, refetch } = useGetAppointmentsQuery({
+    page,
+    limit: 6,
+  });
+
+  const [acceptAppointment] = useAcceptAppointmentMutation();
+
+  const [rejectAppointment] = useRejectAppointmentMutation();
 
   const handleAccept = async (id) => {
     try {
@@ -47,36 +53,28 @@ export default function AdminAppointments() {
 
   const appointments = data?.appointments || [];
 
-  const filteredAppointments =
-    appointments.filter((item) => {
-      const matchesSearch =
-        item.fullName
-          ?.toLowerCase()
-          .includes(search.toLowerCase()) ||
-        item.email
-          ?.toLowerCase()
-          .includes(search.toLowerCase());
+  const pagination = data?.pagination;
 
-      const matchesStatus =
-        !status ||
-        item.status === status;
+  const filteredAppointments = appointments.filter((item) => {
+    const matchesSearch =
+      item.fullName?.toLowerCase().includes(search.toLowerCase()) ||
+      item.email?.toLowerCase().includes(search.toLowerCase());
 
-      return (
-        matchesSearch &&
-        matchesStatus
-      );
-    });
+    const matchesStatus = !status || item.status === status;
+
+    return matchesSearch && matchesStatus;
+  });
 
   const pendingCount = appointments.filter(
-    (a) => a.status === "pending"
+    (a) => a.status === "pending",
   ).length;
 
   const confirmedCount = appointments.filter(
-    (a) => a.status === "confirmed"
+    (a) => a.status === "confirmed",
   ).length;
 
   const cancelledCount = appointments.filter(
-    (a) => a.status === "cancelled"
+    (a) => a.status === "cancelled",
   ).length;
 
   return (
@@ -94,10 +92,8 @@ export default function AdminAppointments() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm p-6">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Pending
-          </p>
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm p-6">
+          <p className="text-sm text-slate-500 dark:text-slate-400">Pending</p>
 
           <h2 className="text-3xl font-bold text-amber-600 mt-2">
             {pendingCount}
@@ -196,9 +192,7 @@ export default function AdminAppointments() {
                   </td>
 
                   <td className="p-4 text-slate-700 dark:text-slate-300">
-                    {new Date(
-                      item.appointmentDate
-                    ).toLocaleDateString()}
+                    {new Date(item.appointmentDate).toLocaleDateString()}
                   </td>
 
                   <td className="p-4">
@@ -207,8 +201,8 @@ export default function AdminAppointments() {
                         item.status === "confirmed"
                           ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
                           : item.status === "cancelled"
-                          ? "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400"
-                          : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                            ? "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400"
+                            : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                       }`}
                     >
                       {item.status}
@@ -219,9 +213,7 @@ export default function AdminAppointments() {
                     {item.status === "pending" ? (
                       <div className="flex gap-2">
                         <button
-                          onClick={() =>
-                            handleAccept(item.id)
-                          }
+                          onClick={() => handleAccept(item.id)}
                           className="
                             px-4 py-1.5
                             rounded-full
@@ -239,9 +231,7 @@ export default function AdminAppointments() {
                         </button>
 
                         <button
-                          onClick={() =>
-                            handleReject(item.id)
-                          }
+                          onClick={() => handleReject(item.id)}
                           className="
                             px-4 py-1.5
                             rounded-full
@@ -259,9 +249,7 @@ export default function AdminAppointments() {
                         </button>
                       </div>
                     ) : (
-                      <span className="text-sm text-slate-400">
-                        No actions
-                      </span>
+                      <span className="text-sm text-slate-400">No actions</span>
                     )}
                   </td>
                 </tr>
@@ -269,10 +257,7 @@ export default function AdminAppointments() {
 
               {filteredAppointments.length === 0 && (
                 <tr>
-                  <td
-                    colSpan="6"
-                    className="py-12 text-center"
-                  >
+                  <td colSpan="6" className="py-12 text-center">
                     <p className="text-slate-500 dark:text-slate-400">
                       No appointments found.
                     </p>
@@ -281,6 +266,83 @@ export default function AdminAppointments() {
               )}
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
+          {/* Previous */}
+          <button
+            disabled={page === 1}
+            onClick={() =>
+              setSearchParams({
+                page: page - 1,
+              })
+            }
+            className="
+      px-3 py-2
+      text-sm font-medium
+      rounded-lg
+      border border-slate-200
+      bg-white dark:bg-slate-800
+      text-slate-600 dark:text-slate-300
+      shadow-sm
+      disabled:opacity-40
+      disabled:cursor-not-allowed
+      hover:border-indigo-600
+      hover:text-indigo-600
+      transition
+    "
+          >
+            ← Prev
+          </button>
+
+          {/* Page Numbers */}
+          {Array.from(
+            {
+              length: pagination?.totalPages || 0,
+            },
+            (_, i) => (
+              <button
+                key={i}
+                onClick={() =>
+                  setSearchParams({
+                    page: i + 1,
+                  })
+                }
+                className={`w-9 h-9 rounded-lg text-sm font-medium transition ${
+                  page === i + 1
+                    ? "bg-indigo-600 text-white shadow-md"
+                    : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-indigo-600 hover:text-indigo-600"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ),
+          )}
+
+          {/* Next */}
+          <button
+            disabled={page === pagination?.totalPages}
+            onClick={() =>
+              setSearchParams({
+                page: page + 1,
+              })
+            }
+            className="
+      px-3 py-2
+      text-sm font-medium
+      rounded-lg
+      border border-slate-200
+      bg-white dark:bg-slate-800
+      text-slate-600 dark:text-slate-300
+      shadow-sm
+      disabled:opacity-40
+      disabled:cursor-not-allowed
+      hover:border-indigo-600
+      hover:text-indigo-600
+      transition
+    "
+          >
+            Next →
+          </button>
         </div>
       </div>
     </div>

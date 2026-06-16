@@ -127,7 +127,7 @@ export default function AdminLayout() {
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full" />
             </button>
             <div className="pl-2 border-l border-slate-100 dark:border-slate-700">
-              <Avatar name="Admin User" size={36} />
+              <Avatar name="Admin " size={36} />
             </div>
           </div>
         </header>
