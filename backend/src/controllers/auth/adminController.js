@@ -86,21 +86,45 @@ exports.getDashboardStats = async (req, res) => {
 };
 exports.getStudents = async (req, res) => {
   try {
-    const students = await User.findAll({
-      where: {
-        role: "student",
-      },
-      attributes: {
-        exclude: ["password"],
-      },
-      order: [["createdAt", "DESC"]],
-    });
+    const page =
+      parseInt(req.query.page) || 1;
 
-    res.status(200).json(students);
+    const limit =
+      parseInt(req.query.limit) || 10;
+
+    const offset =
+      (page - 1) * limit;
+
+    const { count, rows } =
+      await User.findAndCountAll({
+        where: {
+          role: "student",
+        },
+        attributes: {
+          exclude: ["password"],
+        },
+        order: [["createdAt", "DESC"]],
+        limit,
+        offset,
+      });
+
+    res.status(200).json({
+      success: true,
+      students: rows,
+      pagination: {
+        page,
+        limit,
+        total: count,
+        totalPages: Math.ceil(
+          count / limit
+        ),
+      },
+    });
   } catch (error) {
     console.error(error);
 
     res.status(500).json({
+      success: false,
       message: "Server error",
     });
   }

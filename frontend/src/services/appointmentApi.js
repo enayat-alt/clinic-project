@@ -17,7 +17,8 @@ export const appointmentApi = createApi({
     }),
 
     getAppointments: builder.query({
-      query: () => "/appointments",
+      query: ({ page = 1, limit = 10 }) =>
+        `/appointments?page=${page}&limit=${limit}`,
     }),
 
     acceptAppointment: builder.mutation({
