@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useGetCourseByIdQuery } from "../../../admin/courses/services/courseApi";
@@ -9,15 +10,22 @@ export default function EnrollCourse() {
 
   const [coupon, setCoupon] = useState("");
 
+  const { accessToken } = useSelector((state) => state.auth);
+
   const { data: course, isLoading, error } = useGetCourseByIdQuery(courseId);
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("accessToken");
 
-    if (!token) {
-      navigate(`/login?redirect=/learning/enroll/${courseId}`);
+  //   if (!token) {
+  //     navigate(`/login?redirect=/learning/enroll/${courseId}`);
+  //   }
+  // }, [courseId, navigate]);
+  useEffect(() => {
+    if (!accessToken) {
+      navigate(`/learning/login?redirect=/learning/enroll/${courseId}`);
     }
-  }, [courseId, navigate]);
+  }, [accessToken, courseId, navigate]);  
 
   const handleEnroll = () => {
     alert("Razorpay payment integration will be added next.");

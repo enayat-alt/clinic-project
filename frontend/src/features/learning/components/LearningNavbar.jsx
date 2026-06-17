@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import { useSelector ,useDispatch} from "react-redux";
 import { useLogoutMutation } from "../../../services/authApi";
+import { clearCredentials } from "../../../app/authSlice";
 
 export default function LearningNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,26 +10,25 @@ export default function LearningNavbar() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [logoutUser] = useLogoutMutation();
+  
+  const { accessToken, user } = useSelector((state) => state.auth);
 
-  const token = localStorage.getItem("accessToken");
+  const isLoggedIn = !!accessToken;
+  const currentUser = user;
+  const dispatch = useDispatch();
 
-  const isLoggedIn = !!token;
 
-  const currentUser = JSON.parse(localStorage.getItem("user"));
-
-  const logout = async () => {
+  const logoutHandler = async () => {
     try {
       await logoutUser().unwrap();
     } catch (error) {
       console.error("Logout failed", error);
     }
 
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
+    dispatch(clearCredentials());
 
     navigate("/learning");
   };
-
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -161,7 +162,7 @@ export default function LearningNavbar() {
                       Dashboard
                     </Link>
                     <button
-                      onClick={logout}
+                      onClick={logoutHandler}
                       className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left"
                     >
                       Logout
@@ -262,7 +263,7 @@ export default function LearningNavbar() {
                   Dashboard
                 </Link>
                 <button
-                  onClick={logout}
+                  onClick={logoutHandler}
                   className="bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition"
                 >
                   Logout

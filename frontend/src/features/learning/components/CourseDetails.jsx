@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useGetCourseByIdQuery } from "../../admin/courses/services/courseApi";
 
 export default function CourseDetails() {
@@ -8,6 +9,7 @@ export default function CourseDetails() {
 
   const [openChapter, setOpenChapter] = useState(null);
   const [openLessons, setOpenLessons] = useState({});
+  const { accessToken } = useSelector((state) => state.auth);
 
   const toggleLesson = (chapterId, lessonId) => {
     setOpenLessons((prev) => ({
@@ -18,14 +20,10 @@ export default function CourseDetails() {
 
   const { data: course, isLoading, error } = useGetCourseByIdQuery(courseId);
 
-  const handleEnroll = () => {
-    const token = localStorage.getItem("accessToken");
 
-    if (!token) {
-      navigate(
-        // `/learning/login?redirect=/learning/course/${courseId}`
-        `/learning/login?redirect=/learning/enroll/${courseId}`,
-      );
+  const handleEnroll = () => {
+    if (!accessToken) {
+      navigate(`/learning/login?redirect=/learning/enroll/${courseId}`);
       return;
     }
 
