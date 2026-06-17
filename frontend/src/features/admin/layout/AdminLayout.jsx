@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { useLogoutMutation } from "../../../services/authApi";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -25,14 +25,27 @@ const menuItems = [
 ];
 
 export default function AdminLayout() {
+  const [logoutUser] = useLogoutMutation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
-  const handleLogout = () => {
+  // const handleLogout = () => {
+  //   localStorage.removeItem("accessToken");
+  //   localStorage.removeItem("user");
+  //   navigate("/learning");
+  // };
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser().unwrap();
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
+
     navigate("/learning");
   };
 

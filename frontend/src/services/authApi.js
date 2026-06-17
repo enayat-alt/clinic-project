@@ -24,10 +24,16 @@ export const authApi = createApi({
     }),
 
     refresh: builder.mutation({
-      query: (refreshToken) => ({
+      query: () => ({
         url: AUTH_ROUTES.REFRESH,
         method: "POST",
-        body: { refreshToken },
+      }),
+    }),
+
+    logout: builder.mutation({
+      query: () => ({
+        url: AUTH_ROUTES.LOGOUT,
+        method: "POST",
       }),
     }),
 
@@ -43,5 +49,6 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useRefreshMutation,
+  useLogoutMutation,
   useGetMeQuery,
 } = authApi;

@@ -1,11 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+//import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithReauth } from "../../../../services/baseQueryWithReauth";
 
 export const lessonApi = createApi({
   reducerPath: "lessonApi",
-    baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
-  }),
+    baseQuery: baseQueryWithReauth,
+    
   tagTypes: ["Lessons"],
 
   endpoints: (builder) => ({

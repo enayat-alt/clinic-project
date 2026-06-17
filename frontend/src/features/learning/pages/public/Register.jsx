@@ -20,93 +20,68 @@ export default function LearningRegister() {
     });
   };
 
+  const [registerUser, { isLoading }] = useRegisterMutation();
 
-const [registerUser, { isLoading }] =
-  useRegisterMutation();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
 
-  if (
-    !formData.name ||
-    !formData.email ||
-    !formData.phone ||
-    !formData.password ||
-    !formData.confirmPassword
-  ) {
-    alert("Please fill all fields");
-    return;
-  }
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-  if (formData.password !== formData.confirmPassword) {
-    alert("Passwords do not match");
-    return;
-  }
+    try {
+      const response = await registerUser({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: "student",
+      }).unwrap();
 
-  try {
-    const response = await registerUser({
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-      role: "student",
-    }).unwrap();
+      localStorage.setItem("accessToken", response.accessToken);
 
-    localStorage.setItem(
-      "accessToken",
-      response.accessToken
-    );
+      localStorage.setItem("user", JSON.stringify(response.user));
 
-    localStorage.setItem(
-      "refreshToken",
-      response.refreshToken
-    );
+      alert("Registration Successful");
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify(response.user)
-    );
+      navigate("/learning/login");
+    } catch (error) {
+      console.error(error);
 
-    alert("Registration Successful");
-
-    navigate("/learning/login");
-  } catch (error) {
-    console.error(error);
-
-    alert(
-      error?.data?.message ||
-      "Registration Failed"
-    );
-  }
-};
-
+      alert(error?.data?.message || "Registration Failed");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#e5f9f8] flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-lg bg-white rounded-3xl shadow-xl border border-[#cdebea] p-8">
-
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-[#1a504c] rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
             L
           </div>
 
-          <h1 className="text-3xl font-bold text-[#1a504c]">
-            Create Account
-          </h1>
+          <h1 className="text-3xl font-bold text-[#1a504c]">Create Account</h1>
 
-          <p className="text-gray-600 mt-2">
-            Join Odisha Learning Platform
-          </p>
+          <p className="text-gray-600 mt-2">Join Odisha Learning Platform</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Full Name
-            </label>
+            <label className="block text-sm font-medium mb-2">Full Name</label>
 
             <input
               type="text"
@@ -152,9 +127,7 @@ const handleSubmit = async (e) => {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium mb-2">Password</label>
 
             <input
               type="password"
@@ -199,16 +172,13 @@ const handleSubmit = async (e) => {
           >
             Create Account
           </button>
-
         </form>
 
         {/* Divider */}
         <div className="my-6 flex items-center">
           <div className="flex-1 border-t border-gray-300"></div>
 
-          <span className="px-3 text-gray-500 text-sm">
-            OR
-          </span>
+          <span className="px-3 text-gray-500 text-sm">OR</span>
 
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
@@ -238,7 +208,6 @@ const handleSubmit = async (e) => {
             ← Back to Learning Home
           </Link>
         </div>
-
       </div>
     </div>
   );
