@@ -1,9 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../../../app/authSlice";
 import { useRegisterMutation } from "../../../../services/authApi";
 
 export default function LearningRegister() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,10 +52,16 @@ export default function LearningRegister() {
         role: "student",
       }).unwrap();
 
-      localStorage.setItem("accessToken", response.accessToken);
+      // localStorage.setItem("accessToken", response.accessToken);
 
-      localStorage.setItem("user", JSON.stringify(response.user));
+      // localStorage.setItem("user", JSON.stringify(response.user));
 
+      dispatch(
+        setCredentials({
+          accessToken: response.accessToken,
+          user: response.user,
+        }),
+      );
       alert("Registration Successful");
 
       navigate("/learning/login");

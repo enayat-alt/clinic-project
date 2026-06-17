@@ -128,7 +128,6 @@ exports.login = async (req, res) => {
 // Refresh Token
 exports.refresh = async (req, res) => {
   try {
-    console.log("REFRESH TOKEN ENDPOINT HIT");
     const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {
