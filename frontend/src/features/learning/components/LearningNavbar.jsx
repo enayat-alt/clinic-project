@@ -1,12 +1,13 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import { useLogoutMutation } from "../../../services/authApi";
 
 export default function LearningNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const [logoutUser] = useLogoutMutation();
 
   const token = localStorage.getItem("accessToken");
 
@@ -14,9 +15,14 @@ export default function LearningNavbar() {
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await logoutUser().unwrap();
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
 
     navigate("/learning");
@@ -269,4 +275,3 @@ export default function LearningNavbar() {
     </nav>
   );
 }
-

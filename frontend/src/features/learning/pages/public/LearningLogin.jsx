@@ -38,8 +38,6 @@ export default function LearningLogin() {
 
       localStorage.setItem("accessToken", response.accessToken);
 
-      localStorage.setItem("refreshToken", response.refreshToken);
-
       localStorage.setItem("user", JSON.stringify(response.user));
 
       const user = response.user;

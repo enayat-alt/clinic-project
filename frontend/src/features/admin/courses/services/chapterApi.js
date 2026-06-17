@@ -1,12 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+//import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithReauth } from "../../../../services/baseQueryWithReauth";
 
 
 export const chapterApi = createApi({
   reducerPath: "chapterApi",
-    baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
-  }),
+    baseQuery: baseQueryWithReauth,
   tagTypes: ["Chapters"],
 
   endpoints: (builder) => ({
@@ -41,3 +40,4 @@ export const {
   useCreateChapterMutation,
   useDeleteChapterMutation,
 } = chapterApi;
+

@@ -1,26 +1,6 @@
 const Appointment = require("../../models/clinic/Appointment");
 
-// Get All Appointments (Admin)
-// exports.getAll = async (req, res) => {
-//   try {
-//     const appointments = await Appointment.findAll({
-//       order: [["createdAt", "DESC"]],
-//     });
 
-//     res.status(200).json({
-//       success: true,
-//       appointments,
-//     });
-//   } catch (error) {
-//     console.error(error);
-
-//     res.status(500).json({
-//       success: false,
-//       message: "Server Error",
-//     });
-//   }
-// };
-// Get All Appointments (Admin)
 exports.getAll = async (req, res) => {
   try {
     const page =

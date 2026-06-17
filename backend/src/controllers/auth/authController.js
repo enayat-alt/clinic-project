@@ -5,7 +5,7 @@ const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../../utils/generateTokens");
-  
+
 // Register
 exports.register = async (req, res) => {
   try {
@@ -42,11 +42,17 @@ exports.register = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     res.status(201).json({
       success: true,
       message: "Registration successful",
       accessToken,
-      refreshToken,
       user: {
         id: user.id,
         name: user.name,
@@ -93,11 +99,17 @@ exports.login = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
       success: true,
       message: "Login successful",
       accessToken,
-      refreshToken,
       user: {
         id: user.id,
         name: user.name,
@@ -116,7 +128,8 @@ exports.login = async (req, res) => {
 // Refresh Token
 exports.refresh = async (req, res) => {
   try {
-    const { refreshToken } = req.body;
+    console.log("REFRESH TOKEN ENDPOINT HIT");
+    const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {
       return res.status(401).json({
@@ -125,10 +138,7 @@ exports.refresh = async (req, res) => {
       });
     }
 
-    const decoded = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET
-    );
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
     const user = await User.findByPk(decoded.id);
 
@@ -149,6 +159,36 @@ exports.refresh = async (req, res) => {
     res.status(401).json({
       success: false,
       message: "Invalid refresh token",
+    });
+  }
+};
+
+
+exports.logout = async (req, res) => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (refreshToken) {
+      const user = await User.findOne({
+        where: { refreshToken },
+      });
+
+      if (user) {
+        user.refreshToken = null;
+        await user.save();
+      }
+    }
+
+    res.clearCookie("refreshToken");
+
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Logout failed",
     });
   }
 };
