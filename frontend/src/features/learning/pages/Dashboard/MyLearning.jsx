@@ -1,5 +1,5 @@
-
 import { useGetMyCoursesQuery } from "../../../../services/studentCourseApi";
+import { useSelector } from "react-redux";
 import {
   BookOpen,
   CheckCircle2,
@@ -12,10 +12,12 @@ import {
 } from "lucide-react";
 
 export default function MyLearning() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useSelector((state) => state.auth.user);
 
-  const { data: courses = [], isLoading } = useGetMyCoursesQuery();
+  //const { data: courses = [], isLoading } = useGetMyCoursesQuery();
+  const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
 
+  console.log("My Courses:", courses);
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -44,7 +46,9 @@ export default function MyLearning() {
               <div className="w-16 h-16 rounded-full bg-[#1a504c] text-white flex items-center justify-center text-2xl font-semibold">
                 {user?.name?.charAt(0).toUpperCase()}
               </div>
-              <h2 className="mt-3 text-base font-semibold text-slate-800">{user?.name}</h2>
+              <h2 className="mt-3 text-base font-semibold text-slate-800">
+                {user?.name}
+              </h2>
               <p className="text-slate-400 text-xs">Student</p>
             </div>
 
@@ -72,7 +76,11 @@ export default function MyLearning() {
           <div className="lg:col-span-3 space-y-6">
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <StatCard icon={BookOpen} label="Enrolled" value={courses.length} />
+              <StatCard
+                icon={BookOpen}
+                label="Enrolled"
+                value={courses.length}
+              />
               <StatCard icon={CheckCircle2} label="Completed" value={0} />
               <StatCard icon={Award} label="Certificates" value={0} />
               <StatCard icon={Clock} label="Hours" value={0} />
@@ -81,7 +89,9 @@ export default function MyLearning() {
             {/* Continue Learning */}
             {courses.length > 0 && (
               <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-                <h2 className="text-base font-semibold text-slate-800 mb-3">Continue learning</h2>
+                <h2 className="text-base font-semibold text-slate-800 mb-3">
+                  Continue learning
+                </h2>
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-slate-50 rounded-xl p-4">
                   <div className="w-full sm:w-32 h-20 rounded-lg bg-[#1a504c]/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -100,10 +110,15 @@ export default function MyLearning() {
                     <h3 className="text-sm font-semibold text-slate-800 truncate">
                       {courses[0].Course.title}
                     </h3>
-                    <p className="text-xs text-slate-400 mt-0.5">Resume where you left off</p>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      Resume where you left off
+                    </p>
 
                     <div className="w-full bg-slate-200 rounded-full h-1.5 mt-3">
-                      <div className="bg-[#1a504c] h-1.5 rounded-full" style={{ width: "0%" }} />
+                      <div
+                        className="bg-[#1a504c] h-1.5 rounded-full"
+                        style={{ width: "0%" }}
+                      />
                     </div>
                     <p className="mt-1 text-xs text-slate-400">0% completed</p>
                   </div>
@@ -118,7 +133,9 @@ export default function MyLearning() {
 
             {/* My Courses */}
             <div>
-              <h2 className="text-base font-semibold text-slate-800 mb-3">My courses</h2>
+              <h2 className="text-base font-semibold text-slate-800 mb-3">
+                My courses
+              </h2>
 
               {courses.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -172,14 +189,18 @@ export default function MyLearning() {
               ) : (
                 <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-10 text-center">
                   <BookOpen size={28} className="text-slate-300 mx-auto mb-2" />
-                  <p className="text-slate-400 text-sm">You haven't enrolled in any courses yet.</p>
+                  <p className="text-slate-400 text-sm">
+                    You haven't enrolled in any courses yet.
+                  </p>
                 </div>
               )}
             </div>
 
             {/* Achievements */}
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-              <h2 className="text-base font-semibold text-slate-800 mb-4">Achievements</h2>
+              <h2 className="text-base font-semibold text-slate-800 mb-4">
+                Achievements
+              </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <AchievementCard icon="🏆" label="First course completed" />
