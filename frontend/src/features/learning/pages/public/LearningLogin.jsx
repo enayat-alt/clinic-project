@@ -1,19 +1,22 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../../../app/authSlice";
 import { useLoginMutation } from "../../../../services/authApi";
 
 export default function LearningLogin() {
   const navigate = useNavigate();
   //const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const redirect = new URLSearchParams(location.search).get("redirect");
 
   const [loginUser, { isLoading }] = useLoginMutation();
 
   const [formData, setFormData] = useState({
-    email: "admin1@gmail.com",
-    password: "admin1",
+    email: "",
+    password: "",
   });
 
   const [error, setError] = useState("");
@@ -36,10 +39,15 @@ export default function LearningLogin() {
         password: formData.password,
       }).unwrap();
 
-      localStorage.setItem("accessToken", response.accessToken);
+      // localStorage.setItem("accessToken", response.accessToken);
 
-      localStorage.setItem("user", JSON.stringify(response.user));
-
+      // localStorage.setItem("user", JSON.stringify(response.user));
+      dispatch(
+        setCredentials({
+          accessToken: response.accessToken,
+          user: response.user,
+        }),
+      );
       const user = response.user;
 
       // If user came from another page

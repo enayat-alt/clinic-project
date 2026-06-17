@@ -9,8 +9,12 @@ import { chapterApi } from "../features/admin/courses/services/chapterApi";
 import { lessonApi } from "../features/admin/courses/services/lessonApi";
 import { dashboardStatsApi } from "../features/admin/courses/services/dashboardStatsApi";
 
+//auth token 
+import authReducer from "./authSlice";
+
 export const store = configureStore({
   reducer: {
+      auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [courseApi.reducerPath]: courseApi.reducer,
