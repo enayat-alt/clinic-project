@@ -10,11 +10,13 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 
 import "./index.css";
+import SessionRestorer from './common/auth/SessionRestorer';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
     <Provider store={store}>
+        <SessionRestorer>
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center bg-[#e5f9f8]">
@@ -24,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       >
         <RouterProvider router={router} />
       </Suspense>
+      </SessionRestorer>
     </Provider>
     </ThemeProvider>
   </React.StrictMode>

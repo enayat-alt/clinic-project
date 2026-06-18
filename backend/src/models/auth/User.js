@@ -49,11 +49,6 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       defaultValue: "",
     },
-    refreshToken: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,

@@ -5,6 +5,7 @@ const User = require("./auth/User");
 const StudentCourse = require("./learning/StudentCourse");
 const Doctor = require("./clinic/Doctor");
 const Patient = require("./clinic/Patient")
+const Session = require("./auth/Session");
 
 Course.hasMany(Chapter, {
   foreignKey: "courseId",
@@ -74,6 +75,17 @@ User.hasOne(Patient, {
   as: "patient",
 });
 
+User.hasMany(Session, {
+  foreignKey: "userId",
+  as: "sessions",
+  onDelete: "CASCADE",
+});
+
+Session.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
+
 module.exports = {
   Course,
   Chapter,
@@ -81,5 +93,6 @@ module.exports = {
   User,
   StudentCourse,
   Doctor,
-  Patient
+  Patient,
+  Session
 };

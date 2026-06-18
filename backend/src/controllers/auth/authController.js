@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../../models/auth/User");
+const Session = require("../../models/auth/Session");
 
 const {
   generateAccessToken,
@@ -39,8 +40,14 @@ exports.register = async (req, res) => {
     const accessToken = generateAccessToken(user.id);
     const refreshToken = generateRefreshToken(user.id);
 
-    user.refreshToken = refreshToken;
-    await user.save();
+    // user.refreshToken = refreshToken;
+    // await user.save();
+
+    await Session.create({
+      userId: user.id,
+      refreshToken,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
@@ -96,8 +103,14 @@ exports.login = async (req, res) => {
     const accessToken = generateAccessToken(user.id);
     const refreshToken = generateRefreshToken(user.id);
 
-    user.refreshToken = refreshToken;
-    await user.save();
+    // user.refreshToken = refreshToken;
+    // await user.save();
+
+    await Session.create({
+      userId: user.id,
+      refreshToken,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
@@ -139,12 +152,44 @@ exports.refresh = async (req, res) => {
 
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
-    const user = await User.findByPk(decoded.id);
+    //const user = await User.findByPk(decoded.id);
 
-    if (!user || user.refreshToken !== refreshToken) {
+    // if (!user || user.refreshToken !== refreshToken) {
+    //   return res.status(401).json({
+    //     success: false,
+    //     message: "Invalid refresh token",
+    //   });
+    // }
+
+    //const accessToken = generateAccessToken(user.id);
+
+    const session = await Session.findOne({
+      where: {
+        refreshToken,
+        isRevoked: false,
+      },
+    });
+
+    if (!session) {
       return res.status(401).json({
         success: false,
         message: "Invalid refresh token",
+      });
+    }
+
+    if (session.expiresAt < new Date()) {
+      return res.status(401).json({
+        success: false,
+        message: "Session expired",
+      });
+    }
+
+    const user = await User.findByPk(session.userId);
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found",
       });
     }
 
@@ -162,19 +207,49 @@ exports.refresh = async (req, res) => {
   }
 };
 
+// exports.logout = async (req, res) => {
+//   try {
+//     const refreshToken = req.cookies.refreshToken;
 
+//     if (refreshToken) {
+//       const user = await User.findOne({
+//         where: { refreshToken },
+//       });
+
+//       if (user) {
+//         user.refreshToken = null;
+//         await user.save();
+//       }
+//     }
+
+//     res.clearCookie("refreshToken");
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Logged out successfully",
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Logout failed",
+//     });
+//   }
+// };
 exports.logout = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
 
     if (refreshToken) {
-      const user = await User.findOne({
-        where: { refreshToken },
+      const session = await Session.findOne({
+        where: {
+          refreshToken,
+          isRevoked: false,
+        },
       });
 
-      if (user) {
-        user.refreshToken = null;
-        await user.save();
+      if (session) {
+        session.isRevoked = true;
+        await session.save();
       }
     }
 
