@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../../app/authSlice";
 import { useGetMyCoursesQuery } from "../../../../services/studentCourseApi";
 import { BookOpen, CheckCircle2, Award, PlayCircle } from "lucide-react";
 
 export default function Dashboard() {
-  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const user = useSelector(selectCurrentUser);
+  //const user = JSON.parse(localStorage.getItem("currentUser"));
 
   const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
 
   return (
+    
     <div className="min-h-screen bg-slate-50">
       {/* Welcome Header */}
       <div className="bg-white border-b border-slate-100">

@@ -23,7 +23,14 @@ const connectDB = async () => {
      require("../models");
 
     // CREATE/UPDATE TABLES
-    await sequelize.sync();
+    //await sequelize.sync();
+     if (!isProduction) {
+      console.log(
+        "Development mode: syncing database..."
+      );
+
+      await sequelize.sync();
+    }
     console.log(" PostgreSQL connected successfully");
   } catch (error) {
     console.error(" Database connection error:", error.message);
