@@ -1,10 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "./baseQueryWithReauth";
+//import { baseQueryWithReauth } from "./baseQueryWithReauth";
+import { rawBaseQuery } from "./rawBaseQuery";
 import { AUTH_ROUTES } from "./apiRoutes";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: baseQueryWithReauth,
+  baseQuery: rawBaseQuery,
 
   endpoints: (builder) => ({
     register: builder.mutation({

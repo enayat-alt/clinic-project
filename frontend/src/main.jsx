@@ -29,5 +29,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </SessionRestorer>
     </Provider>
     </ThemeProvider>
-  </React.StrictMode>
+   </React.StrictMode>
 );
