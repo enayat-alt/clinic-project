@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogoutMutation } from "../../../services/authApi";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { clearCredentials } from "../../../app/authSlice";
 import {
   LayoutDashboard,
   CalendarCheck,
@@ -15,6 +16,7 @@ import {
 import Avatar from "../common/Avatar";
 import { useTheme } from "../../../context/ThemeContext";
 import { Sun, Moon } from "lucide-react";
+import { useDispatch } from "react-redux";
 
 const menuItems = [
   { name: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
@@ -29,12 +31,8 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const dispatch = useDispatch();
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("accessToken");
-  //   localStorage.removeItem("user");
-  //   navigate("/learning");
-  // };
 
   const handleLogout = async () => {
     try {
@@ -43,8 +41,7 @@ export default function AdminLayout() {
       console.error("Logout failed", error);
     }
 
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
+     dispatch(clearCredentials());
 
     navigate("/learning");
   };
