@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-//const { apiLimiter } = require("./middleware/rateLimiter");
+const { apiLimiter } = require("./middleware/rateLimiter");
 const helmet = require("helmet");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 app.use(helmet());
 
-//app.use("/api", apiLimiter);
+app.use("/api", apiLimiter);
 
 // Routes
 app.use("/api/auth", require("./routes/auth/authRoutes"));

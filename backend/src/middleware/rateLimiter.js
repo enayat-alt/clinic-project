@@ -1,75 +1,51 @@
-// const rateLimit = require("express-rate-limit");
 
-// const apiLimiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 500,
-// });
+const rateLimit = require("express-rate-limit");
 
-// const loginLimiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 500,
-//   message: {
-//     success: false,
-//     message: "Too many login attempts. Please try again later.",
-//   },
-// });
 
-// const registerLimiter = rateLimit({
-//   windowMs: 60 * 60 * 1000,
-//   max: 500,
-//   message: {
-//     success: false,
-//     message: "Too many registration attempts. Please try again later.",
-//   },
-// });
+const isDev =
+  process.env.NODE_ENV !== "production";
 
-// module.exports = {
-//   apiLimiter,
-//   loginLimiter,
-//   registerLimiter,
-// };
+const createLimiter = (options) => {
+  if (isDev) {
+    return (req, res, next) => next();
+  }
 
-// const rateLimit = require("express-rate-limit");
+  return rateLimit(options);
+};
 
-// const isDev =
-//   process.env.NODE_ENV !== "production";
+const apiLimiter = createLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+    message: {
+    success: false,
+    message:
+      "Too many api request ",
+  },
+});
 
-// const createLimiter = (options) => {
-//   if (isDev) {
-//     return (req, res, next) => next();
-//   }
+const loginLimiter = createLimiter({
+  windowMs: 15 * 60 * 1000,
 
-//   return rateLimit(options);
-// };
+  max: 500,
+  message: {
+    success: false,
+    message:
+      "Too many login attempts. Please try again later.",
+  },
+});
 
-// const apiLimiter = createLimiter({
-//   windowMs: 15 * 60 * 1000,
-//   max: 500,
-// });
+const registerLimiter = createLimiter({
+  windowMs: 60 * 60 * 1000,
+  max: 500,
+  message: {
+    success: false,
+    message:
+      "Too many registration attempts. Please try again later.",
+  },
+});
 
-// const loginLimiter = createLimiter({
-//   windowMs: 15 * 60 * 1000,
-
-//   max: 500,
-//   message: {
-//     success: false,
-//     message:
-//       "Too many login attempts. Please try again later.",
-//   },
-// });
-
-// const registerLimiter = createLimiter({
-//   windowMs: 60 * 60 * 1000,
-//   max: 500,
-//   message: {
-//     success: false,
-//     message:
-//       "Too many registration attempts. Please try again later.",
-//   },
-// });
-
-// module.exports = {
-//   apiLimiter,
-//   loginLimiter,
-//   registerLimiter,
-// };
+module.exports = {
+  apiLimiter,
+  loginLimiter,
+  registerLimiter,
+};
