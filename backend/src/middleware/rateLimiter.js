@@ -15,7 +15,7 @@ const createLimiter = (options) => {
 
 const apiLimiter = createLimiter({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: 1000,
     message: {
     success: false,
     message:
@@ -26,7 +26,7 @@ const apiLimiter = createLimiter({
 const loginLimiter = createLimiter({
   windowMs: 15 * 60 * 1000,
 
-  max: 500,
+  max: 5,
   message: {
     success: false,
     message:
@@ -36,7 +36,7 @@ const loginLimiter = createLimiter({
 
 const registerLimiter = createLimiter({
   windowMs: 60 * 60 * 1000,
-  max: 500,
+  max: 5,
   message: {
     success: false,
     message:
