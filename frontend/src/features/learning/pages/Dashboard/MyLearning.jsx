@@ -17,7 +17,8 @@ export default function MyLearning() {
   //const { data: courses = [], isLoading } = useGetMyCoursesQuery();
   const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
 
-  console.log("My Courses:", courses);
+  
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
