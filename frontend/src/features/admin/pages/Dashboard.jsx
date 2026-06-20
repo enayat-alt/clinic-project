@@ -1,4 +1,5 @@
 import { useGetAppointmentsQuery } from "../../../services/appointmentApi";
+import DashboardCharts from "../courses/components/DashboardCharts";
 import { useGetDashboardStatsQuery } from "../courses/services/dashboardStatsApi";
 
 export default function Dashboard() {
@@ -97,6 +98,8 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+      
+    <DashboardCharts/>
 
       {/* Recent Appointments */}
       <div className="mt-10 bg-white rounded-2xl shadow-sm border p-6">
