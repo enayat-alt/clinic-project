@@ -1,4 +1,3 @@
-
 const User = require("../../models/auth/User");
 const Doctor = require("../../models/clinic/Doctor");
 const Appointment = require("../../models/clinic/Appointment");
@@ -82,7 +81,7 @@ exports.verifyDoctor = async (req, res) => {
           id: req.params.id,
         },
         returning: true,
-      }
+      },
     );
 
     if (!updatedRows) {
@@ -103,17 +102,13 @@ exports.verifyDoctor = async (req, res) => {
 
 exports.getAnalytics = async (req, res) => {
   try {
-    const [
-      totalUsers,
-      totalDoctors,
-      totalAppointments,
-      totalCourses,
-    ] = await Promise.all([
-      User.count(),
-      Doctor.count(),
-      Appointment.count(),
-      Course.count(),
-    ]);
+    const [totalUsers, totalDoctors, totalAppointments, totalCourses] =
+      await Promise.all([
+        User.count(),
+        Doctor.count(),
+        Appointment.count(),
+        Course.count(),
+      ]);
 
     res.json({
       totalUsers,
@@ -142,10 +137,42 @@ exports.getDashboardStats = async (req, res) => {
 
     const totalEnrollments = await StudentCourse.count();
 
+    const appointments = await Appointment.findAll({
+      attributes: ["appointmentDate"],
+    });
+
+    const weekDays = {
+      Sun: 0,
+      Mon: 0,
+      Tue: 0,
+      Wed: 0,
+      Thu: 0,
+      Fri: 0,
+      Sat: 0,
+    };
+
+    appointments.forEach((appointment) => {
+      const date = new Date(appointment.appointmentDate);
+
+      const day = date.toLocaleDateString("en-US", {
+        weekday: "short",
+      });
+
+      weekDays[day]++;
+    });
+
+    const appointmentsThisWeek = Object.entries(weekDays).map(
+      ([day, count]) => ({
+        day,
+        appointments: count,
+      }),
+    );
+
     res.status(200).json({
       totalStudents,
       totalCourses,
       totalEnrollments,
+      appointmentsThisWeek,
     });
   } catch (error) {
     console.error(error);
