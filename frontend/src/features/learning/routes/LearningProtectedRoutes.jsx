@@ -17,7 +17,7 @@ export const learningProtectedRoutes = [
     //element: <ProtectedRoute />,
     element: (
       <ErrorBoundary>
-        <ProtectedRoute />
+        <ProtectedRoute allowedRoles={["student"]} />
       </ErrorBoundary>
     ),
     children: [

@@ -1,6 +1,6 @@
-
 import { lazy } from "react";
 import ErrorBoundary from "../../../common/ErrorBoundary";
+import ProtectedRoute from "../../../routes/ProtectedRoute";
 
 const AdminLayout = lazy(() => import("../layout/AdminLayout"));
 
@@ -32,55 +32,60 @@ const EditCourse = lazy(() =>
 
 export const adminRoutes = [
   {
-    path: "/admin",
-    //element: <AdminLayout />,
-       element: (
-          <ErrorBoundary>
-            <AdminLayout />
-          </ErrorBoundary>
-        ),
+    element: (
+      <ErrorBoundary>
+        <ProtectedRoute
+          allowedRoles={["admin"]}
+        />
+      </ErrorBoundary>
+    ),
     children: [
       {
-        path: "dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "appointments",
-        element: <Appointments />,
-      },
-      {
-        path: "students",
-        element: <Students />,
-      },
-      {
-        path: "courses",
-        element: <Courses />,
-      },
-      {
-        path: "setting",
-        element: <Setting />,
-      },
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <Dashboard />,
+          },
+          {
+            path: "appointments",
+            element: <Appointments />,
+          },
+          {
+            path: "students",
+            element: <Students />,
+          },
+          {
+            path: "courses",
+            element: <Courses />,
+          },
+          {
+            path: "setting",
+            element: <Setting />,
+          },
 
-      // Course Routes
-      {
-        path: "courses/create",
-        element: <CreateCourse />,
-      },
-      {
-        path: "courses/:courseId/content",
-        element: <CourseContent />,
-      },
-      {
-        path: "add-lesson/:courseId/:chapterId",
-        element: <AddLesson />,
-      },
-      {
-        path: "add-chapter/:courseId",
-        element: <AddChapter />,
-      },
-      {
-        path: "courses/:id/edit",
-        element: <EditCourse />,
+          {
+            path: "courses/create",
+            element: <CreateCourse />,
+          },
+          {
+            path: "courses/:courseId/content",
+            element: <CourseContent />,
+          },
+          {
+            path: "add-lesson/:courseId/:chapterId",
+            element: <AddLesson />,
+          },
+          {
+            path: "add-chapter/:courseId",
+            element: <AddChapter />,
+          },
+          {
+            path: "courses/:id/edit",
+            element: <EditCourse />,
+          },
+        ],
       },
     ],
   },
