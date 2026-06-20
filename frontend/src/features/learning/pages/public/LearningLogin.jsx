@@ -48,6 +48,7 @@ export default function LearningLogin() {
           user: response.user,
         }),
       );
+
       const user = response.user;
 
       // If user came from another page

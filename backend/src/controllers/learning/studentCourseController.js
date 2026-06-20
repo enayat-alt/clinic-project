@@ -1,7 +1,4 @@
-const {
-  Course,
-  StudentCourse,
-} = require("../../models");
+const { Course, StudentCourse } = require("../../models");
 
 exports.enrollInCourse = async (req, res) => {
   try {
@@ -18,18 +15,16 @@ exports.enrollInCourse = async (req, res) => {
     }
 
     // Check if already enrolled
-    const existingStudentCourse =
-      await StudentCourse.findOne({
-        where: {
-          userId,
-          courseId,
-        },
-      });
+    const existingStudentCourse = await StudentCourse.findOne({
+      where: {
+        userId,
+        courseId,
+      },
+    });
 
     if (existingStudentCourse) {
       return res.status(400).json({
-        message:
-          "You are already enrolled in this course",
+        message: "You are already enrolled in this course",
       });
     }
 
@@ -40,8 +35,7 @@ exports.enrollInCourse = async (req, res) => {
     });
 
     return res.status(201).json({
-      message:
-        "Course enrolled successfully",
+      message: "Course enrolled successfully",
     });
   } catch (error) {
     console.error(error);
@@ -49,14 +43,12 @@ exports.enrollInCourse = async (req, res) => {
     return res.status(500).json({
       message: "Server error",
     });
-    
   }
 };
 
 exports.getMyCourses = async (req, res) => {
   try {
     const userId = req.user.id;
-
     const courses = await StudentCourse.findAll({
       where: {
         userId,
@@ -67,10 +59,11 @@ exports.getMyCourses = async (req, res) => {
         },
       ],
     });
-
+   
+  
     return res.status(200).json(courses);
   } catch (error) {
-    console.error(error);
+    
 
     return res.status(500).json({
       message: "Server error",

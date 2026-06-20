@@ -5,13 +5,19 @@ import { useGetMyCoursesQuery } from "../../../../services/studentCourseApi";
 import { BookOpen, CheckCircle2, Award, PlayCircle } from "lucide-react";
 
 export default function Dashboard() {
-  const user = useSelector(selectCurrentUser);
-  //const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
+
+  const user = useSelector(selectCurrentUser);
+
+  //const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
+  const { data: courses = [], isLoading, error } =
+  useGetMyCoursesQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+  const token = useSelector((state) => state.auth.accessToken);
+
 
   return (
-    
     <div className="min-h-screen bg-slate-50">
       {/* Welcome Header */}
       <div className="bg-white border-b border-slate-100">
@@ -29,14 +35,18 @@ export default function Dashboard() {
         {/* Loading */}
         {isLoading && (
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
-            <p className="text-center text-sm text-slate-400">Loading courses...</p>
+            <p className="text-center text-sm text-slate-400">
+              Loading courses...
+            </p>
           </div>
         )}
 
         {/* Error */}
         {error && (
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
-            <p className="text-center text-sm text-rose-500">Failed to load courses.</p>
+            <p className="text-center text-sm text-rose-500">
+              Failed to load courses.
+            </p>
           </div>
         )}
 
@@ -45,7 +55,9 @@ export default function Dashboard() {
             {/* Continue Learning */}
             {courses.length > 0 && (
               <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-                <h2 className="text-base font-semibold text-slate-800 mb-3">Continue learning</h2>
+                <h2 className="text-base font-semibold text-slate-800 mb-3">
+                  Continue learning
+                </h2>
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-slate-50 rounded-xl p-4">
                   <div className="w-full sm:w-32 h-20 rounded-lg bg-[#1a504c]/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -69,7 +81,10 @@ export default function Dashboard() {
                     </p>
 
                     <div className="w-full bg-slate-200 rounded-full h-1.5 mt-3">
-                      <div className="bg-[#1a504c] h-1.5 rounded-full" style={{ width: "0%" }} />
+                      <div
+                        className="bg-[#1a504c] h-1.5 rounded-full"
+                        style={{ width: "0%" }}
+                      />
                     </div>
                     <p className="mt-1 text-xs text-slate-400">0% completed</p>
                   </div>
@@ -84,7 +99,11 @@ export default function Dashboard() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <StatCard icon={BookOpen} label="Enrolled courses" value={courses.length} />
+              <StatCard
+                icon={BookOpen}
+                label="Enrolled courses"
+                value={courses.length}
+              />
               <StatCard icon={CheckCircle2} label="Completed" value={0} />
               <StatCard icon={Award} label="Certificates" value={0} />
             </div>
@@ -92,14 +111,20 @@ export default function Dashboard() {
             {/* My Learning */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-base font-semibold text-slate-800">My learning</h2>
-                <p className="text-xs text-slate-400">{courses.length} courses</p>
+                <h2 className="text-base font-semibold text-slate-800">
+                  My learning
+                </h2>
+                <p className="text-xs text-slate-400">
+                  {courses.length} courses
+                </p>
               </div>
 
               {courses.length === 0 ? (
                 <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-10 text-center">
                   <BookOpen size={28} className="text-slate-300 mx-auto mb-2" />
-                  <p className="text-slate-400 text-sm">You haven't enrolled in any courses yet.</p>
+                  <p className="text-slate-400 text-sm">
+                    You haven't enrolled in any courses yet.
+                  </p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

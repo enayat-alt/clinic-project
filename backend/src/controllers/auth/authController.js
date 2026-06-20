@@ -7,7 +7,7 @@ const {
   generateRefreshToken,
 } = require("../../utils/generateTokens");
 
-// Register
+
 exports.register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -30,45 +30,21 @@ exports.register = async (req, res) => {
       });
     }
 
-    const user = await User.create({
+    await User.create({
       name,
       email,
       password,
       role: role || "patient",
     });
 
-    const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateRefreshToken(user.id);
-
-    // user.refreshToken = refreshToken;
-    // await user.save();
-
-    await Session.create({
-      userId: user.id,
-      refreshToken,
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    });
-
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
-      message: "Registration successful",
-      accessToken,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
+      message: "Registration successful. Please login.",
     });
   } catch (error) {
-    res.status(500).json({
+    console.error(error);
+
+    return res.status(500).json({
       success: false,
       message: "Server Error",
     });
@@ -102,9 +78,6 @@ exports.login = async (req, res) => {
 
     const accessToken = generateAccessToken(user.id);
     const refreshToken = generateRefreshToken(user.id);
-
-    // user.refreshToken = refreshToken;
-    // await user.save();
 
     await Session.create({
       userId: user.id,
@@ -142,8 +115,7 @@ exports.login = async (req, res) => {
 exports.refresh = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
-
-    if (!refreshToken) {
+       if (!refreshToken) {
       return res.status(401).json({
         success: false,
         message: "Refresh token required",
@@ -152,23 +124,13 @@ exports.refresh = async (req, res) => {
 
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
-    //const user = await User.findByPk(decoded.id);
-
-    // if (!user || user.refreshToken !== refreshToken) {
-    //   return res.status(401).json({
-    //     success: false,
-    //     message: "Invalid refresh token",
-    //   });
-    // }
-
-    //const accessToken = generateAccessToken(user.id);
-
     const session = await Session.findOne({
       where: {
         refreshToken,
         isRevoked: false,
       },
     });
+   
 
     if (!session) {
       return res.status(401).json({
@@ -207,37 +169,15 @@ exports.refresh = async (req, res) => {
   }
 };
 
-// exports.logout = async (req, res) => {
-//   try {
-//     const refreshToken = req.cookies.refreshToken;
 
-//     if (refreshToken) {
-//       const user = await User.findOne({
-//         where: { refreshToken },
-//       });
 
-//       if (user) {
-//         user.refreshToken = null;
-//         await user.save();
-//       }
-//     }
-
-//     res.clearCookie("refreshToken");
-
-//     res.status(200).json({
-//       success: true,
-//       message: "Logged out successfully",
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Logout failed",
-//     });
-//   }
-// };
 exports.logout = async (req, res) => {
   try {
+   
+
     const refreshToken = req.cookies.refreshToken;
+
+  
 
     if (refreshToken) {
       const session = await Session.findOne({
@@ -249,7 +189,11 @@ exports.logout = async (req, res) => {
 
       if (session) {
         session.isRevoked = true;
+
         await session.save();
+
+        await session.reload();
+
       }
     }
 
@@ -260,13 +204,14 @@ exports.logout = async (req, res) => {
       message: "Logged out successfully",
     });
   } catch (error) {
+   
+
     res.status(500).json({
       success: false,
       message: "Logout failed",
     });
   }
 };
-
 // Get Current User
 exports.getMe = async (req, res) => {
   res.status(200).json({
