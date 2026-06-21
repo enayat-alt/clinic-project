@@ -1,3 +1,4 @@
+
 export default function AppointmentTable({
   appointments,
   onAccept,
@@ -85,56 +86,83 @@ export default function AppointmentTable({
               </td>
 
               <td className="p-4">
-                {item.status === "pending" ? (
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => onAccept(item.id)}
-                      className="
-                        px-4 py-1.5
-                        rounded-full
-                        bg-emerald-100
-                        text-emerald-700
-                        hover:bg-emerald-200
-                        dark:bg-emerald-900/30
-                        dark:text-emerald-400
-                        transition
-                        text-sm
-                        font-medium
-                      "
-                    >
-                      Accept
-                    </button>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    className="
+                      px-4 py-1.5
+                      rounded-full
+                      bg-indigo-100
+                      text-indigo-700
+                      hover:bg-indigo-200
+                      dark:bg-indigo-900/30
+                      dark:text-indigo-400
+                      transition
+                      text-sm
+                      font-medium
+                    "
+                  >
+                    View
+                  </button>
 
-                    <button
-                      onClick={() => onReject(item.id)}
-                      className="
-                        px-4 py-1.5
-                        rounded-full
-                        bg-rose-100
-                        text-rose-700
-                        hover:bg-rose-200
-                        dark:bg-rose-900/30
-                        dark:text-rose-400
-                        transition
-                        text-sm
-                        font-medium
-                      "
-                    >
-                      Reject
-                    </button>
-                  </div>
-                ) : (
-                  <span className="text-sm text-slate-400">
-                    No actions
-                  </span>
-                )}
+                  {item.status ===
+                    "pending" && (
+                    <>
+                      <button
+                        onClick={() =>
+                          onAccept(
+                            item.id
+                          )
+                        }
+                        className="
+                          px-4 py-1.5
+                          rounded-full
+                          bg-emerald-100
+                          text-emerald-700
+                          hover:bg-emerald-200
+                          dark:bg-emerald-900/30
+                          dark:text-emerald-400
+                          transition
+                          text-sm
+                          font-medium
+                        "
+                      >
+                        Accept
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          onReject(
+                            item.id
+                          )
+                        }
+                        className="
+                          px-4 py-1.5
+                          rounded-full
+                          bg-rose-100
+                          text-rose-700
+                          hover:bg-rose-200
+                          dark:bg-rose-900/30
+                          dark:text-rose-400
+                          transition
+                          text-sm
+                          font-medium
+                        "
+                      >
+                        Reject
+                      </button>
+                    </>
+                  )}
+                </div>
               </td>
             </tr>
           ))}
 
           {appointments.length === 0 && (
             <tr>
-              <td colSpan="6" className="py-12 text-center">
+              <td
+                colSpan="6"
+                className="py-12 text-center"
+              >
                 <p className="text-slate-500 dark:text-slate-400">
                   No appointments found.
                 </p>
