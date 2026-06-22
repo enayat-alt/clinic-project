@@ -25,6 +25,13 @@ app.use(helmet());
 
 app.use("/api", apiLimiter);
 
+//uploads
+
+app.use(
+  "/api/test-upload",
+  require("./routes/uploads/testUploadRoutes")
+);
+
 // Routes
 app.use("/api/auth", require("./routes/auth/authRoutes"));
 app.use("/api/patients", require("./routes/clinic/patientRoutes"));

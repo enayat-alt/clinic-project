@@ -1,24 +1,48 @@
 const { Lesson } = require("../../models");
+const uploadToCloudinary = require("../../utils/cloudinaryUpload");
 
 exports.createLesson = async (
   req,
   res
 ) => {
   try {
-    const lesson = await Lesson.create({
-      title: req.body.title,
-      type: req.body.type,
-      fileUrl: req.body.fileUrl,
-      duration: req.body.duration,
-      chapterId: req.body.chapterId,
-      order: req.body.order || 1,
-      description: req.body.description
-    });
+    let fileUrl = null;
 
-    res.status(201).json(lesson);
+    if (req.file) {
+      const uploadedFile =
+        await uploadToCloudinary(
+          req.file.buffer,
+          "lessons"
+        );
+
+      fileUrl =
+        uploadedFile.secure_url;
+    }
+
+    const lesson =
+      await Lesson.create({
+        title: req.body.title,
+        type: req.body.type,
+        fileUrl,
+        duration:
+          req.body.duration,
+        chapterId:
+          req.body.chapterId,
+        order:
+          req.body.order || 1,
+        description:
+          req.body.description,
+      });
+
+    res.status(201).json(
+      lesson
+    );
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
-      message: error.message,
+      message:
+        error.message,
     });
   }
 };

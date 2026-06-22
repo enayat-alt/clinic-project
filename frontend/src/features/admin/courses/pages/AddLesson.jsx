@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCreateLessonMutation } from "../services/lessonApi";
@@ -19,8 +18,8 @@ export default function AddLesson() {
   const [lessonType, setLessonType] =
     useState("video");
 
-  const [lessonUrl, setLessonUrl] =
-    useState("");
+  const [selectedFile, setSelectedFile] =
+    useState(null);
 
   const [createLesson, { isLoading }] =
     useCreateLessonMutation();
@@ -31,18 +30,56 @@ export default function AddLesson() {
       return;
     }
 
-    try {
-      await createLesson({
-        title: lessonTitle,
-        description: lessonDescription,
-        type: lessonType,
-        fileUrl: lessonUrl,
-        chapterId: Number(chapterId),
-        duration: "",
-        order: 1,
-      }).unwrap();
+    if (!selectedFile) {
+      alert("Please select a file");
+      return;
+    }
 
-      alert("Lesson created successfully");
+    try {
+      const formData = new FormData();
+
+      formData.append(
+        "title",
+        lessonTitle
+      );
+
+      formData.append(
+        "description",
+        lessonDescription
+      );
+
+      formData.append(
+        "type",
+        lessonType
+      );
+
+      formData.append(
+        "chapterId",
+        chapterId
+      );
+
+      formData.append(
+        "duration",
+        ""
+      );
+
+      formData.append(
+        "order",
+        1
+      );
+
+      formData.append(
+        "file",
+        selectedFile
+      );
+
+      await createLesson(
+        formData
+      ).unwrap();
+
+      alert(
+        "Lesson created successfully"
+      );
 
       navigate(
         `/admin/courses/${courseId}/content`
@@ -195,7 +232,7 @@ export default function AddLesson() {
             </select>
           </div>
 
-          {/* URL */}
+          {/* File Upload */}
           <div>
             <label
               className="
@@ -205,22 +242,21 @@ export default function AddLesson() {
               "
             >
               {lessonType === "video"
-                ? "Video URL"
-                : "PDF URL"}
+                ? "Upload Video"
+                : "Upload PDF"}
             </label>
 
             <input
-              type="text"
-              value={lessonUrl}
-              onChange={(e) =>
-                setLessonUrl(
-                  e.target.value
-                )
-              }
-              placeholder={
+              type="file"
+              accept={
                 lessonType === "video"
-                  ? "https://youtube.com/..."
-                  : "https://example.com/file.pdf"
+                  ? "video/*"
+                  : ".pdf"
+              }
+              onChange={(e) =>
+                setSelectedFile(
+                  e.target.files[0]
+                )
               }
               className="
                 w-full
@@ -229,12 +265,17 @@ export default function AddLesson() {
                 border border-slate-200 dark:border-slate-600
                 bg-white dark:bg-slate-900
                 text-slate-900 dark:text-white
-                placeholder:text-slate-400
                 focus:outline-none
                 focus:ring-2
                 focus:ring-indigo-500
               "
             />
+
+            {selectedFile && (
+              <p className="mt-2 text-sm text-emerald-600">
+                Selected: {selectedFile.name}
+              </p>
+            )}
           </div>
 
           {/* Buttons */}
@@ -257,7 +298,7 @@ export default function AddLesson() {
               "
             >
               {isLoading
-                ? "Saving..."
+                ? "Uploading..."
                 : "Save Lesson"}
             </button>
 

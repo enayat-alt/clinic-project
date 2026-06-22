@@ -1,11 +1,12 @@
+
 import { createApi } from "@reduxjs/toolkit/query/react";
-//import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../../../../services/baseQueryWithReauth";
 
 export const lessonApi = createApi({
   reducerPath: "lessonApi",
-    baseQuery: baseQueryWithReauth,
-    
+
+  baseQuery: baseQueryWithReauth,
+
   tagTypes: ["Lessons"],
 
   endpoints: (builder) => ({
@@ -17,10 +18,10 @@ export const lessonApi = createApi({
     }),
 
     createLesson: builder.mutation({
-      query: (lesson) => ({
+      query: (formData) => ({
         url: "/lessons",
         method: "POST",
-        body: lesson,
+        body: formData,
       }),
       invalidatesTags: ["Lessons"],
     }),
