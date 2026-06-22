@@ -12,6 +12,7 @@ const MyLearning = lazy(() => import("../pages/Dashboard/MyLearning"));
 
 const Profile = lazy(() => import("../pages/Dashboard/Profile"));
 
+const CoursePlayer = lazy(() => import("../pages/student/CoursePlayer"));
 export const learningProtectedRoutes = [
   {
     //element: <ProtectedRoute />,
@@ -35,6 +36,10 @@ export const learningProtectedRoutes = [
           {
             path: "/learning/profile",
             element: <Profile />,
+          },
+          {
+            path: "/learning/my-learning/:courseId",
+            element: <CoursePlayer />,
           },
         ],
       },
