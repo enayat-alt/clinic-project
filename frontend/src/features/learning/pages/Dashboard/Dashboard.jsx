@@ -5,17 +5,10 @@ import { useGetMyCoursesQuery } from "../../../../services/studentCourseApi";
 import { BookOpen, CheckCircle2, Award, PlayCircle } from "lucide-react";
 
 export default function Dashboard() {
-
-
   const user = useSelector(selectCurrentUser);
+  //const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  //const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
-  const { data: courses = [], isLoading, error } =
-  useGetMyCoursesQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
-  const token = useSelector((state) => state.auth.accessToken);
-
+  const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -89,10 +82,17 @@ export default function Dashboard() {
                     <p className="mt-1 text-xs text-slate-400">0% completed</p>
                   </div>
 
-                  <button className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-purple-700 transition whitespace-nowrap">
+                  {/* <button className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-purple-700 transition whitespace-nowrap">
                     <PlayCircle size={15} />
                     Continue
-                  </button>
+                  </button> */}
+                  <Link
+                    to={`/learning/my-learning/${courses[0].Course.id}`}
+                    className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#143d3a] transition whitespace-nowrap"
+                  >
+                    <PlayCircle size={15} />
+                    Continue
+                  </Link>
                 </div>
               </div>
             )}
@@ -171,12 +171,20 @@ export default function Dashboard() {
                             />
                           </div>
                         </div>
-
+                        {/* 
                         <Link
                           to={`/courses/${enrollment.Course.id}`}
                           className="mt-4 w-full flex items-center justify-center gap-1.5 text-sm font-medium text-[#1a504c] border border-[#1a504c]/30 py-2 rounded-lg hover:bg-[#1a504c]/5 transition"
                         >
                           <PlayCircle size={14} />
+                          Continue
+                        </Link> */}
+
+                        <Link
+                          to={`/learning/my-learning/${courses[0].Course.id}`}
+                          className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#143d3a] transition whitespace-nowrap"
+                        >
+                          <PlayCircle size={15} />
                           Continue
                         </Link>
                       </div>

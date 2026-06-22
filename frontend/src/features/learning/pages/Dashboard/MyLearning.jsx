@@ -1,5 +1,6 @@
 import { useGetMyCoursesQuery } from "../../../../services/studentCourseApi";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   BookOpen,
   CheckCircle2,
@@ -16,8 +17,6 @@ export default function MyLearning() {
 
   //const { data: courses = [], isLoading } = useGetMyCoursesQuery();
   const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
-
-  
 
   if (isLoading) {
     return (
@@ -124,10 +123,18 @@ export default function MyLearning() {
                     <p className="mt-1 text-xs text-slate-400">0% completed</p>
                   </div>
 
-                  <button className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#143e3b] transition whitespace-nowrap">
+                  {/* <button className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#143e3b] transition whitespace-nowrap">
                     <PlayCircle size={15} />
                     Continue
-                  </button>
+                  </button> */}
+                  <Link
+                          to={`/learning/my-learning/${courses[0].Course.id}`}
+                          className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#143d3a] transition whitespace-nowrap"
+                        >
+                          <PlayCircle size={15} />
+                          Continue
+                        </Link>
+                  
                 </div>
               </div>
             )}
@@ -178,11 +185,20 @@ export default function MyLearning() {
                             />
                           </div>
                         </div>
-
+                        {/* 
                         <button className="mt-4 w-full flex items-center justify-center gap-1.5 text-sm font-medium text-[#1a504c] border border-[#1a504c]/30 py-2 rounded-lg hover:bg-[#e5f9f8] transition">
                           <PlayCircle size={14} />
                           Continue
-                        </button>
+                        </button> */}
+                        
+
+                        <Link
+                          to={`/learning/my-learning/${courses[0].Course.id}`}
+                          className="flex items-center justify-center gap-1.5 bg-[#1a504c] text-white text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#143d3a] transition whitespace-nowrap"
+                        >
+                          <PlayCircle size={15} />
+                          Continue
+                        </Link>
                       </div>
                     </div>
                   ))}
