@@ -6,9 +6,14 @@ import { BookOpen, CheckCircle2, Award, PlayCircle } from "lucide-react";
 
 export default function Dashboard() {
   const user = useSelector(selectCurrentUser);
-  //const user = JSON.parse(localStorage.getItem("currentUser"));
+  
+   
+  const { data: courses = [], isLoading, error } =
+  useGetMyCoursesQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+  const token = useSelector((state) => state.auth.accessToken);
 
-  const { data: courses = [], isLoading, error } = useGetMyCoursesQuery();
 
   return (
     <div className="min-h-screen bg-slate-50">
