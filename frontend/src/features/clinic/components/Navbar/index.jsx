@@ -158,7 +158,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         {/* Navbar */}
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          Logo
           <Link to="/" className="flex items-center">
             <AnimatedLogo />
           </Link>
