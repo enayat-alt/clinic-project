@@ -50,9 +50,9 @@ export default function Appointment() {
 
   return (
   <div className="min-h-screen bg-[#e5f9f8]">
-    <section className="py-16">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-[#cdebea]">
+    <section className="py-16 md:py-20">
+      <div className="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-[#cdebea] bg-white p-6 shadow-xl sm:p-8 md:p-10">
           <AppointmentForm
             formData={formData}
             handleChange={handleChange}

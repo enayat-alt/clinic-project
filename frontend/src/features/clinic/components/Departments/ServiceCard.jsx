@@ -24,11 +24,11 @@ export default function ServiceCard({
 
       <div className="relative z-10">
 
-        <div className="w-16 h-16 rounded-2xl bg-[#081A33] text-white flex items-center justify-center text-3xl mb-6 group-hover:rotate-6 transition duration-300">
+        <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#081A33] text-2xl text-white transition duration-300 group-hover:rotate-6 sm:h-16 sm:w-16 sm:text-3xl">
           {icon}
         </div>
 
-        <h3 className="text-2xl font-bold text-[#081A33]">
+        <h3 className="text-xl font-bold text-[#081A33] sm:text-2xl">
           {title}
         </h3>
 

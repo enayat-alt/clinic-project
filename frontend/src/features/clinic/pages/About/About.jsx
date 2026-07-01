@@ -156,19 +156,19 @@ export default function About() {
 
       {/* ================= HERO ================= */}
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#081A33] via-[#0D2D5C] to-[#1E4C89] py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#081A33] via-[#0D2D5C] to-[#1E4C89] py-16 md:py-20 lg:py-24">
 
         <div className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]" />
 
         <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-blue-500/20 blur-[120px]" />
 
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
+        <div className="relative mx-auto max-w-7xl px-5 text-center sm:px-6 lg:px-8">
 
           <p className="uppercase tracking-[4px] text-cyan-300 font-semibold">
             About Odisha Polyclinic
           </p>
 
-          <h1 className="mt-6 text-5xl md:text-6xl font-bold text-white">
+          <h1 className="mt-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl lg:text-6xl">
             Compassionate Healthcare
             <br />
             You Can Trust
@@ -179,7 +179,7 @@ export default function About() {
             expertise, and personalized attention for every patient.
           </p>
 
-          <div className="mt-10 flex justify-center gap-4 flex-wrap">
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row sm:flex-wrap">
 
             <Link
               to="/appointment"
@@ -203,11 +203,9 @@ export default function About() {
 
       {/* ================= ABOUT ================= */}
 
-      <section className="py-24">
-
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 
             {/* Image */}
 
@@ -216,7 +214,7 @@ export default function About() {
               <img
                 src="/doctor.png"
                 alt="Doctor"
-                className="w-full rounded-[35px] shadow-2xl"
+                className="w-full rounded-[35px] object-cover shadow-2xl"
               />
 
               <div className="absolute bottom-8 left-8 rounded-3xl bg-white p-6 shadow-2xl">
@@ -241,24 +239,24 @@ export default function About() {
                 Welcome
               </span>
 
-              <h2 className="mt-4 text-4xl md:text-5xl font-bold text-[#081A33] leading-tight">
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-[#081A33] sm:text-4xl md:text-5xl">
                 Your Trusted Healthcare Partner
               </h2>
 
-              <p className="mt-8 text-lg leading-8 text-slate-600">
+              <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
                 At Odisha Polyclinic, we believe healthcare should be
                 compassionate, affordable, and accessible to everyone.
                 Our experienced medical team is dedicated to delivering
                 personalized treatment with modern diagnostic support.
               </p>
 
-              <p className="mt-6 text-lg leading-8 text-slate-600">
+              <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
                 Every patient receives individualized attention,
                 accurate diagnosis, and comprehensive care in a warm
                 and welcoming environment.
               </p>
 
-              <div className="grid grid-cols-2 gap-5 mt-10">
+              <div className="mt-10 grid gap-5 sm:grid-cols-2">
 
                 <div className="rounded-3xl bg-slate-50 p-6 shadow-sm border">
 
@@ -300,11 +298,9 @@ export default function About() {
 
       {/* ================= STATS ================= */}
 
-      <section className="pb-24">
-
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="pb-16 md:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
             <div className="rounded-3xl bg-white border shadow-lg p-8 text-center">
 
@@ -383,7 +379,7 @@ export default function About() {
               Comprehensive Healthcare Services
             </h2>
 
-            <p className="mt-6 max-w-3xl mx-auto text-lg text-slate-600 leading-8">
+            <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-600 md:text-lg">
               We provide complete healthcare solutions with personalized
               treatment plans and compassionate medical care.
             </p>
@@ -452,15 +448,13 @@ export default function About() {
 
       {/* ================= MISSION & VISION ================= */}
 
-      <section className="py-24">
-
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="grid lg:grid-cols-2 gap-10">
+      <section className="py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-2">
 
             {/* Mission */}
 
-            <div className="relative overflow-hidden rounded-[35px] bg-gradient-to-br from-[#081A33] to-[#174A84] p-12 text-white shadow-2xl">
+<div className="relative overflow-hidden rounded-[35px] bg-gradient-to-br from-[#081A33] to-[#174A84] p-8 text-white shadow-2xl sm:p-10 lg:p-12">
 
               <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
 
@@ -472,7 +466,7 @@ export default function About() {
                 Healthcare For Everyone
               </h3>
 
-              <p className="mt-8 leading-8 text-slate-200">
+              <p className="mt-8 text-base leading-8 text-slate-200 md:text-lg">
                 To provide affordable, accessible, and high-quality
                 healthcare that improves the lives of every patient
                 through compassionate treatment, accurate diagnosis,
@@ -483,23 +477,23 @@ export default function About() {
 
             {/* Vision */}
 
-            <div className="rounded-[35px] border border-slate-200 bg-white p-12 shadow-xl">
+            <div className="rounded-[35px] border border-slate-200 bg-white p-8 shadow-xl sm:p-10 lg:p-12">
 
               <span className="uppercase tracking-[4px] text-blue-600 font-semibold">
                 Our Vision
               </span>
 
-              <h3 className="mt-5 text-4xl font-bold text-[#081A33]">
+              <h3 className="mt-5 text-3xl font-bold text-[#081A33] sm:text-4xl">
                 Trusted Healthcare Leader
               </h3>
 
-              <p className="mt-8 leading-8 text-slate-600">
+              <p className="mt-8 text-base leading-8 text-slate-600 md:text-lg">
                 To become Odisha's most trusted healthcare destination,
                 recognized for excellence in patient care, innovation,
                 ethical medical practices, and community well-being.
               </p>
 
-              <div className="mt-10 grid grid-cols-2 gap-5">
+              <div className="mt-10 grid gap-5 sm:grid-cols-2">
 
                 <div className="rounded-2xl bg-slate-100 p-5 text-center">
 
@@ -550,7 +544,7 @@ export default function About() {
               Healthcare You Can Trust
             </h2>
 
-            <p className="mt-6 max-w-3xl mx-auto text-lg leading-8 text-slate-600">
+            <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-600 md:text-lg">
               Our commitment is to provide compassionate healthcare with
               experienced professionals, modern facilities, and personalized
               treatment for every patient.
@@ -630,11 +624,9 @@ export default function About() {
 
       {/* ================= CTA ================= */}
 
-      <section className="pb-24">
-
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-r from-[#081A33] via-[#10376D] to-[#174A84] p-12 md:p-20 text-center text-white">
+      <section className="pb-16 md:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-r from-[#081A33] via-[#10376D] to-[#174A84] p-8 text-center text-white sm:p-10 md:p-16 lg:p-20">
 
             <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-cyan-400/20 blur-[140px]" />
 
@@ -646,17 +638,17 @@ export default function About() {
                 Book Your Visit
               </span>
 
-              <h2 className="mt-5 text-4xl md:text-5xl font-bold">
+              <h2 className="mt-5 text-3xl font-bold sm:text-4xl md:text-5xl">
                 Your Health Is Our Priority
               </h2>
 
-              <p className="mt-8 max-w-3xl mx-auto text-lg leading-8 text-slate-300">
+              <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
                 Whether you need a routine health check-up, specialist
                 consultation, or preventive healthcare, our experienced medical
                 team is here to provide trusted, compassionate care.
               </p>
 
-              <div className="mt-12 flex flex-wrap justify-center gap-5">
+              <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row sm:flex-wrap">
 
                 <Link
                   to="/appointment"

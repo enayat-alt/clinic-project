@@ -16,9 +16,9 @@ export default function InfoCard({
         y: -6,
         scale: 1.03,
       }}
-      className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg"
+      className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg sm:gap-4 sm:p-5"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#081A33] text-2xl text-white">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#081A33] text-xl text-white sm:h-14 sm:w-14 sm:text-2xl">
         {icon}
       </div>
 

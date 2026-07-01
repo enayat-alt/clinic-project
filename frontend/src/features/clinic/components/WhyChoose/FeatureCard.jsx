@@ -18,11 +18,11 @@ export default function FeatureCard({
       whileHover={{
         y: -8,
       }}
-      className="bg-white rounded-2xl p-6 border border-slate-200 shadow-lg hover:shadow-2xl transition-all"
+      className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg transition-all hover:shadow-2xl sm:p-6"
     >
       <div className="flex gap-5 items-start">
 
-        <div className="w-14 h-14 rounded-2xl bg-[#081A33] text-white flex items-center justify-center text-2xl flex-shrink-0">
+        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[#081A33] text-xl text-white sm:h-14 sm:w-14 sm:text-2xl">
           {icon}
         </div>
 

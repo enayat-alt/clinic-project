@@ -10,7 +10,7 @@ export default function CTAFeature({ icon, title }) {
       transition={{
         duration: 0.3,
       }}
-      className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-lg p-4"
+      className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-lg"
     >
       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300 text-xl">
         {icon}

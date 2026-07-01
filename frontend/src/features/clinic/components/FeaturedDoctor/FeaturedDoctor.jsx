@@ -13,11 +13,9 @@ import InfoCard from "./InfoCard";
 
 export default function FeaturedDoctor() {
   return (
-    <section className="bg-[#F8FAFC] py-28">
-
-      <div className="max-w-7xl mx-auto px-6">
-
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+    <section className="bg-[#F8FAFC] py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 
           {/* LEFT */}
 
@@ -31,13 +29,13 @@ export default function FeaturedDoctor() {
               MEET OUR DOCTOR
             </span>
 
-            <h2 className="text-5xl font-bold text-[#081A33] mt-5 leading-tight">
+            <h2 className="mt-5 text-3xl font-bold leading-tight text-[#081A33] sm:text-4xl lg:text-5xl">
               Compassionate Healthcare
               <br />
               From A Trusted Expert
             </h2>
 
-            <p className="mt-8 text-lg leading-8 text-slate-600">
+            <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
               Our lead physician is committed to providing compassionate,
               patient-focused healthcare with modern diagnostics and
               evidence-based treatment.
@@ -55,7 +53,7 @@ export default function FeaturedDoctor() {
 
             </div>
 
-            <div className="flex items-center gap-2 mt-6">
+            <div className="mt-6 flex flex-wrap items-center gap-2">
 
               <FaStar className="text-yellow-500" />
               <FaStar className="text-yellow-500" />
@@ -69,11 +67,11 @@ export default function FeaturedDoctor() {
 
             </div>
 
-            <div className="flex flex-wrap gap-5 mt-10">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
 
               <Link
                 to="/appointment"
-                className="rounded-xl bg-[#081A33] px-8 py-4 text-white font-semibold hover:bg-blue-700 transition"
+                className="rounded-xl bg-[#081A33] px-6 py-4 text-center font-semibold text-white transition hover:bg-blue-700 sm:px-8"
               >
                 <FaCalendarAlt className="inline mr-2" />
                 Book Appointment
@@ -83,7 +81,7 @@ export default function FeaturedDoctor() {
                 href="https://wa.me/919999999999"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-xl bg-green-500 px-8 py-4 text-white font-semibold hover:bg-green-600 transition"
+                className="rounded-xl bg-green-500 px-6 py-4 text-center font-semibold text-white transition hover:bg-green-600 sm:px-8"
               >
                 <FaWhatsapp className="inline mr-2" />
                 WhatsApp
@@ -113,10 +111,10 @@ export default function FeaturedDoctor() {
             <img
               src="/doctor.png"
               alt="Doctor"
-              className="relative z-10 mx-auto w-[420px]"
+              className="relative z-10 mx-auto w-full max-w-[280px] object-contain sm:max-w-[360px] lg:max-w-[420px]"
             />
 
-            <div className="absolute -left-8 top-12 space-y-5">
+            <div className="absolute -left-2 top-4 space-y-3 sm:-left-8 sm:top-12 sm:space-y-5">
 
               <InfoCard
                 icon={<FaAward />}
@@ -134,7 +132,7 @@ export default function FeaturedDoctor() {
 
             </div>
 
-            <div className="absolute -right-8 bottom-12">
+            <div className="absolute -right-2 bottom-4 sm:-right-8 sm:bottom-12">
 
               <InfoCard
                 icon={<FaUserMd />}
