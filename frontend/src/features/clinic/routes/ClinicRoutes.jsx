@@ -1,62 +1,135 @@
 
 
+// import { lazy } from "react";
+
+// const Home = lazy(() => import("../pages/Home/Home"));
+
+// const About = lazy(
+//   () => import("../pages/About/About")
+// );
+
+// const Departments = lazy(
+//   () => import("../pages/Departments/Departments")
+// );
+
+// const TestsServices = lazy(
+//   () => import("../pages/TestsServices/TestsServices")
+// );
+
+// const Contact = lazy(
+//   () => import("../pages/Contact/Contact")
+// );
+
+// const Appointment = lazy(
+//   () => import("../pages/Appointment/Appointment")
+// );
+
+// const Login = lazy(
+//   () => import("../pages/Login/Login")
+// );
+
+// const Register = lazy(
+//   () => import("../pages/Register/Register")
+// );
+
+// export const clinicRoutes = [
+//   {
+//     path: "/",
+//     element: <Home />,
+//   },
+//   {
+//     path: "/about",
+//     element: <About />,
+//   },
+//   {
+//     path: "/departments",
+//     element: <Departments />,
+//   },
+//   {
+//     path: "/tests-services",
+//     element: <TestsServices />,
+//   },
+//   {
+//     path: "/contact",
+//     element: <Contact />,
+//   },
+//   {
+//     path: "/appointment",
+//     element: <Appointment />,
+//   },
+//   {
+//     path: "/login",
+//     element: <Login />,
+//   },
+//   {
+//     path: "/register",
+//     element: <Register />,
+//   },
+// ];
+
 import { lazy } from "react";
+import ClinicLayout from "../layouts/ClinicLayout";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 
-const About = lazy(
-  () => import("../pages/About/About")
+const About = lazy(() => import("../pages/About/About"));
+
+const Departments = lazy(() =>
+  import("../pages/Departments/Departments")
 );
 
-const Departments = lazy(
-  () => import("../pages/Departments/Departments")
+const TestsServices = lazy(() =>
+  import("../pages/TestsServices/TestsServices")
 );
 
-const TestsServices = lazy(
-  () => import("../pages/TestsServices/TestsServices")
+const Contact = lazy(() =>
+  import("../pages/Contact/Contact")
 );
 
-const Contact = lazy(
-  () => import("../pages/Contact/Contact")
+const Appointment = lazy(() =>
+  import("../pages/Appointment/Appointment")
 );
 
-const Appointment = lazy(
-  () => import("../pages/Appointment/Appointment")
+const Login = lazy(() =>
+  import("../pages/Login/Login")
 );
 
-const Login = lazy(
-  () => import("../pages/Login/Login")
-);
-
-const Register = lazy(
-  () => import("../pages/Register/Register")
+const Register = lazy(() =>
+  import("../pages/Register/Register")
 );
 
 export const clinicRoutes = [
   {
-    path: "/",
-    element: <Home />,
+    element: <ClinicLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/departments",
+        element: <Departments />,
+      },
+      {
+        path: "/tests-services",
+        element: <TestsServices />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/appointment",
+        element: <Appointment />,
+      },
+    ],
   },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/departments",
-    element: <Departments />,
-  },
-  {
-    path: "/tests-services",
-    element: <TestsServices />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
-  },
-  {
-    path: "/appointment",
-    element: <Appointment />,
-  },
+
+  // Routes without Header & Footer
   {
     path: "/login",
     element: <Login />,

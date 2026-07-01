@@ -1,1 +1,0 @@
-export default function AppointmentCard() { return <div className="p-4">AppointmentCard</div>; }

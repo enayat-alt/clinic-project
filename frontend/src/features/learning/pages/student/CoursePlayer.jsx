@@ -29,7 +29,6 @@ export default function CoursePlayer() {
   const [selectedLesson, setSelectedLesson] =
     useState(null);
 
-    console.log(selectedLesson);
 
   const allLessons = useMemo(() => {
     if (!course?.Chapters)
