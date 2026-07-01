@@ -19,17 +19,17 @@ export default function TestsServices() {
     <div className="bg-[#e5f9f8]">
 
       {/* Hero Section */}
-      <section className="bg-[#e5f9f8] py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="bg-[#e5f9f8] py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <p className="text-gray-600">
             <Link to="/">Home</Link> / Tests & Services
           </p>
 
-          <h1 className="text-4xl font-bold text-[#1a504c] mt-3">
+          <h1 className="mt-3 text-3xl font-bold text-[#1a504c] sm:text-4xl lg:text-5xl">
             Lab and Tests
           </h1>
 
-          <p className="mt-4 text-gray-600 max-w-3xl leading-7">
+          <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600 md:text-lg">
             Our clinic provides a wide range of diagnostic tests and medical
             services to support accurate diagnosis and effective treatment.
             From pathology tests to routine health screenings, we use modern
@@ -40,10 +40,10 @@ export default function TestsServices() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#1a504c]">
+          <h2 className="mb-12 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
             Our Services
           </h2>
 
@@ -70,10 +70,10 @@ export default function TestsServices() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl font-bold text-center mb-10 text-[#1a504c]">
+          <h2 className="mb-10 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
             Why Choose Odisha Polyclinic?
           </h2>
 
@@ -108,12 +108,12 @@ export default function TestsServices() {
       </section>
 
       {/* Appointment Form */}
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto px-4">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-5 sm:px-6 lg:px-8">
 
           <div className="bg-white shadow-lg rounded-3xl p-8 border border-[#cdebea]">
 
-            <h2 className="text-3xl font-bold text-center mb-8 text-[#1a504c]">
+            <h2 className="mb-8 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
               Make an Appointment
             </h2>
 
@@ -170,7 +170,7 @@ export default function TestsServices() {
 
               <button
                 type="submit"
-                className="w-full bg-[#1a504c] text-white py-3 rounded-lg font-semibold hover:bg-[#143d3a] transition"
+                className="w-full rounded-lg bg-[#1a504c] py-3 font-semibold text-white transition hover:bg-[#143d3a]"
               >
                 Book Appointment
               </button>
@@ -183,8 +183,8 @@ export default function TestsServices() {
       </section>
 
       {/* Departments + Hours */}
-      <section className="bg-[#1a504c] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <section className="bg-[#1a504c] py-16 text-white md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 md:grid-cols-2 lg:px-8">
 
           <div>
             <h3 className="text-2xl font-bold mb-5">

@@ -11,7 +11,7 @@ export default function ReviewCard({ review }) {
       transition={{
         duration: 0.3,
       }}
-      className="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg hover:shadow-2xl"
+      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg hover:shadow-2xl sm:p-8"
     >
       <FaQuoteLeft className="text-3xl text-blue-600 mb-5" />
 

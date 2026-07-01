@@ -8,15 +8,15 @@ export default function AppointmentForm({
 }) {
   return (
     <>
-      <h2 className="text-3xl font-bold text-[#1a504c] mb-2 text-center">
+      <h2 className="mb-2 text-2xl font-bold text-[#1a504c] sm:text-3xl">
         Appointment Form
       </h2>
 
-      <p className="text-center text-gray-600 mb-8">
+      <p className="mb-8 text-center text-gray-600">
         Fill in your details and our team will contact you shortly.
       </p>
 
-      <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="grid gap-6 md:grid-cols-2">
         <div>
           <label className="block mb-2 font-medium text-gray-700">
             Full Name
@@ -141,7 +141,7 @@ export default function AppointmentForm({
         <button
           type="submit"
           disabled={isLoading}
-          className="md:col-span-2 bg-[#1a504c] text-white py-4 rounded-xl font-semibold text-lg hover:bg-[#143d3a] transition duration-300 disabled:opacity-50"
+          className="rounded-xl bg-[#1a504c] py-4 text-lg font-semibold text-white transition duration-300 hover:bg-[#143d3a] disabled:opacity-50 md:col-span-2"
         >
           {isLoading
             ? "Booking Appointment..."

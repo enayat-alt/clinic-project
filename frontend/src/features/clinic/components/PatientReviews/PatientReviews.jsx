@@ -4,9 +4,8 @@ import { reviews } from "./reviewsData";
 
 export default function PatientReviews() {
   return (
-    <section className="bg-[#F8FAFC] py-16 md:py-24 lg:py-28">
-
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+    <section className="bg-[#F8FAFC] py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}

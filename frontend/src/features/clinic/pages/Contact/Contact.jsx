@@ -5,18 +5,18 @@ export default function Contact() {
     <div className="bg-[#e5f9f8] min-h-screen">
 
       {/* Hero Section */}
-      <section className="bg-[#1a504c] py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-[#1a504c] py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
           <p className="text-gray-200">
             <Link to="/">Home</Link> / Contact Us
           </p>
 
-          <h1 className="text-5xl font-bold text-white mt-4">
+          <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Contact Us
           </h1>
 
-          <p className="text-lg text-gray-200 mt-6 max-w-3xl">
+          <p className="mt-6 max-w-3xl text-base leading-8 text-gray-200 md:text-lg">
             We're here to help. Contact Odisha Polyclinic for appointments,
             consultations, diagnostic tests, and healthcare information.
           </p>
@@ -25,10 +25,9 @@ export default function Contact() {
       </section>
 
       {/* Contact Information */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-
-          <div className="grid lg:grid-cols-3 gap-8">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="grid gap-6 lg:grid-cols-3">
 
             <div className="bg-white p-8 rounded-3xl shadow-md border border-[#cdebea]">
               <div className="text-4xl mb-4">📞</div>
@@ -84,21 +83,20 @@ export default function Contact() {
       </section>
 
       {/* Contact Form */}
-      <section className="pb-20">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="pb-16 md:pb-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-[#cdebea] bg-white p-6 shadow-lg sm:p-8 md:p-12">
 
-          <div className="bg-white rounded-3xl shadow-lg border border-[#cdebea] p-8 md:p-12">
-
-            <h2 className="text-4xl font-bold text-center text-[#1a504c] mb-4">
+            <h2 className="mb-4 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
               Send Us a Message
             </h2>
 
-            <p className="text-center text-gray-600 mb-10">
+            <p className="mb-10 text-center text-gray-600">
               Have a question? Fill out the form below and our team
               will get back to you.
             </p>
 
-            <form className="grid md:grid-cols-2 gap-6">
+            <form className="grid gap-6 md:grid-cols-2">
 
               <input
                 type="text"
@@ -132,7 +130,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="md:col-span-2 bg-[#1a504c] text-white py-4 rounded-xl font-semibold hover:bg-[#143d3a] transition"
+                className="rounded-xl bg-[#1a504c] py-4 font-semibold text-white transition hover:bg-[#143d3a] md:col-span-2"
               >
                 Send Message
               </button>
@@ -145,14 +143,14 @@ export default function Contact() {
       </section>
 
       {/* Opening Hours */}
-      <section className="bg-white py-20">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
 
-          <h2 className="text-4xl font-bold text-[#1a504c] mb-8">
+          <h2 className="mb-8 text-3xl font-bold text-[#1a504c] sm:text-4xl">
             Opening Hours
           </h2>
 
-          <div className="bg-[#e5f9f8] p-8 rounded-3xl">
+          <div className="rounded-3xl bg-[#e5f9f8] p-6 sm:p-8">
 
             <div className="space-y-4 text-lg">
 
@@ -174,16 +172,15 @@ export default function Contact() {
       </section>
 
       {/* CTA */}
-      <section className="py-20">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-[#1a504c] p-8 text-center sm:p-10">
 
-          <div className="bg-[#1a504c] rounded-3xl p-10 text-center">
-
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               Need Medical Assistance?
             </h2>
 
-            <p className="text-gray-200 mb-8 text-lg">
+            <p className="mb-8 text-base text-gray-200 md:text-lg">
               Book an appointment with our healthcare specialists today.
             </p>
 

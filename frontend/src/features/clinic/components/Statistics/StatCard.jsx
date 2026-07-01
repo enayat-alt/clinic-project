@@ -19,13 +19,13 @@ export default function StatCard({
         y: -10,
         scale: 1.03,
       }}
-      className="bg-white rounded-3xl p-8 border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300"
+      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-2xl sm:p-8"
     >
-      <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center text-3xl text-blue-700 mb-6">
+      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-2xl text-blue-700 sm:h-16 sm:w-16 sm:text-3xl">
         {icon}
       </div>
 
-      <h3 className="text-4xl font-bold text-[#081A33]">
+      <h3 className="text-3xl font-bold text-[#081A33] sm:text-4xl">
         <CountUp end={value} duration={2.5} />
         {suffix}
       </h3>

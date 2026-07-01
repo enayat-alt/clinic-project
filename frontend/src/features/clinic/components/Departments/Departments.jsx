@@ -58,9 +58,8 @@ export default function Departments() {
   ];
 
   return (
-    <section className="py-28 bg-white">
-
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -73,18 +72,18 @@ export default function Departments() {
             OUR SERVICES
           </span>
 
-          <h2 className="text-5xl font-bold mt-4 text-[#081A33]">
+          <h2 className="mt-4 text-3xl font-bold text-[#081A33] sm:text-4xl lg:text-5xl">
             Healthcare Services Designed Around You
           </h2>
 
-          <p className="mt-6 text-lg text-slate-600 leading-8">
+          <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
             From routine checkups to specialized treatments, Odisha Polyclinic
             offers a wide range of healthcare services under one roof.
           </p>
 
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 
           {services.map((service, index) => (
             <ServiceCard

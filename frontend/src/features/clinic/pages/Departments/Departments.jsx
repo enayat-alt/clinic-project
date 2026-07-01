@@ -25,18 +25,18 @@ export default function Departments() {
     <div className="bg-[#e5f9f8] min-h-screen">
 
       {/* Hero Section */}
-      <section className="bg-[#1a504c] py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-[#1a504c] py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
           <p className="text-gray-200">
             <Link to="/">Home</Link> / Departments
           </p>
 
-          <h1 className="text-5xl font-bold text-white mt-4">
+          <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Our Departments
           </h1>
 
-          <p className="mt-6 text-lg text-gray-200 max-w-4xl leading-8">
+          <p className="mt-6 max-w-4xl text-base leading-8 text-gray-200 md:text-lg">
             Our clinic offers a range of specialized departments to provide
             complete healthcare under one roof. From Physiotherapy and
             General Medicine to expert care in Chest Medicine, Gastrology,
@@ -49,10 +49,10 @@ export default function Departments() {
       </section>
 
       {/* Departments Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-          <h2 className="text-4xl font-bold text-center text-[#1a504c] mb-4">
+          <h2 className="mb-4 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
             Services & Departments
           </h2>
 
@@ -61,7 +61,7 @@ export default function Departments() {
             specialists and modern medical facilities.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
             {departments.map((department, index) => (
               <div
@@ -89,14 +89,14 @@ export default function Departments() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-          <h2 className="text-4xl font-bold text-center text-[#1a504c] mb-12">
+          <h2 className="mb-12 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
             Why Choose Odisha Polyclinic?
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
             <div className="bg-[#e5f9f8] p-6 rounded-2xl text-center">
               <h3 className="font-bold text-xl mb-2">
@@ -140,16 +140,15 @@ export default function Departments() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-[#1a504c] p-8 text-center sm:p-10">
 
-          <div className="bg-[#1a504c] rounded-3xl p-10 text-center">
-
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               Need Expert Medical Consultation?
             </h2>
 
-            <p className="text-gray-200 mb-8 text-lg">
+            <p className="mb-8 text-base text-gray-200 md:text-lg">
               Book an appointment today and get personalized healthcare
               from our experienced specialists.
             </p>

@@ -82,7 +82,7 @@ export default function CTA() {
 
         {/* Features */}
 
-        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3">
 
           <CTAFeature
             icon={<FaUserMd />}

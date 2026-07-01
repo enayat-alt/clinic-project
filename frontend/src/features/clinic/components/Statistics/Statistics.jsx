@@ -10,9 +10,8 @@ import StatCard from "./StatCard";
 
 export default function Statistics() {
   return (
-    <section className="bg-[#F8FAFC] py-28">
-
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-[#F8FAFC] py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -25,11 +24,11 @@ export default function Statistics() {
             WHY CHOOSE US
           </span>
 
-          <h2 className="text-5xl font-bold mt-4 text-[#081A33]">
+          <h2 className="mt-4 text-3xl font-bold text-[#081A33] sm:text-4xl lg:text-5xl">
             Trusted By Thousands Of Patients
           </h2>
 
-          <p className="mt-6 text-lg text-slate-600 leading-8">
+          <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
             We combine compassionate healthcare, experienced doctors,
             advanced diagnostics, and modern medical facilities to provide
             exceptional care for every patient.
@@ -37,7 +36,7 @@ export default function Statistics() {
 
         </motion.div>
 
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mt-20">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 
           <StatCard
             icon={<FaUsers />}

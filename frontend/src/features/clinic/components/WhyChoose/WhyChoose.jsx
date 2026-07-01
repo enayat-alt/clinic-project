@@ -53,11 +53,9 @@ export default function WhyChoose() {
   ];
 
   return (
-    <section className="py-28 bg-[#F8FAFC]">
-
-      <div className="max-w-7xl mx-auto px-6">
-
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+    <section className="bg-[#F8FAFC] py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 
           {/* Left */}
 
@@ -71,11 +69,11 @@ export default function WhyChoose() {
               WHY CHOOSE US
             </span>
 
-            <h2 className="text-5xl font-bold mt-5 text-[#081A33] leading-tight">
+            <h2 className="mt-5 text-3xl font-bold leading-tight text-[#081A33] sm:text-4xl lg:text-5xl">
               Exceptional Healthcare with Compassion & Excellence
             </h2>
 
-            <p className="mt-8 text-lg leading-8 text-slate-600">
+            <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
               Odisha Polyclinic combines experienced doctors, advanced
               diagnostics, and patient-focused care to deliver quality
               healthcare services for every family.
@@ -87,7 +85,7 @@ export default function WhyChoose() {
               }}
               src="/doctor-team.png"
               alt="Doctor Team"
-              className="mt-12 rounded-3xl shadow-2xl"
+              className="mt-8 w-full rounded-3xl object-cover shadow-2xl sm:mt-12"
             />
 
           </motion.div>
