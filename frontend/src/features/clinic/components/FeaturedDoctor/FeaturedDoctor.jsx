@@ -78,7 +78,7 @@ export default function FeaturedDoctor() {
               </Link>
 
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919124508591"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-xl bg-green-500 px-6 py-4 text-center font-semibold text-white transition hover:bg-green-600 sm:px-8"

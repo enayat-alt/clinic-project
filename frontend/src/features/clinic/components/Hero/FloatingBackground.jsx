@@ -9,101 +9,197 @@ import {
 export default function FloatingBackground() {
   return (
     <>
-      {/* Animated Gradient Background */}
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#081A33] via-[#0D2D56] to-[#123E73]" />
 
-        {/* Large Gradient Blob 1 */}
+        {/* Blob 1 */}
         <motion.div
           animate={{
-            x: [0, 80, 0],
-            y: [0, -40, 0],
-            scale: [1, 1.2, 1],
+            x: [0, 35, 0],
+            y: [0, -25, 0],
           }}
           transition={{
-            duration: 18,
+            duration: 24,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -top-36 -left-36 h-[420px] w-[420px] rounded-full bg-blue-500/20 blur-[120px]"
+          className="
+            absolute
+            -top-24
+            -left-24
+            h-72
+            w-72
+            rounded-full
+            bg-blue-500/20
+            blur-3xl
+
+            sm:h-80
+            sm:w-80
+
+            lg:h-[420px]
+            lg:w-[420px]
+          "
         />
 
         {/* Blob 2 */}
         <motion.div
           animate={{
-            x: [0, -60, 0],
-            y: [0, 50, 0],
-            scale: [1.1, 0.9, 1.1],
+            x: [0, -30, 0],
+            y: [0, 20, 0],
           }}
           transition={{
-            duration: 22,
+            duration: 30,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-0 right-0 h-[380px] w-[380px] rounded-full bg-cyan-400/10 blur-[100px]"
+          className="
+            absolute
+            bottom-0
+            right-0
+            h-64
+            w-64
+            rounded-full
+            bg-cyan-400/10
+            blur-3xl
+
+            sm:h-72
+            sm:w-72
+
+            lg:h-[360px]
+            lg:w-[360px]
+          "
         />
 
-        {/* Blob 3 */}
+        {/* Decorative Circle */}
         <motion.div
           animate={{
-            rotate: [0, 360],
+            rotate: 360,
           }}
           transition={{
-            duration: 45,
+            duration: 60,
             repeat: Infinity,
             ease: "linear",
           }}
-          className="absolute top-1/3 left-1/2 h-64 w-64 rounded-full border border-white/5"
+          className="
+            absolute
+            left-1/2
+            top-1/3
+            hidden
+            h-48
+            w-48
+            -translate-x-1/2
+            rounded-full
+            border
+            border-white/5
+
+            lg:block
+          "
         />
       </div>
 
-      {/* Floating Medical Icons */}
+      {/* Floating Icons */}
+
       <motion.div
-        animate={{ y: [0, -18, 0] }}
-        transition={{ duration: 4, repeat: Infinity }}
-        className="absolute top-24 left-12 text-white/10 text-4xl"
+        animate={{
+          y: [0, -8, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          left-6
+          top-20
+          text-3xl
+          text-white/10
+
+          sm:left-10
+          sm:text-4xl
+
+          lg:left-16
+        "
       >
         <FaHeartbeat />
       </motion.div>
 
       <motion.div
-        animate={{ y: [0, 18, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-        className="absolute right-20 top-40 text-cyan-300/20 text-5xl"
+        animate={{
+          y: [0, 8, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          right-6
+          top-32
+          hidden
+          text-4xl
+          text-cyan-300/20
+
+          md:block
+
+          lg:right-20
+          lg:text-5xl
+        "
       >
         <FaPlus />
       </motion.div>
 
       <motion.div
         animate={{
-          y: [0, -25, 0],
-          rotate: [0, 8, -8, 0],
+          y: [0, -10, 0],
         }}
         transition={{
-          duration: 6,
+          duration: 9,
           repeat: Infinity,
+          ease: "easeInOut",
         }}
-        className="absolute bottom-24 left-24 text-blue-300/10 text-5xl"
+        className="
+          absolute
+          bottom-20
+          left-10
+          hidden
+          text-4xl
+          text-blue-300/10
+
+          lg:block
+        "
       >
         <FaStethoscope />
       </motion.div>
 
       <motion.div
         animate={{
-          y: [0, 20, 0],
+          y: [0, 8, 0],
         }}
         transition={{
-          duration: 5,
+          duration: 11,
           repeat: Infinity,
+          ease: "easeInOut",
         }}
-        className="absolute bottom-28 right-40 text-white/10 text-4xl"
+        className="
+          absolute
+          bottom-24
+          right-12
+          hidden
+          text-3xl
+          text-white/10
+
+          xl:block
+        "
       >
         <FaCapsules />
       </motion.div>
 
-      {/* Grid Pattern */}
+      {/* Grid */}
       <div
-        className="absolute inset-0 opacity-[0.05]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
@@ -113,7 +209,7 @@ export default function FloatingBackground() {
         }}
       />
 
-      {/* Dark Overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/10" />
     </>
   );
