@@ -69,7 +69,7 @@ export default function CTA() {
           </Link>
 
           <a
-            href="https://wa.me/919999999999"
+            href="https://wa.me/919124508591"
             target="_blank"
             rel="noreferrer"
             className="rounded-2xl bg-green-500 px-8 py-4 text-center font-semibold text-white transition hover:-translate-y-1 hover:bg-green-600 hover:shadow-2xl"

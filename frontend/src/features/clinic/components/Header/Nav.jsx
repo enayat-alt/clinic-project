@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "Services", path: "/services" },
+  { name: "Departments", path: "/departments" },
   { name: "About", path: "/about" },
   { name: "Doctor", path: "/doctor" },
-  { name: "Learning", path: "/Learning" },
+  { name: "Learning", path: "/Learningg" },
   { name: "Tests & Services", path: "/tests-services" },
 ];
 

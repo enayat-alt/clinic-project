@@ -9,8 +9,10 @@ import {
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
   { name: "Departments", path: "/departments" },
+  { name: "About", path: "/about" },
+  { name: "Doctor", path: "/doctor" },
+  { name: "Learning", path: "/learningg" },
   { name: "Tests & Services", path: "/tests-services" },
   { name: "Contact", path: "/contact" },
 ];
