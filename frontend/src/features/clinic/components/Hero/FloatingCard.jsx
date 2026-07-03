@@ -80,3 +80,4 @@ export default function FloatingCard({
     </motion.div>
   );
 }
+
