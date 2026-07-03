@@ -1,4 +1,5 @@
 
+
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -9,11 +10,12 @@ const navItems = [
   { name: "Doctor", path: "/doctor" },
   { name: "Learning", path: "/Learningg" },
   { name: "Tests & Services", path: "/tests-services" },
+  { name: "Contacts", path: "/contacts" },
 ];
 
 export default function Nav({ scrolled }) {
   return (
-    <nav className="hidden lg:flex items-center gap-8">
+    <nav className="flex items-center gap-6 xl:gap-8">
       {navItems.map((item) => (
         <NavLink
           key={item.name}

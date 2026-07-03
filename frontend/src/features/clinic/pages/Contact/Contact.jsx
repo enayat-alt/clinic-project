@@ -1,201 +1,130 @@
-import { Link } from "react-router-dom";
+import React from "react";
 
 export default function Contact() {
   return (
-    <div className="bg-[#e5f9f8] min-h-screen">
-
+    <div className="bg-white min-h-screen font-sans">
       {/* Hero Section */}
-      <section className="bg-[#1a504c] py-16 md:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-          <p className="text-gray-200">
-            <Link to="/">Home</Link> / Contact Us
-          </p>
-
+      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center md:text-left">
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-300 bg-white/10 px-3 py-1 rounded-full">
+            Connect With Us
+          </span>
           <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Contact Us
+            Get In Touch
           </h1>
+          <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+            Have a question about our services, insurance partnerships, or want
+            to reach a specific department? We are here to help.
+          </p>
+        </div>
+      </section>
 
-          <p className="mt-6 max-w-3xl text-base leading-8 text-gray-200 md:text-lg">
-            We're here to help. Contact Odisha Polyclinic for appointments,
-            consultations, diagnostic tests, and healthcare information.
+      {/* Quick Contact Info Cards */}
+      <section className="relative -mt-8 px-5 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Card 1: Emergency */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50 text-red-600 font-bold">
+                ⚠️
+              </div>
+              <h3 className="text-lg font-bold text-[#081A33] mb-1">
+                Emergency Call
+              </h3>
+              <p className="text-slate-600 text-sm mb-3">
+                Available 24/7 for urgent care
+              </p>
+              <a
+                href="tel:+916741234567"
+                className="text-sm font-semibold text-[#174A84] hover:underline"
+              >
+                +91 (674) 123-4567
+              </a>
+            </div>
+
+            {/* Card 2: Phone */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#e5f9f8] text-[#1a504c] font-bold">
+                📞
+              </div>
+              <h3 className="text-lg font-bold text-[#081A33] mb-1">
+                OPD Registration
+              </h3>
+              <p className="text-slate-600 text-sm mb-3">
+                Mon - Sat: 8:00 AM - 8:00 PM
+              </p>
+              <a
+                href="tel:+919876543210"
+                className="text-sm font-semibold text-[#174A84] hover:underline"
+              >
+                +91 98765-43210
+              </a>
+            </div>
+
+            {/* Card 3: Email */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-[#081A33] font-bold">
+                ✉️
+              </div>
+              <h3 className="text-lg font-bold text-[#081A33] mb-1">
+                Email Support
+              </h3>
+              <p className="text-slate-600 text-sm mb-3">
+                Expect a reply within 24 hours
+              </p>
+              <a
+                href="mailto:info@odishapolyclinic.com"
+                className="text-sm font-semibold text-[#174A84] hover:underline"
+              >
+                info@odishapolyclinic.com
+              </a>
+            </div>
+
+            {/* Card 4: Location */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-[#081A33] font-bold">
+                📍
+              </div>
+              <h3 className="text-lg font-bold text-[#081A33] mb-1">
+                Our Location
+              </h3>
+              <p className="text-slate-600 text-sm mb-1">
+                Bhubaneswar, Odisha,
+              </p>
+              <p className="text-slate-600 text-xs">
+                Near Main Junction, India
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Full-Width Map Section */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <h2 className="mb-4 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
+            Find Our Medical Center
+          </h2>
+          <p className="mb-12 text-center text-slate-600 max-w-2xl mx-auto">
+            Conveniently situated in the heart of Bhubaneswar, our clinic
+            provides accessible primary and specialized healthcare with
+            dedicated patient parking facilities.
           </p>
 
-        </div>
-      </section>
-
-      {/* Contact Information */}
-      <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid gap-6 lg:grid-cols-3">
-
-            <div className="bg-white p-8 rounded-3xl shadow-md border border-[#cdebea]">
-              <div className="text-4xl mb-4">📞</div>
-
-              <h3 className="text-2xl font-bold text-[#1a504c] mb-3">
-                Call Us
-              </h3>
-
-              <p className="text-gray-600">
-                +91 9124508591
-              </p>
-
-              <p className="text-gray-600 mt-2">
-                Available during clinic hours
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-3xl shadow-md border border-[#cdebea]">
-              <div className="text-4xl mb-4">📧</div>
-
-              <h3 className="text-2xl font-bold text-[#1a504c] mb-3">
-                Email Us
-              </h3>
-
-              <p className="text-gray-600">
-                odishapolyclinic@gmail.com
-              </p>
-
-              <p className="text-gray-600 mt-2">
-                We reply within 24 hours
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-3xl shadow-md border border-[#cdebea]">
-              <div className="text-4xl mb-4">📍</div>
-
-              <h3 className="text-2xl font-bold text-[#1a504c] mb-3">
-                Visit Us
-              </h3>
-
-              <p className="text-gray-600">
-                Bhubaneswar, Odisha, India
-              </p>
-
-              <p className="text-gray-600 mt-2">
-                Easy access and parking available
-              </p>
-            </div>
-
+          {/* Map Frame Container */}
+          {/* Map Frame Container */}
+          <div className="w-full h-[450px] md:h-[550px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl relative group bg-slate-100">
+            <iframe
+              title="Odisha Polyclinic Location Map"
+              src="https://maps.google.com/maps?q=Bhubaneswar,%20Odisha&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-full border-0 grayscale-[15%] contrast-[110%] group-hover:grayscale-0 transition-all duration-500"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
-
         </div>
       </section>
-
-      {/* Contact Form */}
-      <section className="pb-16 md:pb-20">
-        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-[#cdebea] bg-white p-6 shadow-lg sm:p-8 md:p-12">
-
-            <h2 className="mb-4 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
-              Send Us a Message
-            </h2>
-
-            <p className="mb-10 text-center text-gray-600">
-              Have a question? Fill out the form below and our team
-              will get back to you.
-            </p>
-
-            <form className="grid gap-6 md:grid-cols-2">
-
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
-              />
-
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
-              />
-
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                className="border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
-              />
-
-              <input
-                type="text"
-                placeholder="Subject"
-                className="border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
-              />
-
-              <textarea
-                rows="6"
-                placeholder="Write your message..."
-                className="md:col-span-2 border border-[#cdebea] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1a504c]"
-              />
-
-              <button
-                type="submit"
-                className="rounded-xl bg-[#1a504c] py-4 font-semibold text-white transition hover:bg-[#143d3a] md:col-span-2"
-              >
-                Send Message
-              </button>
-
-            </form>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* Opening Hours */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
-
-          <h2 className="mb-8 text-3xl font-bold text-[#1a504c] sm:text-4xl">
-            Opening Hours
-          </h2>
-
-          <div className="rounded-3xl bg-[#e5f9f8] p-6 sm:p-8">
-
-            <div className="space-y-4 text-lg">
-
-              <div className="flex justify-between border-b pb-3">
-                <span>Monday - Saturday</span>
-                <span>8:00 AM - 8:00 PM</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Sunday</span>
-                <span>Emergency Consultation Only</span>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-[#1a504c] p-8 text-center sm:p-10">
-
-            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
-              Need Medical Assistance?
-            </h2>
-
-            <p className="mb-8 text-base text-gray-200 md:text-lg">
-              Book an appointment with our healthcare specialists today.
-            </p>
-
-            <Link
-              to="/appointment"
-              className="inline-block bg-white text-[#1a504c] px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition"
-            >
-              Book Appointment
-            </Link>
-
-          </div>
-
-        </div>
-      </section>
-
     </div>
   );
 }

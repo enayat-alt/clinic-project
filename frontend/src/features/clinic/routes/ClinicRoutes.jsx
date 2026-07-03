@@ -2,7 +2,7 @@ import { lazy } from "react";
 import ClinicLayout from "../layouts/ClinicLayout";
 
 const Home = lazy(() => import("../pages/Home/Home"));
-
+const Learning = lazy(() => import("../pages/Learning/Learning"));
 const About = lazy(() => import("../pages/About/About"));
 
 const Departments = lazy(() => import("../pages/Departments/Departments"));
@@ -18,7 +18,8 @@ const Learningg = lazy(() => import("../pages/Learning/Learning"));
 const Login = lazy(() => import("../pages/Login/Login"));
 
 const Register = lazy(() => import("../pages/Register/Register"));
-import Learning from "./../pages/Learning/Learning";
+const Contacts = lazy(() => import("../pages/Contact/Contact"));
+
 
 export const clinicRoutes = [
   {
@@ -51,6 +52,10 @@ export const clinicRoutes = [
       {
         path: "/Learningg",
         element: <Learning />,
+      },
+       {
+        path: "/contacts",
+        element: <Contacts />,
       },
     ],
   },

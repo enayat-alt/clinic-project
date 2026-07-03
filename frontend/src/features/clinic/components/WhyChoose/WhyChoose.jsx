@@ -79,14 +79,14 @@ export default function WhyChoose() {
               healthcare services for every family.
             </p>
 
-            <motion.img
+            {/* <motion.img
               whileHover={{
                 scale: 1.03,
               }}
               src="/doctor-team.png"
               alt="Doctor Team"
               className="mt-8 w-full rounded-3xl object-cover shadow-2xl sm:mt-12"
-            />
+            /> */}
 
           </motion.div>
 
