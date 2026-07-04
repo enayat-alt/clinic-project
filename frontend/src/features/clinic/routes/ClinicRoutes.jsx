@@ -11,7 +11,7 @@ const TestsServices = lazy(
   () => import("../pages/TestsServices/TestsServices"),
 );
 
-const DoctorSection = lazy(() => import("../pages/Doctor/DoctorSection"));
+const DoctorSection = lazy(() => import("../pages/doctor/DoctorSection"));
 
 const Appointment = lazy(() => import("../pages/Appointment/Appointment"));
 const Learningg = lazy(() => import("../pages/Learning/Learning"));
