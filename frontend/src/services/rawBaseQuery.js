@@ -3,7 +3,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const rawBaseQuery = fetchBaseQuery({
   baseUrl:
     import.meta.env.VITE_API_URL ||
-    "http://localhost:5000/api",
+    "https://clinic-project-7f07.onrender.com/api",
 
   credentials: "include",
 
