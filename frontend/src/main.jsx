@@ -8,26 +8,35 @@ import { store } from "./app/store";
 import { router } from "./routes/AppRoutes";
 import { ThemeProvider } from "./context/ThemeContext";
 
-
 import "./index.css";
-import SessionRestorer from './common/auth/SessionRestorer';
+import SessionRestorer from "./common/auth/SessionRestorer";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
-    <Provider store={store}>
+      <Provider store={store}>
         <SessionRestorer>
-      <Suspense
-        fallback={
-          <div className="min-h-screen flex items-center justify-center bg-[#e5f9f8]">
-            <div className="w-12 h-12 border-4 border-[#1a504c] border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        }
-      >
-        <RouterProvider router={router} />
-      </Suspense>
-      </SessionRestorer>
-    </Provider>
+          <Suspense
+            fallback={
+              <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84]">
+                <div className="flex flex-col items-center">
+                  <div className="h-16 w-16 animate-spin rounded-full border-[5px] border-cyan-400/30 border-t-cyan-300"></div>
+
+                  <h2 className="mt-6 text-xl font-semibold text-white">
+                    Loading...
+                  </h2>
+
+                  <p className="mt-2 text-sm text-slate-300">
+                    Please wait while we prepare your experience.
+                  </p>
+                </div>
+              </div>
+            }
+          >
+            <RouterProvider router={router} />
+          </Suspense>
+        </SessionRestorer>
+      </Provider>
     </ThemeProvider>
-   </React.StrictMode>
+  </React.StrictMode>,
 );
