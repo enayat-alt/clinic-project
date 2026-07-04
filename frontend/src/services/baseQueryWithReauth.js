@@ -8,7 +8,7 @@ import { setCredentials, clearCredentials } from "../app/authSlice";
 const mutex = new Mutex();
 
 const rawBaseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseUrl: import.meta.env.VITE_API_URL || "https://clinic-project-7f07.onrender.com/api",
 
   credentials: "include",
 
