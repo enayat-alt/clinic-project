@@ -116,7 +116,7 @@ export default function Contact() {
           <div className="w-full h-[450px] md:h-[550px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl relative group bg-slate-100">
             <iframe
               title="Odisha Polyclinic Location Map"
-              src="https://maps.google.com/maps?q=Bhubaneswar,%20Odisha&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=Odisha%20Polyclinic%20Bhubaneswar&t=&z=14&ie=UTF8&iwloc=&output=embed"
               className="w-full h-full border-0 grayscale-[15%] contrast-[110%] group-hover:grayscale-0 transition-all duration-500"
               allowFullScreen=""
               loading="lazy"
