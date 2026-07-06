@@ -1,16 +1,19 @@
+
+
 const Appointment = require("../../models/clinic/Appointment");
 
+const {
+  sendAppointmentNotification,
+} = require("../../services/emailService");
 
+// Get All Appointments
 exports.getAll = async (req, res) => {
   try {
-    const page =
-      parseInt(req.query.page) || 1;
+    const page = parseInt(req.query.page) || 1;
 
-    const limit =
-      parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 10;
 
-    const offset =
-      (page - 1) * limit;
+    const offset = (page - 1) * limit;
 
     const { count, rows } =
       await Appointment.findAndCountAll({
@@ -26,9 +29,7 @@ exports.getAll = async (req, res) => {
         page,
         limit,
         total: count,
-        totalPages: Math.ceil(
-          count / limit
-        ),
+        totalPages: Math.ceil(count / limit),
       },
     });
   } catch (error) {
@@ -40,6 +41,7 @@ exports.getAll = async (req, res) => {
     });
   }
 };
+
 // Book Appointment (Public)
 exports.book = async (req, res) => {
   try {
@@ -53,6 +55,7 @@ exports.book = async (req, res) => {
       symptoms,
     } = req.body;
 
+    // Save appointment
     const appointment = await Appointment.create({
       fullName,
       phone,
@@ -63,6 +66,16 @@ exports.book = async (req, res) => {
       symptoms,
       status: "pending",
     });
+
+    // Send email notification to admin
+    try {
+      await sendAppointmentNotification(appointment);
+    } catch (emailError) {
+      console.error(
+        "Failed to send appointment notification:",
+        emailError
+      );
+    }
 
     res.status(201).json({
       success: true,

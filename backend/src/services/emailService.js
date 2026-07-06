@@ -1,26 +1,27 @@
-const nodemailer = require("nodemailer");
+const resend = require("../config/resend");
+const appointmentEmailTemplate = require("../templates/appointmentEmail");
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const sendAppointmentNotification = async (appointment) => {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: process.env.FROM_EMAIL,
+      to: process.env.ADMIN_EMAIL,
+      subject: `New Appointment #${appointment.id} - ${appointment.fullName}`,
+      html: appointmentEmailTemplate(appointment),
+    });
 
-exports.sendEmail = async ({ to, subject, html }) => {
-  await transporter.sendMail({
-    from: `"MediCare" <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-  });
+    if (error) {
+      console.error("Resend Error:", error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.error("Email Service Error:", err);
+    return null;
+  }
 };
 
-exports.sendAppointmentConfirmation = (to, appointment) =>
-  exports.sendEmail({
-    to,
-    subject: "Appointment Confirmed",
-    html: `<h2>Your appointment on ${appointment.date} at ${appointment.time} is confirmed.</h2>`,
-  });
+module.exports = {
+  sendAppointmentNotification,
+};
