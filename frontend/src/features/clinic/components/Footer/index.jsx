@@ -129,7 +129,7 @@ export default function Footer() {
 
               <div className="flex gap-3">
                 <FaMapMarkerAlt className="mt-1 text-cyan-400" />
-                <span className="text-slate-300">Cuttack, Odisha, India</span>
+                <span className="text-slate-300">Bhubaneswar, Odisha, India</span>
               </div>
 
               <div className="flex gap-3">
