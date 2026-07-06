@@ -1,42 +1,56 @@
+import { lazy, Suspense } from "react";
 
 import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer";
-import About from "../About/About";
-import DoctorSection from "../doctor/DoctorSection";
-import Appointment from "../Appointment/Appointment";
-
-import { Link } from "react-router-dom";
 import Hero from "../../components/Hero/Hero";
-import Statistics from "../../components/Statistics/Statistics";
-import Departments from "../../components/Departments/Departments";
-import WhyChoose from "../../components/WhyChoose/WhyChoose";
-import FeaturedDoctor from "../../components/FeaturedDoctor/FeaturedDoctor";
-import PatientReviews from "../../components/PatientReviews/PatientReviews";
-import CTA from "../../components/CTA/CTA";
-export default function Home() {
-  const services = [
-    "General Checkup",
-    "Cardiology",
-    "Dental Care",
-    "Pediatrics",
-  ];
 
+// Lazy Loaded Components
+const FeaturedDoctor = lazy(() =>
+  import("../../components/FeaturedDoctor/FeaturedDoctor")
+);
+
+const CTA = lazy(() =>
+  import("../../components/CTA/CTA")
+);
+
+const Departments = lazy(() =>
+  import("../../components/Departments/Departments")
+);
+
+const WhyChoose = lazy(() =>
+  import("../../components/WhyChoose/WhyChoose")
+);
+
+const PatientReviews = lazy(() =>
+  import("../../components/PatientReviews/PatientReviews")
+);
+
+const Statistics = lazy(() =>
+  import("../../components/Statistics/Statistics")
+);
+
+export default function Home() {
   return (
     <>
       <Header />
 
-      <main className="bg-[#fff] text-[#121414]">
+      <main className="bg-white text-[#121414]">
+        
         <Hero />
 
-        <FeaturedDoctor />
+        
+        <Suspense fallback={null}>
+          <FeaturedDoctor />
 
-        <CTA />
+          <CTA />
 
-        <Departments />
-        <WhyChoose />
-        <PatientReviews />
+          <Departments />
 
-        <Statistics />
+          <WhyChoose />
+
+          <PatientReviews />
+
+          <Statistics />
+        </Suspense>
       </main>
     </>
   );
