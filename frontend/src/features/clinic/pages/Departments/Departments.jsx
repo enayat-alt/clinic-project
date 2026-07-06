@@ -1,281 +1,164 @@
-// import { Link } from "react-router-dom";
-
-// const departments = [
-//   "Physiotherapy",
-//   "General Medicine",
-//   "Chest Medicine (Pulmonologist)",
-//   "Gastrology",
-//   "Diabetes / Thyroid Specialist",
-//   "Skin Department",
-//   "Ear, Nose & Throat (ENT)",
-//   "Orthopedics",
-//   "Neurology",
-//   "Pediatrics",
-//   "Gynaecology",
-//   "Eye Care",
-//   "Minor Surgery",
-//   "Psychiatry",
-//   "Blood, Urine, Sputum & Semen Tests",
-//   "X-Ray, CT Scan, Ultrasound & MRI",
-//   "Scrape Cytology",
-// ];
-
-// export default function Departments() {
-//   return (
-//     <div className="bg-[#e5f9f8] min-h-screen">
-
-//       {/* Hero Section */}
-//       <section className="bg-[#1a504c] py-16 md:py-20 lg:py-24">
-//         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-//           <p className="text-gray-200">
-//             <Link to="/">Home</Link> / Departments
-//           </p>
-
-//           <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-//             Our Departments
-//           </h1>
-
-//           <p className="mt-6 max-w-4xl text-base leading-8 text-gray-200 md:text-lg">
-//             Our clinic offers a range of specialized departments to provide
-//             complete healthcare under one roof. From Physiotherapy and
-//             General Medicine to expert care in Chest Medicine, Gastrology,
-//             Skin, and Diabetes/Thyroid Management, we are committed to
-//             delivering personalized treatment through experienced
-//             specialists for every patient's healthcare needs.
-//           </p>
-
-//         </div>
-//       </section>
-
-//       {/* Departments Grid */}
-//       <section className="py-16 md:py-20">
-//         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-//           <h2 className="mb-4 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
-//             Services & Departments
-//           </h2>
-
-//           <p className="text-center text-gray-600 mb-12">
-//             Comprehensive healthcare services delivered by experienced
-//             specialists and modern medical facilities.
-//           </p>
-
-//           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
-//             {departments.map((department, index) => (
-//               <div
-//                 key={index}
-//                 className="bg-white p-6 rounded-3xl shadow-md border border-[#cdebea] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-//               >
-//                 <div className="w-12 h-12 bg-[#1a504c] rounded-full flex items-center justify-center text-white font-bold mb-4">
-//                   {index + 1}
-//                 </div>
-
-//                 <h3 className="text-xl font-semibold text-[#1a504c]">
-//                   {department}
-//                 </h3>
-
-//                 <p className="text-gray-600 mt-3">
-//                   Professional healthcare services provided by qualified
-//                   specialists using modern diagnostic and treatment methods.
-//                 </p>
-//               </div>
-//             ))}
-
-//           </div>
-
-//         </div>
-//       </section>
-
-//       {/* Why Choose Us */}
-//       <section className="bg-white py-16 md:py-20">
-//         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-//           <h2 className="mb-12 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
-//             Why Choose Odisha Polyclinic?
-//           </h2>
-
-//           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-2xl text-center">
-//               <h3 className="font-bold text-xl mb-2">
-//                 Expert Doctors
-//               </h3>
-//               <p className="text-gray-600">
-//                 Experienced specialists across multiple departments.
-//               </p>
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-2xl text-center">
-//               <h3 className="font-bold text-xl mb-2">
-//                 Modern Diagnostics
-//               </h3>
-//               <p className="text-gray-600">
-//                 Advanced testing and imaging facilities.
-//               </p>
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-2xl text-center">
-//               <h3 className="font-bold text-xl mb-2">
-//                 Affordable Care
-//               </h3>
-//               <p className="text-gray-600">
-//                 Quality healthcare at reasonable costs.
-//               </p>
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-2xl text-center">
-//               <h3 className="font-bold text-xl mb-2">
-//                 Patient First
-//               </h3>
-//               <p className="text-gray-600">
-//                 Compassionate and personalized treatment plans.
-//               </p>
-//             </div>
-
-//           </div>
-
-//         </div>
-//       </section>
-
-//       {/* CTA Section */}
-//       <section className="py-16 md:py-20">
-//         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-//           <div className="rounded-3xl bg-[#1a504c] p-8 text-center sm:p-10">
-
-//             <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
-//               Need Expert Medical Consultation?
-//             </h2>
-
-//             <p className="mb-8 text-base text-gray-200 md:text-lg">
-//               Book an appointment today and get personalized healthcare
-//               from our experienced specialists.
-//             </p>
-
-//             <Link
-//               to="/appointment"
-//               className="inline-block bg-white text-[#1a504c] px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition"
-//             >
-//               Book Appointment
-//             </Link>
-
-//           </div>
-
-//         </div>
-//       </section>
-
-//     </div>
-//   );
-// }
-
-
-
 
 import { Link } from "react-router-dom";
 
 const departments = [
-  "Physiotherapy",
-  "General Medicine",
-  "Chest Medicine (Pulmonologist)",
-  "Gastrology",
-  "Diabetes / Thyroid Specialist",
-  "Skin Department",
-  "Ear, Nose & Throat (ENT)",
-  "Orthopedics",
-  "Neurology",
-  "Pediatrics",
-  "Gynaecology",
-  "Eye Care",
-  "Minor Surgery",
-  "Psychiatry",
-  "Blood, Urine, Sputum & Semen Tests",
-  "X-Ray, CT Scan, Ultrasound & MRI",
-  "Scrape Cytology",
+  {
+    title: "Physiotherapy",
+    description:
+      "Personalized rehabilitation, pain management, post-surgical recovery, and mobility improvement programs delivered by experienced physiotherapists.",
+  },
+  {
+    title: "General Medicine",
+    description:
+      "Comprehensive diagnosis, treatment, preventive care, and routine health checkups for patients of all age groups.",
+  },
+  {
+    title: "Chest Medicine (Pulmonologist)",
+    description:
+      "Expert diagnosis and treatment for asthma, COPD, pneumonia, lung infections, allergies, and other respiratory disorders.",
+  },
+  {
+    title: "Gastrology",
+    description:
+      "Specialized care for digestive disorders, acidity, ulcers, liver diseases, constipation, and gastrointestinal conditions.",
+  },
+  {
+    title: "Diabetes / Thyroid Specialist",
+    description:
+      "Advanced management of diabetes, thyroid disorders, hormonal imbalance, and lifestyle-related metabolic diseases.",
+  },
+  {
+    title: "Skin Department",
+    description:
+      "Treatment for acne, eczema, psoriasis, allergies, fungal infections, pigmentation, and various skin and hair conditions.",
+  },
+  {
+    title: "Ear, Nose & Throat (ENT)",
+    description:
+      "Complete ENT care for sinus problems, hearing loss, throat infections, nasal disorders, and voice-related conditions.",
+  },
+  {
+    title: "Orthopedics",
+    description:
+      "Diagnosis and treatment of fractures, arthritis, joint pain, sports injuries, spine disorders, and bone-related conditions.",
+  },
+  {
+    title: "Neurology",
+    description:
+      "Expert neurological care for migraines, epilepsy, stroke, nerve disorders, Parkinson's disease, and other neurological conditions.",
+  },
+  {
+    title: "Pediatrics",
+    description:
+      "Dedicated healthcare for infants, children, and adolescents including growth monitoring, vaccinations, and illness management.",
+  },
+  {
+    title: "Gynaecology",
+    description:
+      "Comprehensive women's healthcare including pregnancy care, menstrual disorders, infertility consultation, and reproductive health.",
+  },
+  {
+    title: "Eye Care",
+    description:
+      "Comprehensive eye examinations, vision correction, cataract evaluation, glaucoma screening, and treatment of eye diseases.",
+  },
+  {
+    title: "Minor Surgery",
+    description:
+      "Safe outpatient surgical procedures including wound care, cyst removal, abscess drainage, and minor surgical treatments.",
+  },
+  {
+    title: "Psychiatry",
+    description:
+      "Professional mental healthcare for anxiety, depression, stress, sleep disorders, emotional well-being, and behavioral conditions.",
+  },
+  {
+    title: "Blood, Urine, Sputum & Semen Tests",
+    description:
+      "Accurate laboratory investigations with modern diagnostic equipment and timely reporting for comprehensive health assessment.",
+  },
+  {
+    title: "X-Ray, CT Scan, Ultrasound & MRI",
+    description:
+      "Advanced diagnostic imaging services using modern equipment for accurate diagnosis and effective treatment planning.",
+  },
+  {
+    title: "Scrape Cytology",
+    description:
+      "Microscopic examination of cells for early disease detection, cancer screening, and accurate pathological diagnosis.",
+  },
 ];
 
 export default function Departments() {
   return (
     <div className="bg-white min-h-screen">
-
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-         
-
-          <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Our Departments
           </h1>
 
           <p className="mt-6 max-w-4xl text-base leading-8 text-slate-300 md:text-lg">
-            Our clinic offers a range of specialized departments to provide
-            complete healthcare under one roof. From Physiotherapy and
-            General Medicine to expert care in Chest Medicine, Gastrology,
-            Skin, and Diabetes/Thyroid Management, we are committed to
-            delivering personalized treatment through experienced
-            specialists for every patient's healthcare needs.
+            Odisha Polyclinic offers comprehensive healthcare services through
+            experienced specialists and modern diagnostic facilities. Our
+            patient-first approach ensures quality treatment, compassionate
+            care, and personalized healthcare solutions under one roof.
           </p>
-
         </div>
       </section>
 
       {/* Departments Grid */}
       <section className="bg-slate-50 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
           <h2 className="mb-4 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
             Services & Departments
           </h2>
 
           <p className="mb-12 text-center text-slate-600">
-            Comprehensive healthcare services delivered by experienced
-            specialists and modern medical facilities.
+            Explore our specialized medical departments designed to provide
+            complete healthcare solutions for every stage of life.
           </p>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
             {departments.map((department, index) => (
               <div
-                key={index}
+                key={department.title}
                 className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#081A33] font-bold text-white">
-                  {index + 1}
+                  {String(index + 1).padStart(2, "0")}
                 </div>
 
                 <h3 className="text-xl font-semibold text-[#081A33]">
-                  {department}
+                  {department.title}
                 </h3>
 
-                <p className="mt-3 text-slate-600">
-                  Professional healthcare services provided by qualified
-                  specialists using modern diagnostic and treatment methods.
+                <p className="mt-3 leading-7 text-slate-600">
+                  {department.description}
                 </p>
               </div>
             ))}
-
           </div>
-
         </div>
       </section>
 
       {/* Why Choose Us */}
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
           <h2 className="mb-12 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
             Why Choose Odisha Polyclinic?
           </h2>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center shadow-md transition hover:shadow-xl">
               <h3 className="mb-2 text-xl font-bold text-[#081A33]">
                 Expert Doctors
               </h3>
+
               <p className="text-slate-600">
-                Experienced specialists across multiple departments.
+                Highly experienced specialists dedicated to providing quality
+                medical care across multiple specialties.
               </p>
             </div>
 
@@ -283,8 +166,10 @@ export default function Departments() {
               <h3 className="mb-2 text-xl font-bold text-[#081A33]">
                 Modern Diagnostics
               </h3>
+
               <p className="text-slate-600">
-                Advanced testing and imaging facilities.
+                Advanced laboratory and imaging facilities for fast and accurate
+                diagnosis.
               </p>
             </div>
 
@@ -292,8 +177,10 @@ export default function Departments() {
               <h3 className="mb-2 text-xl font-bold text-[#081A33]">
                 Affordable Care
               </h3>
+
               <p className="text-slate-600">
-                Quality healthcare at reasonable costs.
+                Quality healthcare services delivered at affordable and
+                transparent pricing.
               </p>
             </div>
 
@@ -301,13 +188,13 @@ export default function Departments() {
               <h3 className="mb-2 text-xl font-bold text-[#081A33]">
                 Patient First
               </h3>
+
               <p className="text-slate-600">
-                Compassionate and personalized treatment plans.
+                Compassionate treatment, personalized care, and complete support
+                throughout your healthcare journey.
               </p>
             </div>
-
           </div>
-
         </div>
       </section>
 
@@ -315,14 +202,13 @@ export default function Departments() {
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-gradient-to-r from-[#081A33] via-[#0F2D56] to-[#174A84] p-8 text-center shadow-2xl sm:p-10">
-
             <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               Need Expert Medical Consultation?
             </h2>
 
             <p className="mb-8 text-base text-slate-300 md:text-lg">
-              Book an appointment today and get personalized healthcare
-              from our experienced specialists.
+              Schedule your appointment today and receive personalized medical
+              care from our experienced healthcare professionals.
             </p>
 
             <Link
@@ -331,12 +217,9 @@ export default function Departments() {
             >
               Book Appointment
             </Link>
-
           </div>
-
         </div>
       </section>
-
     </div>
   );
 }

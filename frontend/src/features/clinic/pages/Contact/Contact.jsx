@@ -35,10 +35,10 @@ export default function Contact() {
                 Available 24/7 for urgent care
               </p>
               <a
-                href="tel:+916741234567"
+                href="tel:+918114984201"
                 className="text-sm font-semibold text-[#174A84] hover:underline"
               >
-                +91 (674) 123-4567
+                +91 8114984201
               </a>
             </div>
 
@@ -54,10 +54,10 @@ export default function Contact() {
                 Mon - Sat: 8:00 AM - 8:00 PM
               </p>
               <a
-                href="tel:+919876543210"
+                href="tel:+918114984201"
                 className="text-sm font-semibold text-[#174A84] hover:underline"
               >
-                +91 98765-43210
+                +91 8114984201
               </a>
             </div>
 
@@ -92,7 +92,8 @@ export default function Contact() {
                 Bhubaneswar, Odisha,
               </p>
               <p className="text-slate-600 text-xs">
-                Near Main Junction, India
+                plot no. 119, Sundarpada Road, Kapilprasad, Azad Nagar, Bhubaneswar Infront of Padmavati Convention Infront of Ex corporator home, Azad Nagar, Sundarpada, Bhubaneswar, Ebaranga, Odisha 751002, India
+
               </p>
             </div>
           </div>

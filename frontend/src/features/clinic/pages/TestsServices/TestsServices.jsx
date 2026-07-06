@@ -1,183 +1,143 @@
 
-// import { Link } from "react-router-dom";
-
-// const services = [
-//   "Physiotherapy",
-//   "ECG",
-//   "Eye Test",
-//   "Ear Test",
-//   "PFT",
-//   "X-Ray",
-//   "CT Scan",
-//   "MRI",
-//   "Ultrasound",
-//   "EEG",
-// ];
-
-// export default function TestsServices() {
-//   return (
-//     <div className="bg-[#e5f9f8]">
-
-//       {/* Hero Section */}
-//       <section className="bg-[#e5f9f8] py-16 md:py-20 lg:py-24">
-//         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-//           <p className="text-gray-600">
-//             <Link to="/">Home</Link> / Tests & Services
-//           </p>
-
-//           <h1 className="mt-3 text-3xl font-bold text-[#1a504c] sm:text-4xl lg:text-5xl">
-//             Lab and Tests
-//           </h1>
-
-//           <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600 md:text-lg">
-//             Our clinic provides a wide range of diagnostic tests and medical
-//             services to support accurate diagnosis and effective treatment.
-//             From pathology tests to routine health screenings, we use modern
-//             equipment to ensure reliable results. Convenient, affordable,
-//             and patient-focused services—all under one roof.
-//           </p>
-//         </div>
-//       </section>
-
-//       {/* Services Section */}
-//       <section className="py-16 md:py-20">
-//         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-//           <h2 className="mb-12 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
-//             Our Services
-//           </h2>
-
-//           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-//             {services.map((service, index) => (
-//               <div
-//                 key={index}
-//                 className="bg-white shadow-md rounded-2xl p-6 border border-[#cdebea] hover:shadow-xl transition"
-//               >
-//                 <h3 className="text-xl font-semibold text-[#1a504c]">
-//                   {service}
-//                 </h3>
-
-//                 <p className="text-gray-600 mt-3">
-//                   Professional and reliable {service.toLowerCase()} services
-//                   provided by experienced healthcare specialists.
-//                 </p>
-//               </div>
-//             ))}
-
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* Why Choose Us */}
-//       <section className="bg-white py-16 md:py-20">
-//         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-//           <h2 className="mb-10 text-center text-3xl font-bold text-[#1a504c] sm:text-4xl">
-//             Why Choose Odisha Polyclinic?
-//           </h2>
-
-//           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-xl shadow">
-//               Modern Diagnostic Equipment
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-xl shadow">
-//               Experienced Medical Professionals
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-xl shadow">
-//               Fast & Accurate Reports
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-xl shadow">
-//               Affordable Healthcare Services
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-xl shadow">
-//               Patient-Centered Care
-//             </div>
-
-//             <div className="bg-[#e5f9f8] p-6 rounded-xl shadow">
-//               Easy Appointment Booking
-//             </div>
-
-//           </div>
-//         </div>
-//       </section>
-  
-
-//     </div>
-//   );
-// }
-
-
-
 import { Link } from "react-router-dom";
 
 const services = [
-  "Physiotherapy",
-  "ECG",
-  "Eye Test",
-  "Ear Test",
-  "PFT",
-  "X-Ray",
-  "CT Scan",
-  "MRI",
-  "Ultrasound",
-  "EEG",
+  {
+    title: "Physiotherapy",
+    description:
+      "Comprehensive rehabilitation, pain management, mobility improvement, and post-injury recovery guided by experienced physiotherapists.",
+  },
+  {
+    title: "ECG",
+    description:
+      "Accurate electrocardiogram testing to evaluate heart rhythm, detect cardiac abnormalities, and monitor overall heart health.",
+  },
+  {
+    title: "Eye Test",
+    description:
+      "Complete vision examinations including eyesight assessment, eye pressure checks, and early detection of eye diseases.",
+  },
+  {
+    title: "Ear Test",
+    description:
+      "Professional hearing assessments and ear examinations for diagnosing hearing loss and ear-related disorders.",
+  },
+  {
+    title: "PFT (Pulmonary Function Test)",
+    description:
+      "Advanced lung function testing to diagnose asthma, COPD, allergies, and other respiratory conditions accurately.",
+  },
+  {
+    title: "X-Ray",
+    description:
+      "Digital X-ray imaging for accurate diagnosis of fractures, chest conditions, joint problems, and bone disorders.",
+  },
+  {
+    title: "CT Scan",
+    description:
+      "High-resolution CT scans for detailed imaging of internal organs, bones, blood vessels, and soft tissues.",
+  },
+  {
+    title: "MRI",
+    description:
+      "Advanced MRI scans providing detailed images of the brain, spine, joints, muscles, and internal soft tissues.",
+  },
+  {
+    title: "Ultrasound",
+    description:
+      "Safe and non-invasive ultrasound imaging for pregnancy care, abdominal examinations, and organ evaluation.",
+  },
+  {
+    title: "EEG",
+    description:
+      "Electroencephalogram testing to monitor brain activity and assist in diagnosing epilepsy and neurological disorders.",
+  },
+];
+
+const whyChooseUs = [
+  {
+    title: "Modern Diagnostic Equipment",
+    description:
+      "Advanced medical technology ensures precise diagnoses and dependable results.",
+  },
+  {
+    title: "Experienced Medical Professionals",
+    description:
+      "Our skilled doctors and technicians provide quality care with years of clinical experience.",
+  },
+  {
+    title: "Fast & Accurate Reports",
+    description:
+      "Receive timely diagnostic reports to support quicker treatment decisions.",
+  },
+  {
+    title: "Affordable Healthcare Services",
+    description:
+      "Quality diagnostic services offered at transparent and budget-friendly prices.",
+  },
+  {
+    title: "Patient-Centered Care",
+    description:
+      "Every patient receives compassionate attention and personalized healthcare support.",
+  },
+  {
+    title: "Easy Appointment Booking",
+    description:
+      "Book diagnostic tests quickly through our simple and convenient appointment system.",
+  },
 ];
 
 export default function TestsServices() {
   return (
-    <div className="bg-white">
-
+    <div className="bg-white min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-       
-
-          <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Lab and Tests
+          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            Lab & Diagnostic Services
           </h1>
 
-          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
-            Our clinic provides a wide range of diagnostic tests and medical
-            services to support accurate diagnosis and effective treatment.
-            From pathology tests to routine health screenings, we use modern
-            equipment to ensure reliable results. Convenient, affordable,
-            and patient-focused services—all under one roof.
+          <p className="mt-6 max-w-4xl text-base leading-8 text-slate-300 md:text-lg">
+            Odisha Polyclinic offers a comprehensive range of laboratory tests
+            and diagnostic services using modern equipment and experienced
+            healthcare professionals. Our focus is to deliver accurate results,
+            timely reporting, and quality patient care to support effective
+            diagnosis and treatment.
           </p>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services */}
       <section className="bg-slate-50 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-          <h2 className="mb-12 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
-            Our Services
+          <h2 className="mb-4 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
+            Our Diagnostic Services
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p className="mb-12 text-center text-slate-600">
+            Reliable diagnostic solutions delivered with precision, accuracy,
+            and patient-focused care.
+          </p>
 
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
               <div
-                key={index}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                key={service.title}
+                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
               >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#081A33] font-bold text-white">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+
                 <h3 className="text-xl font-semibold text-[#081A33]">
-                  {service}
+                  {service.title}
                 </h3>
 
-                <p className="mt-3 text-slate-600">
-                  Professional and reliable {service.toLowerCase()} services
-                  provided by experienced healthcare specialists.
+                <p className="mt-3 leading-7 text-slate-600">
+                  {service.description}
                 </p>
               </div>
             ))}
-
           </div>
         </div>
       </section>
@@ -185,41 +145,51 @@ export default function TestsServices() {
       {/* Why Choose Us */}
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-
-          <h2 className="mb-10 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
+          <h2 className="mb-12 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
             Why Choose Odisha Polyclinic?
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {whyChooseUs.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                <h3 className="mb-3 text-xl font-semibold text-[#081A33]">
+                  {item.title}
+                </h3>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition hover:shadow-xl">
-              Modern Diagnostic Equipment
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition hover:shadow-xl">
-              Experienced Medical Professionals
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition hover:shadow-xl">
-              Fast & Accurate Reports
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition hover:shadow-xl">
-              Affordable Healthcare Services
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition hover:shadow-xl">
-              Patient-Centered Care
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-md transition hover:shadow-xl">
-              Easy Appointment Booking
-            </div>
-
+                <p className="leading-7 text-slate-600">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-gradient-to-r from-[#081A33] via-[#0F2D56] to-[#174A84] p-8 text-center shadow-2xl sm:p-10">
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+              Need a Diagnostic Test?
+            </h2>
+
+            <p className="mb-8 text-base text-slate-300 md:text-lg">
+              Schedule your diagnostic test today and receive accurate reports
+              with expert medical support from Odisha Polyclinic.
+            </p>
+
+            <Link
+              to="/appointment"
+              className="inline-block rounded-xl bg-white px-8 py-4 font-semibold text-[#081A33] transition hover:bg-slate-100"
+            >
+              Book Appointment
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
