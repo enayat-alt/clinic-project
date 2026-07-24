@@ -1,70 +1,59 @@
+
 import { Link } from "react-router-dom";
-import { FaHeartbeat } from "react-icons/fa";
 
 export default function Logo({ scrolled }) {
   return (
-    <Link to="/" className="flex items-center gap-3 select-none">
-      {/* Logo Icon */}
-      <div className="relative flex-shrink-0">
-        {/* Glow */}
-        <div
-          className={`absolute inset-0 rounded-full blur-xl transition-colors duration-300 ${
-            scrolled ? "bg-cyan-400 opacity-40" : "bg-white opacity-30"
-          }`}
+    <Link to="/" className="flex items-center gap-3 select-none group py-1">
+      {/* Small Side Medical Image Logo (Left Side, Slightly Larger) */}
+      <div className="flex-shrink-0">
+        <img
+          src="/medicallogo.webp"
+          alt="Odisha Polyclinic Medical Logo"
+          className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
         />
-
-        {/* Logo Container - Kept at exact h-12 w-12 */}
-        <div
-          className={`relative flex h-12 w-12 items-center justify-center rounded-2xl shadow-lg transition-colors duration-300 ${
-            scrolled
-              ? "bg-gradient-to-br from-[#0F4C81] to-[#081A33]"
-              : "bg-white/20 backdrop-blur-md border border-white/20"
-          }`}
-        >
-          <FaHeartbeat className="text-xl text-white" />
-        </div>
       </div>
 
-      {/* Text Area */}
-      <div className="flex flex-col justify-center leading-none">
+
+      <div className="flex flex-col leading-none">
         
-        {/* Title Container - Changed to inline-flex with a tiny gap to keep TM close */}
-        <div className="inline-flex items-start gap-0.5 mb-1">
-          <h2
-            className={`text-xl font-extrabold tracking-wide transition-colors duration-300 ${
-              scrolled ? "text-[#081A33]" : "text-white"
+        {/* Row 1: ODISHA (Big Main Title) + TM Badge */}
+        <div className="flex items-start">
+          <span
+            className={`font-serif text-[20px] font-black tracking-[0.16em] uppercase transition-colors duration-300 ${
+              scrolled ? "text-[#1A3B5D]" : "text-[#E5C378]"
             }`}
           >
-            Odisha
-          </h2>
-          
-          {/* Circled TM Mark - Placed tightly at the top right of the text stream */}
+            ODISHA
+          </span>
+
+         
           <span
-            className={`text-[5.5px] font-bold border rounded-full h-3 w-3 flex-shrink-0 flex items-center justify-center tracking-tighter transition-colors duration-300 mt-0.5 ${
-              scrolled ? "text-[#081A33] border-[#081A33]" : "text-white/80 border-white/40"
+            className={`ml-1 mt-0.5 flex items-center justify-center w-2.5 h-2.5 rounded-full border border-current text-[4.5px] font-sans font-extrabold leading-none transition-colors duration-300 ${
+              scrolled ? "text-[#1A3B5D]" : "text-[#E5C378]"
             }`}
           >
             TM
           </span>
         </div>
 
-        {/* Subtitle */}
-        <p
-          className={`text-[10px] uppercase tracking-[3px] mb-1 transition-colors duration-300 ${
-            scrolled ? "text-slate-500" : "text-white/70"
+       
+        <span
+          className={`font-serif text-[11px] font-bold tracking-[0.22em] uppercase mt-0.5 transition-colors duration-300 ${
+            scrolled ? "text-[#1A3B5D]" : "text-[#E5C378]"
           }`}
         >
           POLYCLINIC
-        </p>
+        </span>
 
-        {/* Tagline */}
+    
         <span
-          className={`text-[7px] tracking-tight whitespace-nowrap italic transition-colors duration-300 ${
-            scrolled ? "text-slate-400" : "text-white/50"
+          className={`text-[6.5px] font-sans font-bold uppercase tracking-[0.2em] mt-1 transition-colors duration-300 ${
+            scrolled ? "text-[#1A3B5D]/80" : "text-[#F2DA9B]"
           }`}
         >
-          Bhubaneswar's Best Health Clinic
+          BHUBANESWAR'S BEST HEALTH CLINIC
         </span>
+
       </div>
     </Link>
   );
