@@ -101,7 +101,7 @@ export default function FeaturedDoctor() {
 
             {/* Doctor */}
             <img
-              src="/doctor.png"
+              src="/doctor.webp"
               alt="Doctor"
               className="relative z-10 w-full max-w-[260px] object-contain sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px]"
             />

@@ -29,7 +29,7 @@ export default function DoctorSection() {
             <div className="flex justify-center">
               <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-xl">
                 <img
-                  src="Drfaraz.jpg"
+                  src="Drfaraz.webp"
                   alt="Dr. Shaik Faraz Ahmmed"
                   className="w-full max-w-md rounded-2xl object-cover"
                 />
