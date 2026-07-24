@@ -131,7 +131,7 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              src="/doctor.png"
+              src="/doctor.webp"
               alt="Doctor"
               className="relative z-20 w-full max-w-[260px] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,.45)] sm:max-w-[340px] md:max-w-[420px] lg:max-w-[500px] xl:max-w-[560px]"
             />

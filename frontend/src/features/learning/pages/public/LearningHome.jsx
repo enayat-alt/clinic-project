@@ -89,7 +89,7 @@ export default function LearningHome() {
 
             <div className="flex justify-center">
               <img
-                src="/learning.png"
+                src="/learning.webp"
                 alt="Learning"
                 className="w-full max-w-lg"
               />
