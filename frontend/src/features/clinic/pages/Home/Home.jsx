@@ -41,15 +41,16 @@ export default function Home() {
         <Suspense fallback={<div className="min-h-[1200px] bg-slate-50 animate-pulse" />}>
           <FeaturedDoctor />
 
-          <CTA />
+          
 
           <Departments />
 
-          <WhyChoose />
+        
 
           <PatientReviews />
 
-          <Statistics />
+          <CTA />
+            <WhyChoose />
         </Suspense>
       </main>
     </>

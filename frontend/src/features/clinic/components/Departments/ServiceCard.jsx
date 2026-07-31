@@ -1,46 +1,37 @@
+
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
 
 export default function ServiceCard({
   icon,
   title,
-  description,
+  bgColor = "bg-blue-100/70",
+  textColor = "text-[#103B70]",
+  circleBg = "bg-white/80",
   delay = 0,
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
-      whileHover={{
-        y: -10,
-        scale: 1.03,
-      }}
-      className="group relative overflow-hidden rounded-3xl bg-white p-8 border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500"
+      transition={{ duration: 0.3, delay }}
+      whileHover={{ y: -4, scale: 1.02 }}
+      className={`group relative flex h-48 w-32 shrink-0 flex-col justify-between overflow-hidden rounded-2xl p-3.5 transition-all duration-300 ${bgColor} font-jakarta cursor-pointer shadow-xs`}
     >
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-0 group-hover:opacity-100 transition duration-500" />
+      {/* Title at the Top */}
+      <h3 className={`text-xs font-bold tracking-tight ${textColor}`}>
+        {title}
+      </h3>
 
-      <div className="relative z-10">
-
-        <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#081A33] text-2xl text-white transition duration-300 group-hover:rotate-6 sm:h-16 sm:w-16 sm:text-3xl">
-          {icon}
+      {/* Centered Circular Background for React Icons */}
+      <div className="flex flex-1 items-center justify-center">
+        <div
+          className={`flex h-20 w-20 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-105 ${circleBg} shadow-xs`}
+        >
+          <div className={`text-2xl ${textColor}`}>
+            {icon}
+          </div>
         </div>
-
-        <h3 className="text-xl font-bold text-[#081A33] sm:text-2xl">
-          {title}
-        </h3>
-
-        <p className="mt-4 text-slate-600 leading-7">
-          {description}
-        </p>
-
-        <button className="mt-8 flex items-center gap-2 text-blue-700 font-semibold group-hover:gap-4 transition-all">
-          Learn More
-          <FaArrowRight />
-        </button>
-
       </div>
     </motion.div>
   );

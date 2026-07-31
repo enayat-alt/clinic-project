@@ -1,27 +1,23 @@
-
-
 export default function DoctorSection() {
   return (
-    <main>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] pt-36 pb-24">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <span className="font-semibold uppercase tracking-[3px] text-cyan-300">
+    <main className="bg-slate-50 min-h-screen">
+      {/* Blue Top Header Banner */}
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 bg-[#081A33] text-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[3px] text-cyan-300">
             15+ Years of Experience
           </span>
-
-          <h1 className="mt-4 text-5xl font-bold text-white">
-            Meet Our Doctor
+          <h1 className="mt-2 text-3xl sm:text-4xl font-normal tracking-tight text-white">
+            Meet Our Lead Doctor
           </h1>
-
-          <p className="mt-4 text-xl font-semibold text-slate-200">
-            Dr. Shaik Faraz Ahmmed
+          <p className="mt-3 text-sm sm:text-base font-normal tracking-tight text-slate-300 max-w-2xl mx-auto">
+            Dr. Shaik Faraz Ahmmed — Consultant Physician & Head Consultant at Odisha Polyclinic™
           </p>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="bg-white py-20">
+      {/* Content Section */}
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
 
