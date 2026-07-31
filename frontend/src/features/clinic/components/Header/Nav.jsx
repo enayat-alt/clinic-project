@@ -1,5 +1,6 @@
 
 
+
 // import { NavLink } from "react-router-dom";
 // import { motion } from "framer-motion";
 
@@ -21,7 +22,7 @@
 //           key={item.name}
 //           to={item.path}
 //           className={({ isActive }) =>
-//             `relative text-[15px] font-semibold transition-colors duration-300 ${
+//             `relative text-[13px] font-normal tracking-tight transition-colors duration-300 ${
 //               isActive
 //                 ? scrolled
 //                   ? "text-[#081A33]"
@@ -57,9 +58,7 @@
 //   );
 // }
 
-
-
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const navItems = [
@@ -73,6 +72,14 @@ const navItems = [
 ];
 
 export default function Nav({ scrolled }) {
+  const location = useLocation();
+  
+  // Check if current route is Home page
+  const isHomePage = location.pathname === "/";
+
+  // Force "scrolled" behavior (dark text) for ALL pages except Home
+  const forceDarkTheme = scrolled || !isHomePage;
+
   return (
     <nav className="flex items-center gap-6 xl:gap-8">
       {navItems.map((item) => (
@@ -80,12 +87,12 @@ export default function Nav({ scrolled }) {
           key={item.name}
           to={item.path}
           className={({ isActive }) =>
-            `relative text-[13px] font-normal tracking-tight transition-colors duration-300 ${
+            `relative text-[13px] font-medium tracking-tight transition-colors duration-300 ${
               isActive
-                ? scrolled
+                ? forceDarkTheme
                   ? "text-[#081A33]"
                   : "text-white"
-                : scrolled
+                : forceDarkTheme
                 ? "text-slate-600 hover:text-[#081A33]"
                 : "text-white/80 hover:text-white"
             }`
@@ -99,7 +106,7 @@ export default function Nav({ scrolled }) {
                 <motion.span
                   layoutId="activeNav"
                   className={`absolute left-0 -bottom-1 h-[3px] w-full rounded-full ${
-                    scrolled ? "bg-blue-600" : "bg-white"
+                    forceDarkTheme ? "bg-[#081A33]" : "bg-white"
                   }`}
                   transition={{
                     type: "spring",
