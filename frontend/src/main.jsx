@@ -20,19 +20,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             fallback={
               <div className="flex min-h-screen items-center justify-center bg-slate-50/50 font-sans antialiased selection:bg-cyan-500 selection:text-white">
                 <div className="flex flex-col items-center px-6 py-10 text-center">
-                  {/* Modern Pulse Ring Loader */}
+                 
                   <div className="relative flex items-center justify-center">
-                    {/* Subtle Outer Glow */}
+                    
                     <div className="absolute h-16 w-16 animate-ping rounded-full bg-cyan-500/20 duration-1000" />
 
-                    {/* Inner Animated Ring */}
+                    
                     <div className="h-14 w-14 animate-spin rounded-full border-[3.5px] border-slate-200 border-t-[#2a687d] border-r-[#2a687d]" />
 
-                    {/* Center Brand Dot */}
+                    
                     <div className="absolute h-3 w-3 rounded-full bg-[#2a687d]" />
                   </div>
 
-                  {/* Clean Modern Typography */}
                   <h2 className="mt-8 text-lg font-medium tracking-tight text-slate-900">
                     Preparing your experience
                   </h2>
