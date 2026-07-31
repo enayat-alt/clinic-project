@@ -123,11 +123,7 @@ export default function Contact() {
             <h2 className="text-3xl font-bold tracking-tight text-[#081A33] sm:text-4xl">
               Find Our Medical Center
             </h2>
-            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-
-http://googleusercontent.com/map_location_reference/1
-              Conveniently situated in [Odisha Polyclinic™ (ଓଡିଶା ପଲିକ୍ଲିନିକ୍)](http://googleusercontent.com/map_location_reference/0) in Bhubaneswar, our clinic provides accessible primary and specialized healthcare with dedicated patient parking facilities.
-            </p>
+        
           </div>
 
           {/* Map Frame Container */}

@@ -1,340 +1,209 @@
-// import { Link } from "react-router-dom";
-// import { motion } from "framer-motion";
-// import {
-//   FaFacebookF,
-//   FaInstagram,
-//   FaLinkedinIn,
-//   FaYoutube,
-//   FaPhoneAlt,
-//   FaEnvelope,
-//   FaMapMarkerAlt,
-//   FaClock,
-//   FaHeartbeat,
-// } from "react-icons/fa";
-
-// const quickLinks = [
-//   { name: "Home", path: "/" },
-//   { name: "About", path: "/about" },
-//   { name: "Services", path: "/services" },
-//   { name: "Doctor", path: "/doctor" },
-//   { name: "Reviews", path: "/reviews" },
-//   { name: "Contact", path: "/contact" },
-// ];
-
-// const services = [
-//   "General Medicine",
-//   "Cardiology",
-//   "Pediatrics",
-//   "Laboratory",
-//   "Health Checkup",
-// ];
-
-// const socials = [
-//   { icon: <FaFacebookF />, link: "#" },
-//   { icon: <FaInstagram />, link: "#" },
-//   { icon: <FaLinkedinIn />, link: "#" },
-//   { icon: <FaYoutube />, link: "#" },
-// ];
-
-// export default function Footer() {
-//   return (
-//     <footer className="bg-[#081A33] text-white">
-//       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8 md:py-20 lg:py-24">
-//         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-4">
-//           <motion.div
-//             initial={{ opacity: 0, y: 30 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//           >
-//             <div className="flex items-center gap-3">
-//               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600">
-//                 <FaHeartbeat className="text-xl" />
-//               </div>
-
-//               <div>
-//                 <h2 className="text-2xl font-bold">Odisha</h2>
-//                 <p className="text-sm uppercase tracking-[4px] text-slate-300">Polyclinic</p>
-//               </div>
-//             </div>
-
-//             <p className="mt-6 text-slate-300 leading-7">
-//               Compassionate healthcare with experienced medical professionals,
-//               modern facilities, and patient-first care.
-//             </p>
-
-//             <div className="mt-8 flex flex-wrap gap-4">
-//               {socials.map((item, index) => (
-//                 <motion.a
-//                   key={index}
-//                   href={item.link}
-//                   whileHover={{ y: -5, scale: 1.1 }}
-//                   className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition hover:bg-cyan-500"
-//                 >
-//                   {item.icon}
-//                 </motion.a>
-//               ))}
-//             </div>
-//           </motion.div>
-
-//           <motion.div
-//             initial={{ opacity: 0, y: 30 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//           >
-//             <h3 className="mb-6 text-xl font-semibold">Quick Links</h3>
-//             <div className="space-y-4">
-//               {quickLinks.map((link) => (
-//                 <Link
-//                   key={link.name}
-//                   to={link.path}
-//                   className="block text-slate-300 transition hover:text-cyan-400"
-//                 >
-//                   {link.name}
-//                 </Link>
-//               ))}
-//             </div>
-//           </motion.div>
-
-//           <motion.div
-//             initial={{ opacity: 0, y: 30 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//           >
-//             <h3 className="mb-6 text-xl font-semibold">Services</h3>
-//             <div className="space-y-4">
-//               {services.map((service) => (
-//                 <p key={service} className="cursor-pointer text-slate-300 transition hover:text-cyan-400">
-//                   {service}
-//                 </p>
-//               ))}
-//             </div>
-//           </motion.div>
-
-//           <motion.div
-//             initial={{ opacity: 0, y: 30 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//           >
-//             <h3 className="mb-6 text-xl font-semibold">Contact Us</h3>
-//             <div className="space-y-5">
-//               <div className="flex gap-3">
-//                 <FaPhoneAlt className="mt-1 text-cyan-400" />
-//                 <span className="text-slate-300">+91 98765 43210</span>
-//               </div>
-
-//               <div className="flex gap-3">
-//                 <FaEnvelope className="mt-1 text-cyan-400" />
-//                 <span className="text-slate-300">info@odishapolyclinic.com</span>
-//               </div>
-
-//               <div className="flex gap-3">
-//                 <FaMapMarkerAlt className="mt-1 text-cyan-400" />
-//                 <span className="text-slate-300">Bhubaneswar, Odisha, India</span>
-//               </div>
-
-//               <div className="flex gap-3">
-//                 <FaClock className="mt-1 text-cyan-400" />
-//                 <span className="text-slate-300">Mon - Sat : 9:00 AM - 8:00 PM</span>
-//               </div>
-//             </div>
-//           </motion.div>
-//         </div>
-
-//         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
-//           <p className="text-center text-sm text-slate-400">
-//             © {new Date().getFullYear()} Odisha Polyclinic. All Rights Reserved.
-//           </p>
-
-//           <div className="flex flex-wrap justify-center gap-6 text-sm">
-//             <Link to="/privacy-policy" className="text-slate-400 transition hover:text-cyan-400">
-//               Privacy Policy
-//             </Link>
-//             <Link to="/terms" className="text-slate-400 transition hover:text-cyan-400">
-//               Terms & Conditions
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// }
 
 
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaClock,
-  FaHeartbeat,
-} from "react-icons/fa";
 
-const quickLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Doctor", path: "/doctor" },
-  { name: "Reviews", path: "/reviews" },
-  { name: "Contact", path: "/contact" },
+const companyLinks = [
+  { name: "About Us", path: "/about" },
+  { name: "Careers", path: "/careers" },
+  { name: "Blog", path: "/blog" },
+  { name: "Partner with Odisha Polyclinic", path: "/partner" },
 ];
 
-const services = [
+const serviceLinks = [
   "General Medicine",
-  "Cardiology",
-  "Pediatrics",
-  "Laboratory",
-  "Health Checkup",
+  "Cardiology & Diagnostics",
+  "Pediatrics Care",
+  "Lab Tests & Health Packages",
+];
+
+const categoryLinks = [
+  "Personal Care",
+  "Healthcare Devices",
+  "Vitamins & Supplements",
+  "Sports Nutrition",
+  "Homeopathy Care",
+  "Health Food and Drinks",
+  "Sexual Wellness",
+  "Diabetes Essentials",
+  "Ayurvedic Care",
+  "Mother and Baby Care",
+  "Mobility & Elderly Care",
+  "Skin Care",
+  "Pet Care",
+  "Health Concern",
+  "Explore More",
+];
+
+const policyLinks = [
+  { name: "Editorial Policy", path: "/editorial-policy" },
+  { name: "Privacy Policy", path: "/privacy-policy" },
+  { name: "Vulnerability Disclosure Policy", path: "/vulnerability-policy" },
+  { name: "Terms and conditions", path: "/terms" },
+  { name: "Declaration on Dark Pattern", path: "/dark-pattern-declaration" },
+  { name: "Customer Support Policy", path: "/customer-support-policy" },
+  { name: "Return Policy", path: "/return-policy" },
+  { name: "Smartbuy Policy", path: "/smartbuy-policy" },
+];
+
+const needHelpLinks = [
+  "Browse All Doctors",
+  "Browse All Cities",
+  "Browse All Clinics",
+  "FAQs",
 ];
 
 const socials = [
-  { icon: <FaFacebookF />, link: "#" },
-  { icon: <FaInstagram />, link: "#" },
-  { icon: <FaLinkedinIn />, link: "#" },
-  { icon: <FaYoutube />, link: "#" },
+  { name: "Facebook", link: "#" },
+  { name: "Instagram", link: "#" },
+  { name: "LinkedIn", link: "#" },
+  { name: "YouTube", link: "#" },
+  { name: "Twitter", link: "#" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#081A33] text-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8 md:py-20 lg:py-24">
-        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600">
-                <FaHeartbeat className="text-xl" />
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-normal tracking-tight">Odisha</h2>
-                <p className="text-[12px] uppercase tracking-[4px] text-slate-300 font-normal">
-                  Polyclinic
-                </p>
-              </div>
-            </div>
-
-            <p className="mt-6 text-[13px] font-normal tracking-tight text-slate-300 leading-relaxed">
-              Compassionate healthcare with experienced medical professionals,
-              modern facilities, and patient-first care.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              {socials.map((item, index) => (
-                <motion.a
-                  key={index}
-                  href={item.link}
-                  whileHover={{ y: -5, scale: 1.1 }}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition hover:bg-cyan-500"
-                >
-                  {item.icon}
-                </motion.a>
+    <footer className="bg-[#EEF4FE] text-[#4F585E] font-sans pt-12 pb-8 antialiased">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Main Links Grid Layout */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+          
+          {/* Column 1: Company & Our Services */}
+          <div>
+            <h3 className="text-sm font-bold text-[#30363C]">
+              Company
+            </h3>
+            <ul className="mt-3 space-y-2 text-xs font-normal">
+              {companyLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className="transition hover:text-[#0F8A79]"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
               ))}
-            </div>
-          </motion.div>
+            </ul>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="mb-6 text-lg font-normal tracking-tight">Quick Links</h3>
-            <div className="space-y-4">
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className="block text-[13px] font-normal tracking-tight text-slate-300 transition hover:text-cyan-400"
-                >
-                  {link.name}
-                </Link>
+            <h3 className="mt-6 text-sm font-bold text-[#30363C]">
+              Our Services
+            </h3>
+            <ul className="mt-3 space-y-2 text-xs font-normal">
+              {serviceLinks.map((service) => (
+                <li key={service}>
+                  <span className="cursor-pointer transition hover:text-[#0F8A79]">
+                    {service}
+                  </span>
+                </li>
               ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="mb-6 text-lg font-normal tracking-tight">Services</h3>
-            <div className="space-y-4">
-              {services.map((service) => (
-                <p
-                  key={service}
-                  className="cursor-pointer text-[13px] font-normal tracking-tight text-slate-300 transition hover:text-cyan-400"
-                >
-                  {service}
-                </p>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="mb-6 text-lg font-normal tracking-tight">Contact Us</h3>
-            <div className="space-y-5">
-              <div className="flex gap-3">
-                <FaPhoneAlt className="mt-1 text-cyan-400 text-xs" />
-                <span className="text-[13px] font-normal tracking-tight text-slate-300">
-                  +91 98765 43210
-                </span>
-              </div>
-
-              <div className="flex gap-3">
-                <FaEnvelope className="mt-1 text-cyan-400 text-xs" />
-                <span className="text-[13px] font-normal tracking-tight text-slate-300">
-                  info@odishapolyclinic.com
-                </span>
-              </div>
-
-              <div className="flex gap-3">
-                <FaMapMarkerAlt className="mt-1 text-cyan-400 text-xs" />
-                <span className="text-[13px] font-normal tracking-tight text-slate-300">
-                  Bhubaneswar, Odisha, India
-                </span>
-              </div>
-
-              <div className="flex gap-3">
-                <FaClock className="mt-1 text-cyan-400 text-xs" />
-                <span className="text-[13px] font-normal tracking-tight text-slate-300">
-                  Mon - Sat : 9:00 AM - 8:00 PM
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
-          <p className="text-center text-[13px] font-normal tracking-tight text-slate-400">
-            © {new Date().getFullYear()} Odisha Polyclinic. All Rights Reserved.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link
-              to="/privacy-policy"
-              className="text-[13px] font-normal tracking-tight text-slate-400 transition hover:text-cyan-400"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms"
-              className="text-[13px] font-normal tracking-tight text-slate-400 transition hover:text-cyan-400"
-            >
-              Terms & Conditions
-            </Link>
+            </ul>
           </div>
+
+          {/* Column 2: Our Categories */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-bold text-[#30363C]">
+              Our Categories
+            </h3>
+            <div className="mt-3 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-2 text-xs font-normal">
+              {categoryLinks.map((category) => (
+                <span
+                  key={category}
+                  className="cursor-pointer transition hover:text-[#0F8A79]"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3: Need Help & Policy Info */}
+          <div>
+            <h3 className="text-sm font-bold text-[#30363C]">
+              Need Help
+            </h3>
+            <ul className="mt-3 space-y-2 text-xs font-normal">
+              {needHelpLinks.map((item) => (
+                <li key={item}>
+                  <span className="cursor-pointer transition hover:text-[#0F8A79]">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="mt-6 text-sm font-bold text-[#30363C]">
+              Policy Info
+            </h3>
+            <ul className="mt-3 space-y-2 text-xs font-normal">
+              {policyLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className="transition hover:text-[#0F8A79]"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Follow Us */}
+          <div>
+            <h3 className="text-sm font-bold text-[#30363C]">
+              Follow Us
+            </h3>
+            <ul className="mt-3 space-y-2 text-xs font-normal">
+              {socials.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.link}
+                    className="transition hover:text-[#0F8A79]"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
+
+        {/* Bottom Section: Payment Partners & Copyright */}
+        <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-slate-200/80 pt-6 md:flex-row md:items-center">
+          
+          {/* Payment Partners Text Badges */}
+          <div>
+            <h4 className="text-xs font-bold text-[#30363C]">
+              Our Payment Partners
+            </h4>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {[
+                "Google Pay",
+                "Paytm",
+                "Amazon Pay",
+                "PhonePe",
+                "VISA",
+                "Mastercard",
+                "RuPay",
+              ].map((partner) => (
+                <span
+                  key={partner}
+                  className="rounded border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-[#30363C] shadow-xs"
+                >
+                  {partner}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Copyright Text */}
+          <div className="text-xs text-slate-500 font-medium">
+            © {new Date().getFullYear()} Odisha Polyclinic. All Rights Reserved.
+          </div>
+
+        </div>
+
       </div>
     </footer>
   );
