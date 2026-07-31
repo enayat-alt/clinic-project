@@ -91,7 +91,7 @@ export default function TestsServices() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] py-16 md:py-20 lg:py-24">
+      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             Lab & Diagnostic Services

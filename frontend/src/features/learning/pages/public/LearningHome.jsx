@@ -226,7 +226,7 @@ export default function LearningHome() {
       </section>
 
       {/* Call To Action */}
-      <section className="py-24 bg-[#1a504c]">
+      {/* <section className="py-24 bg-[#1a504c]">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
             Start Your Medical Learning Journey Today
@@ -274,7 +274,7 @@ export default function LearningHome() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
