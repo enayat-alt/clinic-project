@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] py-16 md:py-20 lg:py-24">
+      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center md:text-left">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-300 bg-white/10 px-3 py-1 rounded-full">
             Connect With Us
