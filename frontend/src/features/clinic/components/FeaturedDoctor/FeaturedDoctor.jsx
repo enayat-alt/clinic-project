@@ -1,76 +1,113 @@
 
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
 import {
-  FaUserMd,
   FaAward,
   FaUsers,
   FaWhatsapp,
   FaCalendarAlt,
   FaStar,
+  FaCheckCircle,
 } from "react-icons/fa";
 
-import InfoCard from "./InfoCard";
-
 export default function FeaturedDoctor() {
+  const stats = [
+    {
+      icon: <FaAward className="h-3.5 w-3.5 text-[#0F4C81]" />,
+      title: "15+ Years",
+      subtitle: "Experience",
+    },
+    {
+      icon: <FaUsers className="h-3.5 w-3.5 text-[#0F4C81]" />,
+      title: "5,000+",
+      subtitle: "Patients",
+    },
+    {
+      icon: <FaCheckCircle className="h-3.5 w-3.5 text-emerald-600" />,
+      title: "Available Today",
+      subtitle: "In-Clinic",
+    },
+  ];
+
   return (
-    <section className="overflow-hidden bg-[#F8FAFC] py-16 md:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
+    // 'font-sans' with clean tracking and dark gray/slate text colors mimics the screenshot style
+    <section className="relative overflow-hidden bg-[#F8FAFC] py-12 md:py-16 font-sans antialiased text-[#475569]">
+      
+      {/* Google Font Import (Plus Jakarta Sans) */}
+      <style>
+        {`@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+          .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }`}
+      </style>
+
+      {/* Background Subtle Glows */}
+      <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-blue-100/50 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-emerald-100/40 blur-3xl" />
+
+      <div className="relative mx-auto max-w-6xl px-4 font-jakarta sm:px-6 lg:px-8">
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+          
           {/* LEFT CONTENT */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center lg:text-left"
+            transition={{ duration: 0.4 }}
+            className="text-center lg:col-span-7 lg:text-left"
           >
-            <span className="font-semibold uppercase tracking-[4px] text-blue-700">
+            {/* Pill Tag */}
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#0F4C81]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#0F4C81] animate-pulse" />
               Meet Our Doctor
-            </span>
+            </div>
 
-            <h2 className="mt-5 text-3xl font-bold leading-tight text-[#081A33] sm:text-4xl lg:text-5xl">
-              Compassionate Healthcare
-              <br />
+            {/* Main Title - Semi-bold & Tight Tracking */}
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#1E293B] sm:text-3xl lg:text-4xl leading-tight">
+              Compassionate Healthcare <br className="hidden sm:inline" />
               From A Trusted Expert
             </h2>
 
-            <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
-              Our lead physician is committed to providing compassionate,
-              patient-focused healthcare with modern diagnostics and
-              evidence-based treatment.
+            {/* Subtext - Clean muted gray with smooth leading */}
+            <p className="mt-3 text-xs leading-relaxed text-[#64748B] sm:text-sm font-normal">
+              Our lead physician is committed to providing compassionate, patient-focused healthcare with modern diagnostics and evidence-based treatment.
             </p>
 
-            <div className="mt-10">
-              <h3 className="text-3xl font-bold text-[#081A33]">
-                Dr. Shaik Faraz Ahmmed
-              </h3>
+            {/* Compact Doctor Card */}
+            <div className="mt-5 inline-block w-full max-w-sm rounded-xl border border-slate-200/80 bg-white/90 p-3.5 text-left shadow-sm backdrop-blur-sm">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-base font-bold text-[#1E293B] sm:text-lg tracking-tight">
+                    Dr. Shaik Faraz Ahmmed
+                  </h3>
+                  <p className="mt-0.5 text-xs font-semibold text-[#0F4C81]">
+                    MBBS • MD • General Physician
+                  </p>
+                </div>
+                <span className="hidden sm:inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+                  Verified MD
+                </span>
+              </div>
 
-              <p className="mt-2 font-semibold text-blue-700">
-                MBBS • MD • General Physician
-              </p>
+              {/* Rating */}
+              <div className="mt-2.5 flex items-center gap-2 border-t border-slate-100 pt-2.5">
+                <div className="flex text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} className="h-3 w-3" />
+                  ))}
+                </div>
+                <span className="text-[11px] font-semibold text-[#334155]">
+                  4.9 <span className="font-normal text-[#64748B]">(500+ Reviews)</span>
+                </span>
+              </div>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-1 lg:justify-start">
-              {[...Array(5)].map((_, index) => (
-                <FaStar
-                  key={index}
-                  className="text-yellow-500"
-                />
-              ))}
-
-              <span className="ml-2 text-slate-600">
-                4.9 (500+ Reviews)
-              </span>
-            </div>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+            {/* Buttons */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 lg:justify-start">
               <Link
                 to="/appointment"
-                className="rounded-xl bg-[#081A33] px-6 py-3 text-center font-semibold text-white transition hover:bg-blue-700"
+                className="inline-flex items-center justify-center rounded-xl bg-[#081A33] px-4 py-2 text-xs font-semibold text-white shadow-md shadow-[#081A33]/15 transition-all duration-300 hover:bg-[#0F4C81] hover:shadow-lg active:scale-[0.98]"
               >
-                <FaCalendarAlt className="mr-2 inline" />
+                <FaCalendarAlt className="mr-1.5 h-3 w-3" />
                 Book Appointment
               </Link>
 
@@ -78,9 +115,9 @@ export default function FeaturedDoctor() {
                 href="https://wa.me/919124508591"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-xl bg-green-500 px-6 py-3 text-center font-semibold text-white transition hover:bg-green-600"
+                className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-emerald-600/15 transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-[0.98]"
               >
-                <FaWhatsapp className="mr-2 inline" />
+                <FaWhatsapp className="mr-1.5 h-3.5 w-3.5" />
                 WhatsApp
               </a>
             </div>
@@ -88,51 +125,41 @@ export default function FeaturedDoctor() {
 
           {/* RIGHT CONTENT */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative mx-auto flex w-full max-w-[700px] items-center justify-center"
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="relative lg:col-span-5"
           >
-            {/* Background Glow */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-[320px] w-[320px] rounded-full bg-blue-500/15 blur-[120px] sm:h-[420px] sm:w-[420px]" />
-            </div>
+            <div className="relative mx-auto max-w-xs rounded-2xl border border-slate-200/60 bg-gradient-to-b from-blue-50/60 to-white p-3 shadow-lg">
+              <div className="relative overflow-hidden rounded-xl bg-slate-100">
+                <img
+                  src="/doctor.webp"
+                  alt="Dr. Shaik Faraz Ahmmed"
+                  className="h-auto w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
 
-            {/* Doctor */}
-            <img
-              src="/doctor.webp"
-              alt="Doctor"
-              className="relative z-10 w-full max-w-[260px] object-contain sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px]"
-            />
-
-            {/* Left Cards */}
-            <div className="absolute left-0 top-6 z-20 hidden space-y-5 md:block lg:left-4">
-              <InfoCard
-                icon={<FaAward />}
-                title="15+ Years"
-                subtitle="Experience"
-                delay={0.2}
-              />
-
-              <InfoCard
-                icon={<FaUsers />}
-                title="5000+"
-                subtitle="Patients Treated"
-                delay={0.4}
-              />
-            </div>
-
-            {/* Right Card */}
-            <div className="absolute bottom-8 right-0 z-20 hidden md:block lg:right-4">
-              <InfoCard
-                icon={<FaUserMd />}
-                title="General Physician"
-                subtitle="Available Today"
-                delay={0.6}
-              />
+              {/* Stat Chips */}
+              <div className="mt-3 grid grid-cols-3 gap-1.5">
+                {stats.map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col items-center justify-center rounded-lg bg-slate-50 p-2 text-center border border-slate-100"
+                  >
+                    {stat.icon}
+                    <span className="mt-1 text-[11px] font-bold text-[#1E293B] leading-none">
+                      {stat.title}
+                    </span>
+                    <span className="mt-0.5 text-[9px] font-medium text-[#64748B] leading-none">
+                      {stat.subtitle}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>

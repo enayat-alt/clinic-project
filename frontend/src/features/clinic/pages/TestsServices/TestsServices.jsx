@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const services = [
@@ -90,19 +89,15 @@ const whyChooseUs = [
 export default function TestsServices() {
   return (
     <div className="bg-white min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+      
+      {/* Blue Top Header Banner */}
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 bg-[#081A33] text-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight text-white">
             Lab & Diagnostic Services
           </h1>
-
-          <p className="mt-6 max-w-4xl text-base leading-8 text-slate-300 md:text-lg">
-            Odisha Polyclinic offers a comprehensive range of laboratory tests
-            and diagnostic services using modern equipment and experienced
-            healthcare professionals. Our focus is to deliver accurate results,
-            timely reporting, and quality patient care to support effective
-            diagnosis and treatment.
+          <p className="mt-3 text-sm sm:text-base font-normal tracking-tight text-slate-300 max-w-2xl mx-auto">
+            Comprehensive diagnostic services with advanced equipment, accurate reporting, and expert medical care at Odisha Polyclinic.
           </p>
         </div>
       </section>

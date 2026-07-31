@@ -1,5 +1,10 @@
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  FaUserNurse,
+  FaCheckCircle,
+} from "react-icons/fa";
 
 const departments = [
   {
@@ -90,136 +95,160 @@ const departments = [
 ];
 
 export default function Departments() {
-  return (
-    <div className="bg-white min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#081A33] via-[#0F2D56] to-[#174A84] pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Our Departments
-          </h1>
+  const [searchQuery, setSearchQuery] = useState("");
 
-          <p className="mt-6 max-w-4xl text-base leading-8 text-slate-300 md:text-lg">
-            Odisha Polyclinic offers comprehensive healthcare services through
-            experienced specialists and modern diagnostic facilities. Our
-            patient-first approach ensures quality treatment, compassionate
-            care, and personalized healthcare solutions under one roof.
+  // Filter departments dynamically based on search
+  const filteredDepartments = departments.filter((dept) =>
+    dept.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dept.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div className="bg-slate-50 min-h-screen text-slate-800">
+
+      {/* Blue Top Header Banner */}
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 bg-[#081A33] text-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight text-white">
+            Our Specialized Departments
+          </h1>
+          <p className="mt-3 text-sm sm:text-base font-normal tracking-tight text-slate-300 max-w-2xl mx-auto">
+            Explore complete healthcare services and diagnostic solutions provided by experienced doctors at Odisha Polyclinic.
           </p>
         </div>
       </section>
 
-      {/* Departments Grid */}
-      <section className="bg-slate-50 py-16 md:py-20">
+      {/* Departments & Services Grid Section */}
+      <section className="py-12 md:py-16">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
-            Services & Departments
-          </h2>
+          
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-2xl sm:text-3xl font-normal tracking-tight text-[#081A33]">
+              Specialized Departments & Services
+            </h2>
+            <p className="mt-2 text-[13px] font-normal tracking-tight text-slate-500">
+              Explore our wide range of medical disciplines designed to give you complete healthcare under one roof.
+            </p>
+          </div>
 
-          <p className="mb-12 text-center text-slate-600">
-            Explore our specialized medical departments designed to provide
-            complete healthcare solutions for every stage of life.
-          </p>
+          {/* Department Cards Grid */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredDepartments.length > 0 ? (
+              filteredDepartments.map((dept, index) => (
+                <div
+                  key={dept.title}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-[11px] font-normal tracking-tight text-cyan-700 bg-cyan-50 border border-cyan-100 px-2.5 py-1 rounded-full">
+                        Department #{String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="h-8 w-8 rounded-full bg-slate-100 text-[#081A33] flex items-center justify-center text-xs">
+                        <FaUserNurse />
+                      </div>
+                    </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {departments.map((department, index) => (
-              <div
-                key={department.title}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#081A33] font-bold text-white">
-                  {String(index + 1).padStart(2, "0")}
+                    <h3 className="text-base font-normal tracking-tight text-[#081A33]">
+                      {dept.title}
+                    </h3>
+
+                    <p className="mt-2 text-[13px] font-normal tracking-tight text-slate-600 leading-relaxed">
+                      {dept.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[11px] font-normal tracking-tight text-emerald-600 flex items-center gap-1">
+                      <FaCheckCircle className="text-[10px]" /> Doctors Available
+                    </span>
+                    <Link
+                      to="/appointment"
+                      className="text-[12px] font-normal tracking-tight text-[#081A33] hover:text-cyan-600 transition underline underline-offset-4"
+                    >
+                      Book Dept &rarr;
+                    </Link>
+                  </div>
                 </div>
-
-                <h3 className="text-xl font-semibold text-[#081A33]">
-                  {department.title}
-                </h3>
-
-                <p className="mt-3 leading-7 text-slate-600">
-                  {department.description}
-                </p>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12 text-[13px] font-normal tracking-tight text-slate-500">
+                No matching departments found for "{searchQuery}".
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="bg-white py-16 md:py-20">
+      {/* Why Choose Us Section */}
+      <section className="bg-white py-16 border-t border-slate-200/60">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold text-[#081A33] sm:text-4xl">
+          <h2 className="mb-10 text-center text-2xl sm:text-3xl font-normal tracking-tight text-[#081A33]">
             Why Choose Odisha Polyclinic?
           </h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center shadow-md transition hover:shadow-xl">
-              <h3 className="mb-2 text-xl font-bold text-[#081A33]">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-slate-200/70 bg-slate-50/50 p-5 text-center shadow-xs">
+              <h3 className="mb-1.5 text-base font-normal tracking-tight text-[#081A33]">
                 Expert Doctors
               </h3>
-
-              <p className="text-slate-600">
-                Highly experienced specialists dedicated to providing quality
-                medical care across multiple specialties.
+              <p className="text-[13px] font-normal tracking-tight text-slate-600">
+                Highly experienced specialists dedicated to quality medical care across multiple specialties.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center shadow-md transition hover:shadow-xl">
-              <h3 className="mb-2 text-xl font-bold text-[#081A33]">
+            <div className="rounded-2xl border border-slate-200/70 bg-slate-50/50 p-5 text-center shadow-xs">
+              <h3 className="mb-1.5 text-base font-normal tracking-tight text-[#081A33]">
                 Modern Diagnostics
               </h3>
-
-              <p className="text-slate-600">
-                Advanced laboratory and imaging facilities for fast and accurate
-                diagnosis.
+              <p className="text-[13px] font-normal tracking-tight text-slate-600">
+                Advanced laboratory and imaging facilities for fast and accurate diagnosis.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center shadow-md transition hover:shadow-xl">
-              <h3 className="mb-2 text-xl font-bold text-[#081A33]">
+            <div className="rounded-2xl border border-slate-200/70 bg-slate-50/50 p-5 text-center shadow-xs">
+              <h3 className="mb-1.5 text-base font-normal tracking-tight text-[#081A33]">
                 Affordable Care
               </h3>
-
-              <p className="text-slate-600">
-                Quality healthcare services delivered at affordable and
-                transparent pricing.
+              <p className="text-[13px] font-normal tracking-tight text-slate-600">
+                Quality healthcare services delivered at affordable and transparent pricing.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center shadow-md transition hover:shadow-xl">
-              <h3 className="mb-2 text-xl font-bold text-[#081A33]">
+            <div className="rounded-2xl border border-slate-200/70 bg-slate-50/50 p-5 text-center shadow-xs">
+              <h3 className="mb-1.5 text-base font-normal tracking-tight text-[#081A33]">
                 Patient First
               </h3>
-
-              <p className="text-slate-600">
-                Compassionate treatment, personalized care, and complete support
-                throughout your healthcare journey.
+              <p className="text-[13px] font-normal tracking-tight text-slate-600">
+                Compassionate treatment, personalized care, and complete support throughout your health journey.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-20">
+      {/* CTA Banner Section */}
+      <section className="py-16">
         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-gradient-to-r from-[#081A33] via-[#0F2D56] to-[#174A84] p-8 text-center shadow-2xl sm:p-10">
-            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+          <div className="rounded-3xl bg-gradient-to-r from-[#081A33] via-[#0F2D56] to-[#174A84] p-8 sm:p-10 text-center shadow-2xl text-white">
+            <h2 className="mb-3 text-2xl sm:text-3xl font-normal tracking-tight">
               Need Expert Medical Consultation?
             </h2>
 
-            <p className="mb-8 text-base text-slate-300 md:text-lg">
-              Schedule your appointment today and receive personalized medical
-              care from our experienced healthcare professionals.
+            <p className="mb-6 text-[13px] font-normal tracking-tight text-slate-300 max-w-xl mx-auto">
+              Schedule your appointment today and receive personalized medical care from our experienced healthcare professionals.
             </p>
 
             <Link
               to="/appointment"
-              className="inline-block rounded-xl bg-white px-8 py-4 font-semibold text-[#081A33] transition hover:bg-slate-100"
+              className="inline-block rounded-xl bg-white px-8 py-3 text-[13px] font-normal tracking-tight text-[#081A33] hover:bg-slate-100 transition shadow-md"
             >
-              Book Appointment
+              Book Appointment Now
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

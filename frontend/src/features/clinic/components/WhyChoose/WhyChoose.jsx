@@ -1,113 +1,104 @@
-import { motion } from "framer-motion";
 
 import {
   FaUserMd,
-  FaHeartbeat,
   FaFlask,
+  FaHeartbeat,
   FaHospital,
   FaClock,
-  FaShieldAlt,
 } from "react-icons/fa";
-
 import FeatureCard from "./FeatureCard";
 
 export default function WhyChoose() {
+  const trustStats = [
+    { label: "100% NABL", sub: "Certified Labs" },
+    { label: "50,000+", sub: "Happy Patients" },
+    { label: "15 YEARS+", sub: "Medical Expertise" },
+  ];
 
   const features = [
     {
       icon: <FaUserMd />,
-      title: "Experienced Doctors",
-      description:
-        "Highly qualified specialists providing expert diagnosis and treatment.",
+      count: "50+",
+      description: "Expert Doctors & Specialists",
     },
     {
       icon: <FaFlask />,
-      title: "Advanced Diagnostics",
-      description:
-        "Modern laboratory and diagnostic services with fast, accurate reports.",
+      count: "1,000+",
+      description: "Diagnostic Tests & Scans Daily",
     },
     {
       icon: <FaHeartbeat />,
-      title: "Comprehensive Care",
-      description:
-        "From preventive care to specialized treatments—all under one roof.",
+      count: "100%",
+      description: "NABL & ISO Quality Standard",
     },
     {
       icon: <FaHospital />,
-      title: "Modern Infrastructure",
-      description:
-        "Comfortable patient experience with advanced medical facilities.",
+      count: "10+",
+      description: "Specialized Departments",
     },
     {
       icon: <FaClock />,
-      title: "Quick Appointments",
-      description:
-        "Easy online appointment booking with minimal waiting time.",
-    },
-    {
-      icon: <FaShieldAlt />,
-      title: "Trusted Healthcare",
-      description:
-        "Committed to safe, ethical, and patient-centered medical care.",
+      count: "24/7",
+      description: "Emergency & Support Care",
     },
   ];
 
   return (
-    <section className="bg-[#F8FAFC] py-16 md:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <section className="bg-white py-12 md:py-16 font-jakarta antialiased">
+      {/* Plus Jakarta Sans Import */}
+      <style>
+        {`@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+          .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }`}
+      </style>
 
-          {/* Left */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Main Section Header */}
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1E293B] tracking-tight">
+            Why trust Odisha Polyclinic?
+          </h2>
 
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
+          <p className="mt-2 text-xs sm:text-sm font-bold tracking-wider text-[#0F8A79] uppercase">
+            # ONE OF ODISHA'S MOST TRUSTED HEALTHCARE PLATFORMS
+          </p>
+        </div>
 
-            <span className="uppercase tracking-widest text-blue-700 font-semibold">
-              WHY CHOOSE US
-            </span>
+        {/* Laurel Wreath Badges Header Row */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-8 sm:gap-14">
+          {trustStats.map((stat, idx) => (
+            <div key={idx} className="flex items-center gap-2 text-center">
+              {/* Left Laurel Leaves */}
+              <span className="text-2xl text-teal-300 opacity-80 select-none">🌿</span>
+              
+              <div>
+                <div className="text-xs sm:text-sm font-bold text-[#1E293B] tracking-tight">
+                  {stat.label}
+                </div>
+                <div className="text-[11px] font-medium text-slate-500">
+                  {stat.sub}
+                </div>
+              </div>
 
-            <h2 className="mt-5 text-3xl font-bold leading-tight text-[#081A33] sm:text-4xl lg:text-5xl">
-              Exceptional Healthcare with Compassion & Excellence
-            </h2>
+              {/* Right Laurel Leaves */}
+              <span className="text-2xl text-teal-300 opacity-80 select-none scale-x-[-1]">🌿</span>
+            </div>
+          ))}
+        </div>
 
-            <p className="mt-6 text-base leading-8 text-slate-600 md:text-lg">
-              Odisha Polyclinic combines experienced doctors, advanced
-              diagnostics, and patient-focused care to deliver quality
-              healthcare services for every family.
-            </p>
-
-            {/* <motion.img
-              whileHover={{
-                scale: 1.03,
-              }}
-              src="/doctor-team.png"
-              alt="Doctor Team"
-              className="mt-8 w-full rounded-3xl object-cover shadow-2xl sm:mt-12"
-            /> */}
-
-          </motion.div>
-
-          {/* Right */}
-
-          <div className="grid gap-6">
-
-            {features.map((item, index) => (
-              <FeatureCard
-                key={item.title}
-                {...item}
-                delay={index * 0.1}
-              />
-            ))}
-
+        {/* Light Mint Background Outer Container */}
+        <div className="mt-10 rounded-2xl bg-[#EAF7F5] p-4 sm:p-6">
+          {/* Scrollable Single Line Horizontal Row */}
+          <div className="w-full overflow-x-auto pb-2 scrollbar-none">
+            <div className="flex flex-nowrap items-center justify-start md:justify-center gap-4">
+              {features.map((item, index) => (
+                <FeatureCard key={index} {...item} />
+              ))}
+            </div>
           </div>
-
         </div>
 
       </div>
-
     </section>
   );
 }

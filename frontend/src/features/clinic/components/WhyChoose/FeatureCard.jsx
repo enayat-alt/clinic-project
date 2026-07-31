@@ -1,43 +1,30 @@
+
+
 import { motion } from "framer-motion";
 
-export default function FeatureCard({
-  icon,
-  title,
-  description,
-  delay = 0,
-}) {
+export default function FeatureCard({ icon, count, title, description }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.6,
-        delay,
-      }}
-      whileHover={{
-        y: -8,
-      }}
-      className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg transition-all hover:shadow-2xl sm:p-6"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+      className="flex h-[200px] w-[180px] shrink-0 flex-col items-start justify-between rounded-2xl bg-white p-4 shadow-xs font-jakarta border border-slate-100/80"
     >
-      <div className="flex gap-5 items-start">
+      {/* Top Icon Area */}
+      <div className="flex h-12 w-full items-center justify-center text-3xl text-[#0F8A79]">
+        {icon}
+      </div>
 
-        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[#081A33] text-xl text-white sm:h-14 sm:w-14 sm:text-2xl">
-          {icon}
-        </div>
+      {/* Content Area */}
+      <div className="w-full">
+        {/* Highlight Count Number */}
+        <h3 className="text-base font-bold text-[#0F8A79] tracking-tight">
+          {count || title}
+        </h3>
 
-        <div>
-
-          <h3 className="text-xl font-semibold text-[#081A33]">
-            {title}
-          </h3>
-
-          <p className="mt-2 text-slate-600 leading-7">
-            {description}
-          </p>
-
-        </div>
-
+        {/* Description Text */}
+        <p className="mt-1 text-[11px] font-normal leading-snug text-slate-600 line-clamp-3">
+          {description}
+        </p>
       </div>
     </motion.div>
   );
