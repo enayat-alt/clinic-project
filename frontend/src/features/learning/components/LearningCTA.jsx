@@ -1,54 +1,116 @@
+
 // import React from "react";
 // import { Link } from "react-router-dom";
 
-// export default function LearningCTA() {
+// export default function LearningFooter() {
 //   return (
-//     <section className="py-24 bg-[#1a504c]">
-//       <div className="max-w-5xl mx-auto px-6 text-center">
-//         <h2 className="text-4xl md:text-5xl font-bold text-white">
-//           Start Your Medical Learning Journey Today
-//         </h2>
+//     <footer className="bg-[#1a504c] text-white pt-20 pb-10 border-t border-teal-800">
+//       <div className="max-w-7xl mx-auto px-6">
+//         {/* Top Section: CTA Banner */}
+//         <div className="max-w-4xl mx-auto text-center mb-16 border-b border-teal-700/60 pb-16">
+//           <h2 className="text-3xl md:text-5xl font-bold text-white">
+//             Start Your Medical Learning Journey Today
+//           </h2>
 
-//         <p className="text-gray-200 mt-6 text-lg max-w-2xl mx-auto">
-//           Join Odisha Polyclinic's learning platform and gain access to
-//           comprehensive healthcare education, expert guidance, and practical
-//           training resources.
-//         </p>
+//           <p className="text-gray-200 mt-6 text-base md:text-lg max-w-2xl mx-auto">
+//             Join Odisha Polyclinic's learning platform and gain access to
+//             comprehensive healthcare education, expert guidance, and practical
+//             training resources.
+//           </p>
 
-//         <div className="flex flex-wrap justify-center gap-4 mt-10">
-//           <Link
-//             to="/learning/find-course"
-//             className="bg-white text-[#1a504c] px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition"
-//           >
-//             Browse Courses
-//           </Link>
+//           <div className="flex flex-wrap justify-center gap-4 mt-8">
+//             <Link
+//               to="/learning/find-course"
+//               className="bg-white text-[#1a504c] px-8 py-3.5 rounded-xl font-semibold hover:bg-gray-100 transition shadow"
+//             >
+//               Browse Courses
+//             </Link>
 
-//           <Link
-//             to="/learning/register"
-//             className="border border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-[#1a504c] transition"
-//           >
-//             Create Account
-//           </Link>
+//             <Link
+//               to="/learning/register"
+//               className="border border-white text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white hover:text-[#1a504c] transition"
+//             >
+//               Create Account
+//             </Link>
+//           </div>
+//         </div>
+
+//         {/* Middle Section: Footer Navigation Grid */}
+//         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-gray-200">
+//           <div>
+//             <h3 className="text-white font-bold text-lg mb-3">
+//               Odisha Polyclinic LMS
+//             </h3>
+//             <p className="text-sm text-gray-300 leading-relaxed">
+//               Empowering healthcare professionals with expert clinical courses,
+//               FMGE preparation, and modern medical education.
+//             </p>
+//           </div>
+
+//           <div>
+//             <h4 className="text-white font-semibold mb-3">Quick Links</h4>
+//             <ul className="space-y-2 text-sm">
+//               <li>
+//                 <Link to="/learning/find-course" className="hover:text-white transition">
+//                   Browse Courses
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link to="/learning/login" className="hover:text-white transition">
+//                   Student Portal
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link to="/contact" className="hover:text-white transition">
+//                   Support
+//                 </Link>
+//               </li>
+//             </ul>
+//           </div>
+
+//           <div>
+//             <h4 className="text-white font-semibold mb-3">Categories</h4>
+//             <ul className="space-y-2 text-sm text-gray-300">
+//               <li>Clinical Medicine</li>
+//               <li>Diagnostics & Pathology</li>
+//               <li>FMGE Preparation</li>
+//               <li>Physiotherapy</li>
+//             </ul>
+//           </div>
+
+//           <div>
+//             <h4 className="text-white font-semibold mb-3">Contact</h4>
+//             <p className="text-sm text-gray-300">Bhubaneswar, Odisha, India</p>
+//             <p className="text-sm text-gray-300 mt-1">
+//               info@odishapolyclinic.com
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Bottom Section: Copyright */}
+//         <div className="pt-8 border-t border-teal-800/80 text-xs text-center text-gray-300">
+//           © {new Date().getFullYear()} Odisha Polyclinic. All rights reserved.
 //         </div>
 //       </div>
-//     </section>
+//     </footer>
 //   );
 // }
+
 
 import React from "react";
 import { Link } from "react-router-dom";
 
 export default function LearningFooter() {
   return (
-    <footer className="bg-[#1a504c] text-white pt-20 pb-10 border-t border-teal-800">
+    <footer className="bg-white text-gray-800 pt-20 pb-10 border-t border-gray-100 font-sans">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top Section: CTA Banner */}
-        <div className="max-w-4xl mx-auto text-center mb-16 border-b border-teal-700/60 pb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white">
+        <div className="max-w-4xl mx-auto text-center mb-16 border-b border-gray-100 pb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
             Start Your Medical Learning Journey Today
           </h2>
 
-          <p className="text-gray-200 mt-6 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 mt-6 text-base md:text-lg max-w-2xl mx-auto">
             Join Odisha Polyclinic's learning platform and gain access to
             comprehensive healthcare education, expert guidance, and practical
             training resources.
@@ -57,14 +119,14 @@ export default function LearningFooter() {
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               to="/learning/find-course"
-              className="bg-white text-[#1a504c] px-8 py-3.5 rounded-xl font-semibold hover:bg-gray-100 transition shadow"
+              className="bg-teal-700 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-teal-800 transition shadow-sm"
             >
               Browse Courses
             </Link>
 
             <Link
               to="/learning/register"
-              className="border border-white text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white hover:text-[#1a504c] transition"
+              className="border border-gray-300 text-gray-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-gray-50 transition"
             >
               Create Account
             </Link>
@@ -72,32 +134,32 @@ export default function LearningFooter() {
         </div>
 
         {/* Middle Section: Footer Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-gray-200">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-gray-600">
           <div>
-            <h3 className="text-white font-bold text-lg mb-3">
+            <h3 className="text-gray-900 font-bold text-lg mb-3">
               Odisha Polyclinic LMS
             </h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed">
               Empowering healthcare professionals with expert clinical courses,
               FMGE preparation, and modern medical education.
             </p>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-3">Quick Links</h4>
+            <h4 className="text-gray-900 font-semibold mb-3">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/learning/find-course" className="hover:text-white transition">
+                <Link to="/learning/find-course" className="hover:text-teal-700 transition">
                   Browse Courses
                 </Link>
               </li>
               <li>
-                <Link to="/learning/login" className="hover:text-white transition">
+                <Link to="/learning/login" className="hover:text-teal-700 transition">
                   Student Portal
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition">
+                <Link to="/contact" className="hover:text-teal-700 transition">
                   Support
                 </Link>
               </li>
@@ -105,8 +167,8 @@ export default function LearningFooter() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-3">Categories</h4>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <h4 className="text-gray-900 font-semibold mb-3">Categories</h4>
+            <ul className="space-y-2 text-sm text-gray-500">
               <li>Clinical Medicine</li>
               <li>Diagnostics & Pathology</li>
               <li>FMGE Preparation</li>
@@ -115,16 +177,16 @@ export default function LearningFooter() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-3">Contact</h4>
-            <p className="text-sm text-gray-300">Bhubaneswar, Odisha, India</p>
-            <p className="text-sm text-gray-300 mt-1">
+            <h4 className="text-gray-900 font-semibold mb-3">Contact</h4>
+            <p className="text-sm text-gray-500">Bhubaneswar, Odisha, India</p>
+            <p className="text-sm text-gray-500 mt-1">
               info@odishapolyclinic.com
             </p>
           </div>
         </div>
 
         {/* Bottom Section: Copyright */}
-        <div className="pt-8 border-t border-teal-800/80 text-xs text-center text-gray-300">
+        <div className="pt-8 border-t border-gray-100 text-xs text-center text-gray-400">
           © {new Date().getFullYear()} Odisha Polyclinic. All rights reserved.
         </div>
       </div>
