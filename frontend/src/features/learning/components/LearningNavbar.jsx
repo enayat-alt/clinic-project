@@ -1,6 +1,287 @@
+// import { Link, useNavigate } from "react-router-dom";
+// import { useState, useRef, useEffect } from "react";
+// import { useSelector ,useDispatch} from "react-redux";
+// import { useLogoutMutation } from "../../../services/authApi";
+// import { clearCredentials } from "../../../app/authSlice";
+
+// export default function LearningNavbar() {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const [dropdownOpen, setDropdownOpen] = useState(false);
+//   const dropdownRef = useRef(null);
+//   const navigate = useNavigate();
+//   const [logoutUser] = useLogoutMutation();
+  
+//   const { accessToken, user } = useSelector((state) => state.auth);
+
+//   const isLoggedIn = !!accessToken;
+//   const currentUser = user;
+//   const dispatch = useDispatch();
+
+
+//   const logoutHandler = async () => {
+//     try {
+//       await logoutUser().unwrap();
+//     } catch (error) {
+//       console.error("Logout failed", error);
+//     }
+
+//     dispatch(clearCredentials());
+
+//     navigate("/learning");
+//   };
+//   useEffect(() => {
+//     const handleClickOutside = (e) => {
+//       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+//         setDropdownOpen(false);
+//       }
+//     };
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, []);
+
+//   return (
+//     <nav className="bg-white shadow-md sticky top-0 z-50">
+//       <div className="max-w-7xl mx-auto px-6">
+//         {/* Navbar */}
+//         <div className="flex justify-between items-center h-20">
+//           {/* Logo */}
+//           <Link to="/learning" className="flex items-center gap-3">
+//             <div className="w-10 h-10 bg-[#1a504c] rounded-xl flex items-center justify-center text-white font-bold">
+//               L
+//             </div>
+//             <div>
+//               <h1 className="text-xl font-bold text-[#1a504c]">
+//                 odisha polyclinic
+//               </h1>
+//               <p className="text-xs text-yellow-500">
+//                 Medical Education Platform
+//               </p>
+//             </div>
+//           </Link>
+
+//           {/* Desktop Menu */}
+//           <div className="hidden lg:flex items-center gap-8">
+//             <Link
+//               to="/"
+//               className="text-black transition font-semibold hover:text-[#1a504c]"
+//             >
+//               Odisha Polyclinic
+//             </Link>
+//             <Link
+//               to="/learning"
+//               className="hover:text-[#1a504c] font-medium transition"
+//             >
+//               Home
+//             </Link>
+//             <Link
+//               to="/learning/find-course"
+//               className="hover:text-[#1a504c] font-medium transition"
+//             >
+//               Find Course
+//             </Link>
+//             <Link
+//               to="/learning/certifications"
+//               className="hover:text-[#1a504c] font-medium transition"
+//             >
+//               Get Certified
+//             </Link>
+//             <Link
+//               to="/learning/subscribe"
+//               className="hover:text-[#1a504c] font-medium transition"
+//             >
+//               Subscribe
+//             </Link>
+//           </div>
+
+//           {/* Desktop Right Section */}
+//           <div className="hidden lg:flex items-center gap-3">
+//             {!isLoggedIn ? (
+//               <>
+//                 <Link
+//                   to="/learning/login"
+//                   className="text-slate-600 font-medium px-5 py-2.5 rounded-xl hover:bg-slate-100 transition-colors"
+//                 >
+//                   Log in
+//                 </Link>
+//                 <Link
+//                   to="/learning/register"
+//                   className="bg-[#1a504c] text-white font-medium px-5 py-2.5 rounded-xl shadow-sm hover:bg-[#143e3b] hover:shadow-md transition-all"
+//                 >
+//                   Get started
+//                 </Link>
+//               </>
+//             ) : (
+//               <div className="relative" ref={dropdownRef}>
+//                 <button
+//                   onClick={() => setDropdownOpen(!dropdownOpen)}
+//                   className="flex items-center gap-2 px-2 py-1 rounded-xl hover:bg-[#e5f9f8] transition"
+//                 >
+//                   <div className="w-9 h-9 bg-[#1a504c] rounded-full flex items-center justify-center text-white font-bold">
+//                     {currentUser?.name?.charAt(0).toUpperCase()}
+//                   </div>
+//                   <span className="font-medium text-[#1a504c] hidden xl:block">
+//                     {currentUser?.name}
+//                   </span>
+//                   <svg
+//                     className={`w-4 h-4 text-gray-500 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
+//                     fill="none"
+//                     stroke="currentColor"
+//                     viewBox="0 0 24 24"
+//                   >
+//                     <path
+//                       strokeLinecap="round"
+//                       strokeLinejoin="round"
+//                       strokeWidth={2}
+//                       d="M19 9l-7 7-7-7"
+//                     />
+//                   </svg>
+//                 </button>
+
+//                 {dropdownOpen && (
+//                   <div className="absolute right-0 mt-2 w-52 bg-white border border-gray-100 rounded-xl shadow-lg z-50 overflow-hidden">
+//                     <div className="px-4 py-3 border-b border-gray-100">
+//                       <p className="font-semibold text-sm text-gray-800">
+//                         {currentUser?.name}
+//                       </p>
+//                       <p className="text-xs text-gray-500">
+//                         {currentUser?.email}
+//                       </p>
+//                     </div>
+//                     <Link
+//                       to="/learning/my-learning"
+//                       onClick={() => setDropdownOpen(false)}
+//                       className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-[#e5f9f8] hover:text-[#1a504c] transition"
+//                     >
+//                       My Learning
+//                     </Link>
+//                     <Link
+//                       to="/learning/dashboard"
+//                       onClick={() => setDropdownOpen(false)}
+//                       className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-[#e5f9f8] hover:text-[#1a504c] transition border-b border-gray-100"
+//                     >
+//                       Dashboard
+//                     </Link>
+//                     <button
+//                       onClick={logoutHandler}
+//                       className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left"
+//                     >
+//                       Logout
+//                     </button>
+//                   </div>
+//                 )}
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Mobile Menu Button */}
+//           <button
+//             onClick={() => setIsOpen(!isOpen)}
+//             className="lg:hidden text-3xl text-[#1a504c]"
+//           >
+//             {isOpen ? "✕" : "☰"}
+//           </button>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         {isOpen && (
+//           <div className="lg:hidden border-t py-4 flex flex-col gap-4 font-medium">
+//             <Link
+//               to="/learning"
+//               onClick={() => setIsOpen(false)}
+//               className="hover:text-[#1a504c]"
+//             >
+//               Home
+//             </Link>
+//             <Link
+//               to="/learning/find-course"
+//               onClick={() => setIsOpen(false)}
+//               className="hover:text-[#1a504c]"
+//             >
+//               Find Course
+//             </Link>
+//             <Link
+//               to="/learning/certifications"
+//               onClick={() => setIsOpen(false)}
+//               className="hover:text-[#1a504c]"
+//             >
+//               Get Certified
+//             </Link>
+//             <Link
+//               to="/learning/subscribe"
+//               onClick={() => setIsOpen(false)}
+//               className="hover:text-[#1a504c]"
+//             >
+//               Subscribe
+//             </Link>
+
+//             <hr />
+
+//             {!isLoggedIn ? (
+//               <>
+//                 <Link
+//                   to="/learning/login"
+//                   onClick={() => setIsOpen(false)}
+//                   className="text-slate-600 font-medium text-center py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
+//                 >
+//                   Log in
+//                 </Link>
+//                 <Link
+//                   to="/learning/register"
+//                   onClick={() => setIsOpen(false)}
+//                   className="bg-[#1a504c] text-white font-medium text-center py-2.5 rounded-xl shadow-sm hover:bg-[#143e3b] transition-all"
+//                 >
+//                   Get started
+//                 </Link>
+//               </>
+//             ) : (
+//               <>
+//                 <div className="flex items-center gap-3 px-1">
+//                   <div className="w-9 h-9 bg-[#1a504c] rounded-full flex items-center justify-center text-white font-bold">
+//                     {currentUser?.name?.charAt(0).toUpperCase()}
+//                   </div>
+//                   <div>
+//                     <p className="font-semibold text-sm text-[#1a504c]">
+//                       {currentUser?.name}
+//                     </p>
+//                     <p className="text-xs text-gray-500">
+//                       {currentUser?.email}
+//                     </p>
+//                   </div>
+//                 </div>
+//                 <Link
+//                   to="/learning/my-learning"
+//                   onClick={() => setIsOpen(false)}
+//                   className="hover:text-[#1a504c]"
+//                 >
+//                   My Learning
+//                 </Link>
+//                 <Link
+//                   to="/learning/dashboard"
+//                   onClick={() => setIsOpen(false)}
+//                   className="hover:text-[#1a504c]"
+//                 >
+//                   Dashboard
+//                 </Link>
+//                 <button
+//                   onClick={logoutHandler}
+//                   className="bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition"
+//                 >
+//                   Logout
+//                 </button>
+//               </>
+//             )}
+//           </div>
+//         )}
+//       </div>
+//     </nav>
+//   );
+// }
+
+
+
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { useSelector ,useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../../services/authApi";
 import { clearCredentials } from "../../../app/authSlice";
 
@@ -17,7 +298,6 @@ export default function LearningNavbar() {
   const currentUser = user;
   const dispatch = useDispatch();
 
-
   const logoutHandler = async () => {
     try {
       await logoutUser().unwrap();
@@ -26,9 +306,9 @@ export default function LearningNavbar() {
     }
 
     dispatch(clearCredentials());
-
     navigate("/learning");
   };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -40,72 +320,72 @@ export default function LearningNavbar() {
   }, []);
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 font-sans">
+      <div className="max-w-6xl mx-auto px-4">
         {/* Navbar */}
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/learning" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#1a504c] rounded-xl flex items-center justify-center text-white font-bold">
+          <Link to="/learning" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-white text-xs font-bold">
               L
             </div>
             <div>
-              <h1 className="text-xl font-bold text-[#1a504c]">
+              <h1 className="text-sm font-bold text-gray-900 tracking-tight leading-none">
                 odisha polyclinic
               </h1>
-              <p className="text-xs text-yellow-500">
+              <p className="text-[10px] text-gray-500 mt-0.5">
                 Medical Education Platform
               </p>
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 text-xs font-medium text-gray-600">
             <Link
               to="/"
-              className="text-black transition font-semibold hover:text-[#1a504c]"
+              className="hover:text-teal-700 transition"
             >
               Odisha Polyclinic
             </Link>
             <Link
               to="/learning"
-              className="hover:text-[#1a504c] font-medium transition"
+              className="hover:text-teal-700 transition"
             >
               Home
             </Link>
             <Link
               to="/learning/find-course"
-              className="hover:text-[#1a504c] font-medium transition"
+              className="hover:text-teal-700 transition"
             >
               Find Course
             </Link>
             <Link
               to="/learning/certifications"
-              className="hover:text-[#1a504c] font-medium transition"
+              className="hover:text-teal-700 transition"
             >
               Get Certified
             </Link>
             <Link
               to="/learning/subscribe"
-              className="hover:text-[#1a504c] font-medium transition"
+              className="hover:text-teal-700 transition"
             >
               Subscribe
             </Link>
           </div>
 
           {/* Desktop Right Section */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2.5">
             {!isLoggedIn ? (
               <>
                 <Link
                   to="/learning/login"
-                  className="text-slate-600 font-medium px-5 py-2.5 rounded-xl hover:bg-slate-100 transition-colors"
+                  className="text-gray-700 text-xs font-medium px-3.5 py-1.5 rounded-lg hover:bg-gray-50 transition"
                 >
                   Log in
                 </Link>
                 <Link
                   to="/learning/register"
-                  className="bg-[#1a504c] text-white font-medium px-5 py-2.5 rounded-xl shadow-sm hover:bg-[#143e3b] hover:shadow-md transition-all"
+                  className="bg-teal-700 text-white text-xs font-medium px-3.5 py-1.5 rounded-lg hover:bg-teal-800 transition"
                 >
                   Get started
                 </Link>
@@ -114,16 +394,16 @@ export default function LearningNavbar() {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center gap-2 px-2 py-1 rounded-xl hover:bg-[#e5f9f8] transition"
+                  className="flex items-center gap-2 p-1 rounded-lg hover:bg-gray-50 transition"
                 >
-                  <div className="w-9 h-9 bg-[#1a504c] rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-7 h-7 bg-teal-700 rounded-full flex items-center justify-center text-white text-xs font-bold">
                     {currentUser?.name?.charAt(0).toUpperCase()}
                   </div>
-                  <span className="font-medium text-[#1a504c] hidden xl:block">
+                  <span className="text-xs font-medium text-gray-800 hidden xl:block">
                     {currentUser?.name}
                   </span>
                   <svg
-                    className={`w-4 h-4 text-gray-500 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
+                    className={`w-3.5 h-3.5 text-gray-400 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -138,32 +418,32 @@ export default function LearningNavbar() {
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white border border-gray-100 rounded-xl shadow-lg z-50 overflow-hidden">
-                    <div className="px-4 py-3 border-b border-gray-100">
-                      <p className="font-semibold text-sm text-gray-800">
+                  <div className="absolute right-0 mt-1.5 w-48 bg-white border border-gray-100 rounded-xl shadow-md z-50 overflow-hidden text-xs">
+                    <div className="px-3.5 py-2.5 border-b border-gray-100">
+                      <p className="font-semibold text-gray-900">
                         {currentUser?.name}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-[11px] text-gray-500 mt-0.5 truncate">
                         {currentUser?.email}
                       </p>
                     </div>
                     <Link
                       to="/learning/my-learning"
                       onClick={() => setDropdownOpen(false)}
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-[#e5f9f8] hover:text-[#1a504c] transition"
+                      className="block px-3.5 py-2 text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition"
                     >
                       My Learning
                     </Link>
                     <Link
                       to="/learning/dashboard"
                       onClick={() => setDropdownOpen(false)}
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-[#e5f9f8] hover:text-[#1a504c] transition border-b border-gray-100"
+                      className="block px-3.5 py-2 text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition border-b border-gray-100"
                     >
                       Dashboard
                     </Link>
                     <button
                       onClick={logoutHandler}
-                      className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left"
+                      className="w-full text-left px-3.5 py-2 text-red-600 hover:bg-red-50 transition"
                     >
                       Logout
                     </button>
@@ -176,7 +456,7 @@ export default function LearningNavbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-3xl text-[#1a504c]"
+            className="lg:hidden text-lg text-gray-700 focus:outline-none"
           >
             {isOpen ? "✕" : "☰"}
           </button>
@@ -184,66 +464,73 @@ export default function LearningNavbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden border-t py-4 flex flex-col gap-4 font-medium">
+          <div className="lg:hidden border-t border-gray-100 py-3 flex flex-col gap-3 text-xs font-medium text-gray-700">
+            <Link
+              to="/"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-teal-700 transition"
+            >
+              Odisha Polyclinic
+            </Link>
             <Link
               to="/learning"
               onClick={() => setIsOpen(false)}
-              className="hover:text-[#1a504c]"
+              className="hover:text-teal-700 transition"
             >
               Home
             </Link>
             <Link
               to="/learning/find-course"
               onClick={() => setIsOpen(false)}
-              className="hover:text-[#1a504c]"
+              className="hover:text-teal-700 transition"
             >
               Find Course
             </Link>
             <Link
               to="/learning/certifications"
               onClick={() => setIsOpen(false)}
-              className="hover:text-[#1a504c]"
+              className="hover:text-teal-700 transition"
             >
               Get Certified
             </Link>
             <Link
               to="/learning/subscribe"
               onClick={() => setIsOpen(false)}
-              className="hover:text-[#1a504c]"
+              className="hover:text-teal-700 transition"
             >
               Subscribe
             </Link>
 
-            <hr />
+            <hr className="border-gray-100 my-1" />
 
             {!isLoggedIn ? (
-              <>
+              <div className="flex flex-col gap-2">
                 <Link
                   to="/learning/login"
                   onClick={() => setIsOpen(false)}
-                  className="text-slate-600 font-medium text-center py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
+                  className="text-center py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 transition"
                 >
                   Log in
                 </Link>
                 <Link
                   to="/learning/register"
                   onClick={() => setIsOpen(false)}
-                  className="bg-[#1a504c] text-white font-medium text-center py-2.5 rounded-xl shadow-sm hover:bg-[#143e3b] transition-all"
+                  className="text-center py-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800 transition"
                 >
                   Get started
                 </Link>
-              </>
+              </div>
             ) : (
-              <>
-                <div className="flex items-center gap-3 px-1">
-                  <div className="w-9 h-9 bg-[#1a504c] rounded-full flex items-center justify-center text-white font-bold">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2.5 px-1 py-1">
+                  <div className="w-7 h-7 bg-teal-700 rounded-full flex items-center justify-center text-white text-xs font-bold">
                     {currentUser?.name?.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-[#1a504c]">
+                    <p className="font-semibold text-gray-900">
                       {currentUser?.name}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-[11px] text-gray-500">
                       {currentUser?.email}
                     </p>
                   </div>
@@ -251,24 +538,24 @@ export default function LearningNavbar() {
                 <Link
                   to="/learning/my-learning"
                   onClick={() => setIsOpen(false)}
-                  className="hover:text-[#1a504c]"
+                  className="hover:text-teal-700 transition"
                 >
                   My Learning
                 </Link>
                 <Link
                   to="/learning/dashboard"
                   onClick={() => setIsOpen(false)}
-                  className="hover:text-[#1a504c]"
+                  className="hover:text-teal-700 transition"
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={logoutHandler}
-                  className="bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition"
+                  className="text-left text-red-600 hover:text-red-700 transition pt-1"
                 >
                   Logout
                 </button>
-              </>
+              </div>
             )}
           </div>
         )}
