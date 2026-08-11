@@ -1,81 +1,86 @@
-
-import { motion } from "framer-motion";
-
 import {
-  FaHeartbeat,
-  FaTooth,
-  FaBaby,
-  FaBrain,
-  FaBone,
-  FaEye,
-  FaFlask,
-  FaUserMd,
-} from "react-icons/fa";
+  Activity,
+  Baby,
+  Bone,
+  Brain,
+  Eye,
+  FlaskConical,
+  Smile,
+  Stethoscope,
+} from "lucide-react";
 
 import ServiceCard from "./ServiceCard";
 
 export default function Departments() {
   const services = [
     {
-      icon: <FaHeartbeat />,
+      icon: <Activity />,
       title: "Cardiology",
-      description: "Comprehensive heart care with advanced diagnostics and treatment.",
+      description:
+        "Comprehensive heart care with advanced diagnostics and treatment.",
       bgColor: "bg-[#D0E2FF]",
       textColor: "text-[#103B70]",
       circleBg: "bg-[#EBF2FF]",
     },
     {
-      icon: <FaTooth />,
+      icon: <Smile />,
       title: "Dental Care",
-      description: "Complete dental solutions for healthy smiles and oral hygiene.",
+      description:
+        "Complete dental solutions for healthy smiles and oral hygiene.",
       bgColor: "bg-[#FCE2EC]",
       textColor: "text-[#701A33]",
       circleBg: "bg-[#FFF0F5]",
     },
     {
-      icon: <FaBaby />,
+      icon: <Baby />,
       title: "Pediatrics",
-      description: "Specialized healthcare for infants, children, and adolescents.",
+      description:
+        "Specialized healthcare for infants, children, and adolescents.",
       bgColor: "bg-[#FBF1C9]",
       textColor: "text-[#5E4E0A]",
       circleBg: "bg-[#FFFCE8]",
     },
     {
-      icon: <FaBrain />,
+      icon: <Brain />,
       title: "Neurology",
-      description: "Diagnosis and treatment of brain and nervous system disorders.",
+      description:
+        "Diagnosis and treatment of brain and nervous system disorders.",
       bgColor: "bg-[#E0D8F6]",
       textColor: "text-[#3B2570]",
       circleBg: "bg-[#F2EDFD]",
     },
     {
-      icon: <FaBone />,
+      icon: <Bone />,
       title: "Orthopedics",
-      description: "Expert care for bones, joints, muscles, and sports injuries.",
+      description:
+        "Expert care for bones, joints, muscles, and sports injuries.",
       bgColor: "bg-[#D8E6FE]",
       textColor: "text-[#123875]",
       circleBg: "bg-[#EEF4FF]",
     },
     {
-      icon: <FaEye />,
+      icon: <Eye />,
       title: "Ophthalmology",
-      description: "Advanced eye care and vision correction services.",
+      description:
+        "Advanced eye care and vision correction services.",
       bgColor: "bg-[#E3D5F7]",
       textColor: "text-[#421D70]",
       circleBg: "bg-[#F4ECFC]",
     },
     {
-      icon: <FaFlask />,
+      icon: <FlaskConical />,
       title: "Diagnostics",
-      description: "Accurate laboratory testing with fast and reliable reports.",
+      description:
+        "Accurate laboratory testing with fast and reliable reports.",
       bgColor: "bg-[#F7EBB8]",
       textColor: "text-[#524408]",
       circleBg: "bg-[#FFF9E6]",
     },
     {
-      icon: <FaUserMd />,
+      icon: <Stethoscope />,
       title: "General Medicine",
-      description: "Primary healthcare and preventive medicine for all ages.",
+      description:
+        "Primary healthcare and preventive medicine for all ages.",
       bgColor: "bg-[#D0E2FF]",
       textColor: "text-[#103B70]",
       circleBg: "bg-[#EBF2FF]",
@@ -83,49 +88,36 @@ export default function Departments() {
   ];
 
   return (
-    <section className="bg-white py-12 md:py-16 font-sans antialiased">
-      {/* Plus Jakarta Sans Import */}
-      <style>
-        {`@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-          .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }`}
-      </style>
+    <section className="bg-white py-12 font-sans antialiased md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-      <div className="mx-auto max-w-7xl px-4 font-jakarta sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="mx-auto max-w-2xl text-center"
-        >
-          {/* Badge Pill */}
+        <div className="mx-auto max-w-2xl text-center animate-fade-up">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#0F4C81]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#0F4C81] animate-pulse" />
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#0F4C81]" />
             Our Services
           </div>
 
-          {/* Heading - Modern Tight Typography */}
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#1E293B] sm:text-3xl lg:text-4xl leading-tight">
+          <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-[#1E293B] sm:text-3xl lg:text-4xl">
             Healthcare Services Designed Around You
           </h2>
 
-          {/* Subtitle - Clean muted text */}
-          <p className="mt-3 text-xs leading-relaxed text-[#64748B] sm:text-sm font-normal">
-            From routine checkups to specialized treatments, Odisha Polyclinic offers a wide range of healthcare services under one roof.
+          <p className="mt-3 text-xs font-normal leading-relaxed text-[#64748B] sm:text-sm">
+            From routine checkups to specialized treatments, Odisha Polyclinic
+            offers a wide range of healthcare services under one roof.
           </p>
-        </motion.div>
+        </div>
 
         {/* Services Grid */}
         <div className="mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <ServiceCard
               key={service.title}
               {...service}
-              delay={index * 0.04}
             />
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,9 +1,6 @@
-
-import { motion } from "framer-motion";
 import { FaRegUser } from "react-icons/fa";
 
 export default function ReviewCard({ review }) {
-  // Safely extract text across common data property names
   const reviewText =
     review.comment ||
     review.text ||
@@ -12,33 +9,51 @@ export default function ReviewCard({ review }) {
     review.description ||
     "No review text provided.";
 
-  // Safely extract author name
-  const authorName = review.name || review.author || review.user || "Patient";
+  const authorName =
+    review.name ||
+    review.author ||
+    review.user ||
+    "Patient";
 
   return (
-    <motion.div
-      whileHover={{ y: -2 }}
-      className="flex h-[210px] w-[260px] shrink-0 flex-col justify-between rounded-xl bg-white p-5 shadow-xs font-jakarta overflow-hidden"
+    <div
+      className="
+        review-card
+        flex
+        h-[210px]
+        w-[260px]
+        shrink-0
+        flex-col
+        justify-between
+        overflow-hidden
+        rounded-xl
+        bg-white
+        p-5
+        font-jakarta
+        shadow-xs
+      "
     >
       {/* Review Text */}
-      <div className="overflow-y-auto pr-1 scrollbar-none">
+      <div className="scrollbar-none overflow-y-auto pr-1">
         <p className="text-[13px] font-normal leading-relaxed text-slate-700">
           "{reviewText}"
         </p>
       </div>
 
-      {/* Footer Author & Date */}
-      <div className="border-t border-slate-100 pt-3 flex items-center gap-1.5 text-xs text-slate-500 shrink-0">
-        <FaRegUser className="text-slate-400 text-[11px] shrink-0" />
-        <span className="font-semibold text-slate-800 truncate">
+      {/* Footer */}
+      <div className="flex shrink-0 items-center gap-1.5 border-t border-slate-100 pt-3 text-xs text-slate-500">
+        <FaRegUser className="shrink-0 text-[11px] text-slate-400" />
+
+        <span className="truncate font-semibold text-slate-800">
           {authorName}
         </span>
+
         {review.date && (
-          <span className="text-slate-400 font-normal shrink-0 ml-auto text-[11px]">
+          <span className="ml-auto shrink-0 text-[11px] font-normal text-slate-400">
             {review.date}
           </span>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

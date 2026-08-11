@@ -14,18 +14,33 @@
 //   },
 
 //   server: {
+//     host: true,
 //     proxy: {
-//       "/api": "http://localhost:5000",
+//       "/api": {
+//         target: "http://localhost:5000",
+//         changeOrigin: true,
+//       },
 //     },
 //   },
 // });
 
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+
+    visualizer({
+      filename: "./dist/stats.html",
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+    }),
+  ],
 
   resolve: {
     alias: {
@@ -35,6 +50,7 @@ export default defineConfig({
 
   server: {
     host: true,
+
     proxy: {
       "/api": {
         target: "http://localhost:5000",
