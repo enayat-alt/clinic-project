@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import {
   FaPlus,
   FaHeartbeat,
@@ -14,17 +13,9 @@ export default function FloatingBackground() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#081A33] via-[#0D2D56] to-[#123E73]" />
 
         {/* Blob 1 */}
-        <motion.div
-          animate={{
-            x: [0, 35, 0],
-            y: [0, -25, 0],
-          }}
-          transition={{
-            duration: 24,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+        <div
           className="
+            floating-blob-1
             absolute
             -top-24
             -left-24
@@ -33,27 +24,17 @@ export default function FloatingBackground() {
             rounded-full
             bg-blue-500/20
             blur-3xl
-
             sm:h-80
             sm:w-80
-
             lg:h-[420px]
             lg:w-[420px]
           "
         />
 
         {/* Blob 2 */}
-        <motion.div
-          animate={{
-            x: [0, -30, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+        <div
           className="
+            floating-blob-2
             absolute
             bottom-0
             right-0
@@ -62,26 +43,17 @@ export default function FloatingBackground() {
             rounded-full
             bg-cyan-400/10
             blur-3xl
-
             sm:h-72
             sm:w-72
-
             lg:h-[360px]
             lg:w-[360px]
           "
         />
 
         {/* Decorative Circle */}
-        <motion.div
-          animate={{
-            rotate: 360,
-          }}
-          transition={{
-            duration: 60,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+        <div
           className="
+            floating-circle
             absolute
             left-1/2
             top-1/3
@@ -92,110 +64,77 @@ export default function FloatingBackground() {
             rounded-full
             border
             border-white/5
-
             lg:block
           "
         />
       </div>
 
-      {/* Floating Icons */}
-
-      <motion.div
-        animate={{
-          y: [0, -8, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      {/* Floating Heartbeat */}
+      <div
         className="
+          floating-icon-1
           absolute
           left-6
           top-20
           text-3xl
           text-white/10
-
           sm:left-10
           sm:text-4xl
-
           lg:left-16
         "
       >
         <FaHeartbeat />
-      </motion.div>
+      </div>
 
-      <motion.div
-        animate={{
-          y: [0, 8, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      {/* Floating Plus */}
+      <div
         className="
+          floating-icon-2
           absolute
           right-6
           top-32
           hidden
           text-4xl
           text-cyan-300/20
-
           md:block
-
           lg:right-20
           lg:text-5xl
         "
       >
         <FaPlus />
-      </motion.div>
+      </div>
 
-      <motion.div
-        animate={{
-          y: [0, -10, 0],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      {/* Floating Stethoscope */}
+      <div
         className="
+          floating-icon-3
           absolute
           bottom-20
           left-10
           hidden
           text-4xl
           text-blue-300/10
-
           lg:block
         "
       >
         <FaStethoscope />
-      </motion.div>
+      </div>
 
-      <motion.div
-        animate={{
-          y: [0, 8, 0],
-        }}
-        transition={{
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      {/* Floating Capsules */}
+      <div
         className="
+          floating-icon-4
           absolute
           bottom-24
           right-12
           hidden
           text-3xl
           text-white/10
-
           xl:block
         "
       >
         <FaCapsules />
-      </motion.div>
+      </div>
 
       {/* Grid */}
       <div

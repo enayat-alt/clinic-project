@@ -22,7 +22,8 @@ exports.getProfile = async (req, res) => {
       return res.status(404).json({
         message: "Patient profile not found",
       });
-    }
+    } 
+    
 
     res.json(profile);
   } catch (err) {

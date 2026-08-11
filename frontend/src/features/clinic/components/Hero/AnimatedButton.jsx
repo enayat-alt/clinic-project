@@ -1,7 +1,4 @@
-
-
-import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+import { ArrowRight } from "lucide-react";
 
 export default function AnimatedButton({
   children,
@@ -11,10 +8,8 @@ export default function AnimatedButton({
   ...props
 }) {
   return (
-    <motion.button
-      whileTap={{ scale: 0.97 }}
-      transition={{ duration: 0.15 }}
-      className={`group relative w-full overflow-hidden rounded-2xl px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:w-auto sm:px-8 sm:py-4 sm:text-base ${
+    <button
+      className={`group relative w-full overflow-hidden rounded-2xl px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-[0.97] sm:w-auto sm:px-8 sm:py-4 sm:text-base ${
         primary
           ? "bg-gradient-to-r from-[#0F4C81] to-[#38BDF8] text-white shadow-lg"
           : "border border-white/20 bg-white/10 text-white backdrop-blur-xl hover:bg-white/20"
@@ -41,8 +36,9 @@ export default function AnimatedButton({
         {children}
 
         {icon && (
-          <FaArrowRight
+          <ArrowRight
             className="
+              h-4 w-4
               transition-transform
               duration-300
               group-hover:translate-x-1
@@ -50,6 +46,6 @@ export default function AnimatedButton({
           />
         )}
       </span>
-    </motion.button>
+    </button>
   );
 }

@@ -1,6 +1,3 @@
-
-import { motion } from "framer-motion";
-
 export default function FloatingCard({
   icon,
   title,
@@ -9,45 +6,11 @@ export default function FloatingCard({
   delay = 0,
 }) {
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.45,
-        delay,
-        ease: "easeOut",
-      }}
-      whileHover={{
-        y: -4,
-      }}
-      className={`absolute hidden lg:block will-change-transform ${className}`}
+    <div
+      className={`floating-card absolute hidden lg:block ${className}`}
+      style={{ "--animation-delay": `${delay}s` }}
     >
-      <motion.div
-        animate={{
-          y: [0, -6, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          w-60
-          rounded-3xl
-          border
-          border-white/20
-          bg-white/10
-          p-5
-          backdrop-blur-xl
-          shadow-xl
-        "
-      >
+      <div className="floating-card-inner w-60 rounded-3xl border border-white/20 bg-white/10 p-5 backdrop-blur-xl shadow-xl">
         <div className="flex items-center gap-4">
           <div
             className="
@@ -76,8 +39,7 @@ export default function FloatingCard({
             </p>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
-

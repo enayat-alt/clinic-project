@@ -1,74 +1,9 @@
-
-// import { Link } from "react-router-dom";
-// import { motion } from "framer-motion";
-// import { FaCalendarCheck } from "react-icons/fa";
-
-// export default function HeaderBtn() {
-//   return (
-//     <motion.div
-//       whileHover={{ scale: 1.03 }}
-//       whileTap={{ scale: 0.98 }}
-//     >
-//       <Link
-//         to="/appointment"
-//         className="
-//           group
-//           relative
-//           inline-flex
-//           items-center
-//           gap-2
-//           overflow-hidden
-//           rounded-full
-//           bg-gradient-to-r
-//           from-[#081A33]
-//           to-[#0F4C81]
-//           px-4
-//           py-2
-//           text-sm
-//           font-medium
-//           text-white
-//           shadow-md
-//           transition-all
-//           duration-300
-//           hover:shadow-blue-500/20
-//         "
-//       >
-//         {/* Shine Effect */}
-//         <span
-//           className="
-//             absolute
-//             inset-0
-//             -translate-x-full
-//             bg-gradient-to-r
-//             from-transparent
-//             via-white/20
-//             to-transparent
-//             transition-transform
-//             duration-700
-//             group-hover:translate-x-full
-//           "
-//         />
-
-//         <FaCalendarCheck className="relative z-10 text-sm" />
-
-//         <span className="relative z-10 whitespace-nowrap">
-//           Book Appointment
-//         </span>
-//       </Link>
-//     </motion.div>
-//   );
-// }
-
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaCalendarCheck } from "react-icons/fa";
+import { CalendarCheck } from "lucide-react";
 
 export default function HeaderBtn() {
   return (
-    <motion.div
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.98 }}
-    >
+    <div className="transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]">
       <Link
         to="/appointment"
         className="
@@ -89,7 +24,7 @@ export default function HeaderBtn() {
           tracking-tight
           text-white
           shadow-md
-          transition-all
+          transition-shadow
           duration-300
           hover:shadow-blue-500/20
         "
@@ -110,12 +45,12 @@ export default function HeaderBtn() {
           "
         />
 
-        <FaCalendarCheck className="relative z-10 text-xs" />
+        <CalendarCheck className="relative z-10 h-3.5 w-3.5" />
 
         <span className="relative z-10 whitespace-nowrap">
           Book Appointment
         </span>
       </Link>
-    </motion.div>
+    </div>
   );
 }

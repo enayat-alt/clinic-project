@@ -1,6 +1,4 @@
-
-import { motion } from "framer-motion";
-import CountUp from "react-countup";
+import { useEffect, useState } from "react";
 
 export default function TrustBadge({
   value,
@@ -9,25 +7,47 @@ export default function TrustBadge({
   icon,
   delay = 0,
 }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const duration = 1200;
+    const startTime = performance.now();
+
+    let animationFrame;
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Ease-out effect
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setCount(Math.floor(value * easedProgress));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        setCount(value);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      animationFrame = requestAnimationFrame(animate);
+    }, delay * 1000);
+
+    return () => {
+      clearTimeout(timer);
+
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [value, delay]);
+
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.5,
-        delay,
-      }}
-      whileHover={{
-        y: -5,
-      }}
+    <div
       className="
+        trust-badge
         flex
         flex-col
         items-center
@@ -36,14 +56,18 @@ export default function TrustBadge({
         border
         border-white/15
         bg-white/10
-        backdrop-blur-xl
         p-4
         shadow-lg
-        transition-all
+        backdrop-blur-xl
+        transition-transform
         duration-300
+        hover:-translate-y-1
         hover:bg-white/15
         min-h-[150px]
       "
+      style={{
+        animationDelay: `${delay}s`,
+      }}
     >
       {/* Icon */}
       <div
@@ -65,7 +89,7 @@ export default function TrustBadge({
 
       {/* Number */}
       <h3 className="text-2xl font-bold text-white sm:text-3xl">
-        <CountUp end={value} duration={2} />
+        {count}
         {suffix}
       </h3>
 
@@ -73,6 +97,6 @@ export default function TrustBadge({
       <p className="mt-2 text-center text-sm font-medium text-slate-300 sm:text-base">
         {label}
       </p>
-    </motion.div>
+    </div>
   );
 }
